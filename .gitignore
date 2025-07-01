@@ -1,0 +1,27 @@
+# Ignorar dependencias de node y Angular build
+angular/tickets/node_modules/
+angular/tickets/dist/
+angular/tickets/out-tsc/
+
+# angular/tickets/package-lock.json
+
+angular/tickets/npm-debug.log*
+
+#Django
+# entorno virtual 
+django/tickets/env/
+django/tickets/.venv/
+django/tickets/venv/
+django/tickets/ENV/
+
+django/tickets/__pycache__/
+django/tickets/*.pyc
+django/tickets/*.pyo
+
+django/tickets/db.sqlite3
+django/tickets/*.sqlite3
+
+django/tickets/env/
+django/tickets/.env/
+
+django/tickets/*.log
