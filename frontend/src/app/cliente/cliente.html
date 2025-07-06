@@ -1,1 +1,14 @@
-<p>cliente works!</p>
+<h2>Bienvenido Cliente</h2>
+
+<!-- 🔍 Buscador -->
+<input type="text" placeholder="Buscar restaurante..." />
+
+<!-- 📦 Botón para ver pedidos -->
+<button (click)="verPedidos()">Ver mis pedidos</button>
+
+<!-- 🍽️ Lista de restaurantes -->
+<ul>
+  <li *ngFor="let r of restaurantes">
+    <button (click)="verRestaurante(r.id)">{{ r.nombre }}</button>
+  </li>
+</ul>
