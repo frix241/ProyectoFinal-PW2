@@ -16,7 +16,8 @@ export class Register {
   confirmPassword = '';
   error = '';
   success = '';
-
+  tipo = '';
+  nombreRestaurante = '';
 
   constructor(private auth: Auth, private router: Router) {}
 
@@ -27,10 +28,22 @@ export class Register {
     this.error = '';
     this.success = '';
 
+
     if(this.passwordMismatch){
       this.error = "Las contraseñas son distintas";
       return;
     }
+
+    if (!this.tipo) {
+      this.error = 'Debes seleccionar un tipo de cuenta';
+      return;
+    }
+
+    if (this.tipo === 'restaurante' && !this.nombreRestaurante.trim()) {
+      this.error = 'Debes ingresar el nombre del restaurante';
+      return;
+    }
+
     this.auth.register(this.username, this.password).subscribe({
       next: () => {
         console.log('Registro exitoso, redireccionando a /login');

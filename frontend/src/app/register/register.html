@@ -5,12 +5,35 @@
     </div>
 
     <form #registerForm="ngForm" (ngSubmit)="onRegister()" class="flex flex-col text-sm rounded-md space-y-4">
+
+      <select
+        name="tipo"
+        [(ngModel)]="tipo"
+        class="rounded-[4px] border p-3 focus:outline-none hover:border-yellow-500"
+        required
+      >
+        <option value="" disabled selected>Selecciona el tipo de cuenta</option>
+        <option value="cliente">Cliente</option>
+        <option value="restaurante">Restaurante</option>
+      </select>
+
       <input
+        *ngIf="tipo === 'cliente'"
         type="text"
         name="username"
         [(ngModel)]="username"
         class="rounded-[4px] border p-3 hover:outline-none focus:outline-none hover:border-yellow-500"
-        placeholder="Username"
+        placeholder="Nombre de usuario"
+        required
+      />
+
+      <input
+        *ngIf="tipo === 'restaurante'"
+        type="text"
+        name="nombreRestaurante"
+        [(ngModel)]="nombreRestaurante"
+        class="rounded-[4px] border p-3 hover:outline-none focus:outline-none hover:border-yellow-500"
+        placeholder="Nombre del Restaurante"
         required
       />
 
