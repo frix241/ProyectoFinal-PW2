@@ -23,6 +23,16 @@ class PedidoViewSet(viewsets.ModelViewSet):
     serializer_class = PedidoSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    def get_queryset(self):
+        user = self.request.user
+
+        # Si es un restaurante, mostrar solo sus pedidos
+        if hasattr(user, 'restaurant'):
+            return Pedido.objects.filter(menu__restaurante=user.restaurant).order_by('-fecha')
+
+        # Si es cliente, mostrar solo sus pedidos
+        return Pedido.objects.filter(cliente=user).order_by('-fecha')
+
     def perform_create(self, serializer):
         entrada = serializer.validated_data['entrada']
         segundo = serializer.validated_data['segundo']
