@@ -1,14 +1,21 @@
 <h2>Bienvenido Cliente</h2>
 
 <!-- 🔍 Buscador -->
-<input type="text" placeholder="Buscar restaurante..." />
+<input
+  type="text"
+  [(ngModel)]="busqueda"
+  placeholder="Buscar restaurante..."
+  class="form-control mb-3"
+/>
 
 <!-- 📦 Botón para ver pedidos -->
-<button (click)="verPedidos()">Ver mis pedidos</button>
+<button (click)="verPedidos()" class="btn btn-primary mb-3">
+  Ver mis pedidos
+</button>
 
-<!-- 🍽️ Lista de restaurantes -->
-<ul>
-  <li *ngFor="let r of restaurantes">
-    <button (click)="verRestaurante(r.id)">{{ r.nombre }}</button>
+<!-- 🍽️ Lista filtrada -->
+<ul class="list-group">
+  <li *ngFor="let r of restaurantesFiltrados" class="list-group-item">
+    <button (click)="verRestaurante(r.id)" class="btn btn-link">{{ r.nombre }}</button>
   </li>
 </ul>
