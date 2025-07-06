@@ -21,17 +21,31 @@ export class Login {
     this.auth.login(this.username, this.password).subscribe({
       next: () => {
         console.log('Login exitoso, obteniendo perfil...');
-        this.auth.getUserProfile().subscribe(user => {
-          console.log('Usuario:', user);
+        this.auth.getUserProfile().subscribe({
+          next: user => {
+            console.log('Usuario:', user);
+            console.log('Tipo de usuario:', user.tipo);
 
-          if (user.tipo === 'cliente') {
-            this.router.navigate(['/cliente']);
-          } else if (user.tipo === 'restaurante') {
-            this.router.navigate(['/restaurante']);
+            if (user.tipo === 'cliente') {
+              console.log('Redirigiendo a /cliente');
+              this.router.navigateByUrl('/cliente');
+            } else if (user.tipo === 'restaurante') {
+              console.log('Redirigiendo a /restaurante');
+              this.router.navigateByUrl('/restaurante');
+            } else {
+              this.error = 'Tipo de usuario no reconocido';
+            }
+          },
+          error: (err: any) => {
+            console.error('Error obteniendo perfil:', err);
+            this.error = 'Error obteniendo información del usuario';
           }
         });
       },
-      error: (err: any) => this.error = 'Credenciales incorrectas'
+      error: (err: any) => {
+        console.error('Error en login:', err);
+        this.error = 'Credenciales incorrectas';
+      }
     });
   }
 }

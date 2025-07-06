@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
@@ -33,8 +33,12 @@ export class Auth {
   logout() {
     localStorage.clear();
   }
-
+  
   getUserProfile(): Observable<any> {
-    return this.http.get('http://127.0.0.1:8000/api/users/me/');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('access')}`
+    });
+    return this.http.get('http://127.0.0.1:8000/api/auth/users/me/', { headers });
   }
+
 }
