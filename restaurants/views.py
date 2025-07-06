@@ -9,6 +9,7 @@ class RestaurantViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
 class MenuViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Menu.objects.all().order_by('-fecha')
     serializer_class = MenuSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
