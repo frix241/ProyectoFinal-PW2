@@ -25,3 +25,15 @@ class PedidoViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(cliente=self.request.user, estado='pendiente')
+from .models import Entrada, Segundo
+from .serializers import EntradaSerializer, SegundoSerializer
+
+class EntradaViewSet(viewsets.ModelViewSet):
+    queryset = Entrada.objects.all()
+    serializer_class = EntradaSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+class SegundoViewSet(viewsets.ModelViewSet):
+    queryset = Segundo.objects.all()
+    serializer_class = SegundoSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
