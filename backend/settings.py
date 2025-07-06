@@ -144,7 +144,7 @@ AUTH_USER_MODEL = 'users.User'  # Descomenta después de crear la app users
 
 DJOSER = {
     'SERIALIZERS': {
-        'user_create': 'djoser.serializers.UserCreateSerializer',
+        'user_create': 'users.serializers.UserCreateSerializer',  # 👈 CAMBIADO a nuestro serializer
         'user': 'users.serializers.UserSerializer',            # 👈 tu serializer
         'current_user': 'users.serializers.UserSerializer',    # 👈 muy importante para `/me/`
     },
