@@ -1,27 +1,98 @@
-# Ignorar dependencias de node y Angular build
-angular/tickets/node_modules/
-angular/tickets/dist/
-angular/tickets/out-tsc/
+# ===========================================
+# FRONTEND (Angular)
+# ===========================================
 
-# angular/tickets/package-lock.json
+# Compiled output
+frontend/dist/
+frontend/tmp/
+frontend/out-tsc/
+frontend/bazel-out/
 
-angular/tickets/npm-debug.log*
+# Node
+frontend/node_modules/
+frontend/npm-debug.log
+frontend/yarn-error.log
 
-#Django
-# entorno virtual 
-django/tickets/env/
-django/tickets/.venv/
-django/tickets/venv/
-django/tickets/ENV/
+# Angular
+frontend/.angular/cache/
+frontend/.sass-cache/
+frontend/connect.lock
+frontend/coverage/
+frontend/libpeerconnection.log
+frontend/testem.log
+frontend/typings/
 
-django/tickets/__pycache__/
-django/tickets/*.pyc
-django/tickets/*.pyo
+# ===========================================
+# BACKEND (Django)
+# ===========================================
 
-django/tickets/db.sqlite3
-django/tickets/*.sqlite3
+# Python
+backend/__pycache__/
+backend/*.pyc
+backend/*.pyo
+backend/*.pyd
+backend/.Python
 
-django/tickets/env/
-django/tickets/.env/
+# Django
+backend/db.sqlite3
+backend/*.sqlite3
+backend/media/
+backend/staticfiles/
 
-django/tickets/*.log
+# Virtual environment
+backend/env/
+backend/.env/
+backend/venv/
+backend/.venv/
+backend/ENV/
+
+# Environment variables
+backend/.env
+backend/.env.local
+backend/.env.development
+backend/.env.production
+
+# Logs
+backend/*.log
+backend/logs/
+
+# ===========================================
+# IDEs and EDITORS
+# ===========================================
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# JetBrains IDEs
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# ===========================================
+# SYSTEM FILES
+# ===========================================
+
+.DS_Store
+Thumbs.db
+
+# ===========================================
+# GENERAL
+# ===========================================
+
+# Temporary files
+*.tmp
+*.temp
+
+# Archive files
+*.zip
+*.rar
+*.tar.gz
