@@ -4,7 +4,7 @@
       <img class="w-24" src="" alt="Logo" />
     </div>
 
-    <form #registerForm="ngForm" (ngSubmit)="onRegister()" class="flex flex-col text-sm rounded-md space-y-4">
+    <form #registerForm="ngForm" (ngSubmit)="onRegister()" autocomplete="off" class="flex flex-col text-sm rounded-md space-y-4">
 
       <select
         name="tipo"
@@ -24,6 +24,7 @@
         [(ngModel)]="username"
         class="rounded-[4px] border p-3 hover:outline-none focus:outline-none hover:border-yellow-500"
         placeholder="Nombre de usuario"
+        autocomplete="off"
         required
       />
 
@@ -34,6 +35,7 @@
         [(ngModel)]="nombreRestaurante"
         class="rounded-[4px] border p-3 hover:outline-none focus:outline-none hover:border-yellow-500"
         placeholder="Nombre del Restaurante"
+        autocomplete="off"
         required
       />
 
@@ -44,6 +46,7 @@
         [(ngModel)]="username"
         class="rounded-[4px] border p-3 hover:outline-none focus:outline-none hover:border-yellow-500"
         placeholder="Nombre de usuario para el restaurante"
+        autocomplete="off"
         required
       />
 
@@ -52,7 +55,8 @@
         name="password"
         [(ngModel)]="password"
         class="rounded-[4px] border p-3 hover:outline-none focus:outline-none hover:border-yellow-500"
-        placeholder="Password"
+        placeholder="Contraseña"
+        autocomplete="new-password"
         required
       />
 
@@ -61,7 +65,8 @@
         name="confirmPassword"
         [(ngModel)]="confirmPassword"
         class="rounded-[4px] border p-3 hover:outline-none focus:outline-none hover:border-yellow-500"
-        placeholder="Confirm Password"
+        placeholder="Confirmar Contraseña"
+        autocomplete="new-password"
         required
       />
 
