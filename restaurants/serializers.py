@@ -10,3 +10,11 @@ class MenuSerializer(serializers.ModelSerializer):
     class Meta:
         model = Menu
         fields = '__all__'
+
+from .models import Pedido
+
+class PedidoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Pedido
+        fields = '__all__'
+        read_only_fields = ['cliente', 'estado', 'fecha']
