@@ -19,7 +19,18 @@ export class Login {
 
   login() {
     this.auth.login(this.username, this.password).subscribe({
-      next: () => this.router.navigate(['/']),
+      next: () => {
+        console.log('Login exitoso, obteniendo perfil...');
+        this.auth.getUserProfile().subscribe(user => {
+          console.log('Usuario:', user);
+
+          if (user.tipo === 'cliente') {
+            this.router.navigate(['/cliente']);
+          } else if (user.tipo === 'restaurante') {
+            this.router.navigate(['/restaurante']);
+          }
+        });
+      },
       error: (err: any) => this.error = 'Credenciales incorrectas'
     });
   }

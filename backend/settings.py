@@ -142,14 +142,16 @@ REST_FRAMEWORK = {
 # Custom User Model
 AUTH_USER_MODEL = 'users.User'  # Descomenta después de crear la app users
 
-# Djoser Configuration
 DJOSER = {
     'SERIALIZERS': {
         'user_create': 'djoser.serializers.UserCreateSerializer',
-        'user': 'djoser.serializers.UserSerializer',
+        'user': 'users.serializers.UserSerializer',            # 👈 tu serializer
+        'current_user': 'users.serializers.UserSerializer',    # 👈 muy importante para `/me/`
     },
     'LOGIN_FIELD': 'username',
 }
+
+
 
 # SimpleJWT Configuration
 SIMPLE_JWT = {
