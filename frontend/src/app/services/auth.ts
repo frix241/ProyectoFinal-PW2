@@ -41,10 +41,17 @@ export class Auth {
     return this.http.get('http://127.0.0.1:8000/api/auth/users/me/', { headers });
   }
 
-  register(username: string, password: string): Observable<any>{
-    return this.http.post('http://127.0.0.1:8000/api/register',{
+  register(username: string, password: string, tipo: string = 'cliente', nombreRestaurante?: string): Observable<any>{
+    const payload: any = {
       username,
-      password
-    });
+      password,
+      tipo
+    };
+
+    if (tipo === 'restaurante' && nombreRestaurante) {
+      payload.nombreRestaurante = nombreRestaurante;
+    }
+
+    return this.http.post('http://127.0.0.1:8000/api/auth/users/', payload);
   }
 }

@@ -28,6 +28,16 @@ export class Register {
     this.error = '';
     this.success = '';
 
+    // Validar campos básicos
+    if (!this.username.trim()) {
+      this.error = 'El nombre de usuario es requerido';
+      return;
+    }
+
+    if (!this.password) {
+      this.error = 'La contraseña es requerida';
+      return;
+    }
 
     if(this.passwordMismatch){
       this.error = "Las contraseñas son distintas";
@@ -44,7 +54,7 @@ export class Register {
       return;
     }
 
-    this.auth.register(this.username, this.password).subscribe({
+    this.auth.register(this.username, this.password, this.tipo, this.nombreRestaurante || undefined).subscribe({
       next: () => {
         console.log('Registro exitoso, redireccionando a /login');
         this.success = 'Registro exitoso, redireccionando a /login';

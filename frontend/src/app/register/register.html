@@ -38,6 +38,16 @@
       />
 
       <input
+        *ngIf="tipo === 'restaurante'"
+        type="text"
+        name="username"
+        [(ngModel)]="username"
+        class="rounded-[4px] border p-3 hover:outline-none focus:outline-none hover:border-yellow-500"
+        placeholder="Nombre de usuario para el restaurante"
+        required
+      />
+
+      <input
         type="password"
         name="password"
         [(ngModel)]="password"
