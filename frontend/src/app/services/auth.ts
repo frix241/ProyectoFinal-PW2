@@ -33,7 +33,7 @@ export class Auth {
   logout() {
     localStorage.clear();
   }
-  
+
   getUserProfile(): Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${localStorage.getItem('access')}`
@@ -41,4 +41,10 @@ export class Auth {
     return this.http.get('http://127.0.0.1:8000/api/auth/users/me/', { headers });
   }
 
+  register(username: string, password: string): Observable<any>{
+    return this.http.post('http://127.0.0.1:8000/api/register',{
+      username,
+      password
+    });
+  }
 }
