@@ -1,7 +1,7 @@
 from rest_framework import viewsets, permissions
 from rest_framework.permissions import IsAuthenticatedOrReadOnly 
-from .models import Restaurant, Menu, Pedido
-from .serializers import RestaurantSerializer, MenuSerializer, PedidoSerializer
+from .models import Restaurant, Menu, Pedido, Entrada, Segundo
+from .serializers import RestaurantSerializer, MenuSerializer, PedidoSerializer, EntradaSerializer, SegundoSerializer
 
 class RestaurantViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Restaurant.objects.all()
@@ -24,9 +24,11 @@ class PedidoViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
-        serializer.save(cliente=self.request.user, estado='pendiente')
-from .models import Entrada, Segundo
-from .serializers import EntradaSerializer, SegundoSerializer
+        entrada = serializer.validated_data['entrada']
+        segundo = serializer.validated_data['segundo']
+        total = entrada.precio + segundo.precio
+
+        serializer.save(cliente=self.request.user, estado='pendiente', total=total)
 
 class EntradaViewSet(viewsets.ModelViewSet):
     queryset = Entrada.objects.all()

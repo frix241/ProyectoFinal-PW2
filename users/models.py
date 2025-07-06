@@ -6,7 +6,7 @@ class User(AbstractUser):
         ('cliente', 'Cliente'),
         ('restaurante', 'Restaurante'),
     )
-    tipo = models.CharField(max_length=15, choices=TIPO_USUARIO)
+    tipo = models.CharField(max_length=15, choices=TIPO_USUARIO, default='cliente')
 
     def __str__(self):
         return f"{self.username} ({self.tipo})"
