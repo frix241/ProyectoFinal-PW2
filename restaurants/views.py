@@ -1,7 +1,7 @@
-from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from .models import Restaurant, Menu
-from .serializers import RestaurantSerializer, MenuSerializer
+from rest_framework import viewsets, permissions
+from rest_framework.permissions import IsAuthenticatedOrReadOnly 
+from .models import Restaurant, Menu, Pedido
+from .serializers import RestaurantSerializer, MenuSerializer, PedidoSerializer
 
 class RestaurantViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Restaurant.objects.all()
@@ -18,3 +18,10 @@ class MenuViewSet(viewsets.ReadOnlyModelViewSet):
         if restaurante_id:
             return Menu.objects.filter(restaurante_id=restaurante_id).order_by('-fecha')
         return Menu.objects.all().order_by('-fecha')
+class PedidoViewSet(viewsets.ModelViewSet):
+    queryset = Pedido.objects.all().order_by('-fecha')
+    serializer_class = PedidoSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(cliente=self.request.user, estado='pendiente')
