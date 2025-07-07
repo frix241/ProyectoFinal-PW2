@@ -1,1 +1,21 @@
-<p>restaurante-panel works!</p>
+<div class="contenedor-principal">
+
+  <div class="restaurante-panel">
+
+    <!-- Encabezado editable -->
+    <h2>Nombre del Restaurante</h2>
+    <input type="text" [(ngModel)]="nombreRestaurante" placeholder="Ingrese el nombre del restaurante" />
+
+    <hr />
+
+    <!-- Opciones del panel -->
+    <div class="opciones-panel">
+      <button>Ingresar Menú de hoy</button>
+      <button>Editar Menú de hoy</button>
+      <button>Pedidos de hoy</button>
+      <button>Historial</button>
+    </div>
+
+  </div>
+
+</div>
