@@ -1,0 +1,56 @@
+/* Centra todo en la pantalla */
+.contenedor-principal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Caja del panel */
+.restaurante-panel {
+  width: 300px;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+/* Estilo del título */
+.restaurante-panel h2 {
+  margin-bottom: 15px;
+  font-size: 22px;
+}
+
+/* Campo de texto */
+.restaurante-panel input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Botones organizados uno debajo del otro */
+.opciones-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.opciones-panel button {
+  margin: 5px 0;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.opciones-panel button:hover {
+  background-color: #2980b9;
+}
