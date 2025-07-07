@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-restaurante-panel',
-  imports: [],
+  standalone: true,
+  imports: [FormsModule],
   templateUrl: './restaurante-panel.html',
-  styleUrl: './restaurante-panel.css'
+  styleUrls: ['./restaurante-panel.css']
 })
-export class RestaurantePanel {
-
+export class RestaurantePanelComponent {
+  nombreRestaurante: string = '';
 }
