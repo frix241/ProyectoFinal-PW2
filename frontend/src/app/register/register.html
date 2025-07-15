@@ -1,11 +1,17 @@
 <div class="flex items-center justify-center h-screen">
-  <div class="min-w-fit flex-col border bg-white px-6 py-14 shadow-md rounded-[4px] w-[360px]">
+  <div
+    class="min-w-fit flex-col border bg-white px-6 py-14 shadow-md rounded-[4px] w-[360px]"
+  >
     <div class="mb-8 flex justify-center">
-      <img class="w-24" src="" alt="Logo" />
+      <img class="w-24" src="restoLogo.svg" alt="Logo" />
     </div>
 
-    <form #registerForm="ngForm" (ngSubmit)="onRegister()" autocomplete="off" class="flex flex-col text-sm rounded-md space-y-4">
-
+    <form
+      #registerForm="ngForm"
+      (ngSubmit)="onRegister()"
+      autocomplete="off"
+      class="flex flex-col text-sm rounded-md space-y-4"
+    >
       <select
         name="tipo"
         [(ngModel)]="tipo"
@@ -70,7 +76,9 @@
         required
       />
 
-      <p *ngIf="passwordMismatch" class="text-red-500 text-sm text-center">Las contraseñas no coinciden</p>
+      <p *ngIf="passwordMismatch" class="text-red-500 text-sm text-center">
+        Las contraseñas no coinciden
+      </p>
 
       <button
         type="submit"
@@ -80,8 +88,12 @@
         Registrarse
       </button>
 
-      <p *ngIf="error" class="text-red-500 text-sm mt-2 text-center">{{ error }}</p>
-      <p *ngIf="success" class="text-green-500 text-sm mt-2 text-center">¡Registro exitoso!</p>
+      <p *ngIf="error" class="text-red-500 text-sm mt-2 text-center">
+        {{ error }}
+      </p>
+      <p *ngIf="success" class="text-green-500 text-sm mt-2 text-center">
+        ¡Registro exitoso!
+      </p>
     </form>
 
     <div class="mt-5 flex justify-between text-sm text-gray-600">
