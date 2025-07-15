@@ -1,21 +1,42 @@
-<div class="contenedor-principal">
-
-  <div class="restaurante-panel">
-
+<div class="flex items-center justify-center h-screen">
+  <div
+    class="min-w-fit flex flex-col border bg-white px-6 py-4 shadow-md rounded-[4px] w-[360px]"
+  >
     <!-- Encabezado editable -->
-    <h2>Nombre del Restaurante</h2>
-    <input type="text" [(ngModel)]="nombreRestaurante" placeholder="Ingrese el nombre del restaurante" />
+    <h2 class="flex justify-center mb-6 font-bold text-xl text-gray-600">
+      Nombre del Restaurante
+    </h2>
+    <input
+      class="min-w-fit rounded-[4px] m-3 p-2 hover:outline-none focus:outline-none hover:border-yellow-500 duration-300"
+      type="text"
+      [(ngModel)]="nombreRestaurante"
+      placeholder="Ingrese el nombre del restaurante"
+    />
 
-    <hr />
+    <hr class="pt-4" />
 
     <!-- Opciones del panel -->
-    <div class="opciones-panel">
-      <button>Ingresar Menú de hoy</button>
-      <button>Editar Menú de hoy</button>
-      <button>Pedidos de hoy</button>
-      <button>Historial</button>
+    <div class="flex flex-col items-center">
+      <button
+        class="m-1 w-full border p-2 bg-gradient-to-r from-gray-800 bg-gray-500 text-white rounded-[4px] hover:bg-slate-400 scale-105 duration-300"
+      >
+        Ingresar Menú de hoy
+      </button>
+      <button
+        class="m-1 w-full border p-2 bg-gradient-to-r from-gray-800 bg-gray-500 text-white rounded-[4px] hover:bg-slate-400 scale-105 duration-300"
+      >
+        Editar Menú de hoy
+      </button>
+      <button
+        class="m-1 w-full border p-2 bg-gradient-to-r from-gray-800 bg-gray-500 text-white rounded-[4px] hover:bg-slate-400 scale-105 duration-300"
+      >
+        Pedidos de hoy
+      </button>
+      <button
+        class="w-full border p-2 bg-gradient-to-r from-gray-800 bg-gray-500 text-white rounded-[4px] hover:bg-slate-400 scale-105 duration-300"
+      >
+        Historial
+      </button>
     </div>
-
   </div>
-
 </div>
