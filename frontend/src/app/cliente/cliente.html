@@ -1,4 +1,6 @@
-<div class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-100 py-6 sm:py-12">
+<div
+  class="relative flex min-h-screen flex-col overflow-hidden bg-gray-100 py-6 sm:py-12"
+>
   <div class="mx-auto max-w-screen-xl px-4 w-full">
     <h2 class="mb-6 font-bold text-xl text-gray-600">Bienvenido Cliente</h2>
 
@@ -13,7 +15,7 @@
     <!-- 📦 Botón para ver pedidos -->
     <button
       (click)="verPedidos()"
-      class="mb-6 bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition"
+      class="mb-6 bg-gradient-to-r from-yellow-400 via-yellow-600 to-stone-700 hover:opacity-100 opacity-80 duration-500 text-white px-4 py-2 rounded transition"
     >
       Ver mis pedidos
     </button>
@@ -38,8 +40,12 @@
         </div>
 
         <div class="py-4 px-3">
-          <h3 class="text-lg font-semibold mb-2 text-gray-700">{{ r.nombre }}</h3>
-          <p class="text-sm text-gray-500">{{ r.descripcion || 'Sin descripción disponible.' }}</p>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700">
+            {{ r.nombre }}
+          </h3>
+          <p class="text-sm text-gray-500">
+            {{ r.descripcion || 'Sin descripción disponible.' }}
+          </p>
         </div>
       </div>
     </div>
