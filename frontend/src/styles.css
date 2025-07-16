@@ -1,2 +1,132 @@
-/* You can add global styles to this file, and also import other style files */
-@import "tailwindcss";/*Comentado temporalmente hasta instalar Tailwind */
+/* === Estilo General === */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fff4f4;
+  color: #3d1f00;
+}
+
+/* === Contenedor principal de formularios === */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form-box {
+  background-color: #ffffff;
+  border: 2px solid #d62828;
+  padding: 2rem;
+  width: 360px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(110, 30, 30, 0.2);
+}
+
+/* === Logo === */
+.logo {
+  width: 100px;
+  display: block;
+  margin: 0 auto 1rem auto;
+}
+
+/* === Títulos === */
+h1, h2 {
+  color: #b30000;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+/* === Inputs y Select === */
+.input, .select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+  transition: border 0.3s;
+}
+
+.input:focus, .select:focus {
+  border: 2px solid #ffb703;
+  outline: none;
+}
+
+/* === Botones === */
+.btn {
+  width: 100%;
+  background: linear-gradient(to right, #b30000, #8c1c13);
+  color: white;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.btn:hover {
+  background: #a30000;
+  transform: scale(1.05);
+}
+
+/* === Mensajes === */
+.error-message {
+  color: #e63946;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.success-message {
+  color: #2a9d8f;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* === Panel del restaurante === */
+.contenedor-principal {
+  padding: 2rem;
+  background-color: #fff0eb;
+  height: 100vh;
+}
+
+.restaurante-panel {
+  max-width: 500px;
+  margin: 0 auto;
+  background: #fff;
+  border: 2px solid #d62828;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(150, 0, 0, 0.15);
+}
+
+.restaurante-panel h2 {
+  margin-bottom: 1rem;
+}
+
+.restaurante-panel input {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.opciones-panel button {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  background: #ff6600;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.opciones-panel button:hover {
+  background: #cc5200;
+}
