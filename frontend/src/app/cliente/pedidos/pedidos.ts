@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { PedidoService } from "../../services/pedidos";
+import { Pedidos } from "../../services/pedidos";
 import { CommonModule } from "@angular/common";
 @Component({
   selector: "app-pedidos",
@@ -10,7 +10,7 @@ import { CommonModule } from "@angular/common";
 export class PedidosComponent implements OnInit {
   pedidos: any[] = [];
 
-  constructor(private pedidosService: PedidoService) {}
+  constructor(private pedidosService: Pedidos) {}
 
   ngOnInit(): void {
     this.pedidosService.getPedidos().subscribe({
