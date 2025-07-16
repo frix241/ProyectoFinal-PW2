@@ -6,7 +6,7 @@ import { Auth } from "./auth";
 @Injectable({
   providedIn: "root",
 })
-export class PedidoService {
+export class Pedidos {
   private baseUrl = "http://127.0.0.1:8000/api/pedidos/";
 
   constructor(
@@ -18,6 +18,10 @@ export class PedidoService {
     return new HttpHeaders({
       Authorization: `Bearer ${this.auth.getToken()}`,
     });
+  }
+
+  crearPedido(data: { menu: number; entrada: number; segundo: number }) {
+    return this.http.post(this.baseUrl, data, { headers: this.getHeaders() });
   }
 
   getPedidos(): Observable<any[]> {
