@@ -1,65 +1,45 @@
-<<<<<<< HEAD
-<link rel="stylesheet" href="/frontend/src/styles.css">
-
-<div class="contenedor-principal">
-  <div class="restaurante-panel">
-    <h2>Nombre del Restaurante</h2>
-    <input type="text" class="input" [(ngModel)]="nombreRestaurante" placeholder="Ingrese el nombre del restaurante" />
-
-    <hr />
-
-    <div class="opciones-panel">
-      <button (click)="irACrearMenu()" class="btn">Ingresar Menú de hoy</button>
-      <button class="btn">Editar Menú de hoy</button>
-      <button class="btn">Pedidos de hoy</button>
-      <button class="btn">Historial</button>
-    </div>
-  </div>
-=======
 <div class="flex items-center justify-center min-h-screen bg-gray-100 p-4">
   <!-- Panel Principal -->
-  <div *ngIf="vistaActual === 'panel'" 
-    class="min-w-fit flex flex-col border bg-white px-6 py-4 shadow-md rounded-[4px] w-[360px]"
+  <div
+    *ngIf="vistaActual === 'panel'"
+    class="w-full max-w-md bg-white p-6 rounded-lg shadow-md"
   >
-    <!-- Encabezado editable -->
+    <!-- Encabezado -->
     <div class="flex justify-between items-center mb-6">
-      <h2 class="font-bold text-xl text-gray-600">
+      <h2 class="text-xl font-bold text-gray-700">
         {{ nombreRestaurante || 'Panel de Restaurante' }}
       </h2>
-      <button 
-        (click)="logout()"
-        class="text-sm text-red-500 hover:text-red-700"
-      >
+      <button (click)="logout()" class="text-sm text-red-500 hover:underline">
         Cerrar sesión
       </button>
     </div>
 
     <input
-      class="min-w-fit rounded-[4px] m-3 p-2 hover:outline-none focus:outline-none hover:border-yellow-500 duration-300"
+      class="w-full p-2 mb-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
       type="text"
       [(ngModel)]="nombreRestaurante"
       placeholder="Ingrese el nombre del restaurante"
     />
 
-    <hr class="pt-4" />
+    <hr class="my-4" />
 
-    <!-- Opciones del panel -->
-    <div class="flex flex-col items-center">
+    <!-- Botones -->
+    <div class="flex flex-col space-y-3">
       <button
         (click)="mostrarVistaMenu()"
-        class="m-1 w-full border p-2 bg-gradient-to-r from-gray-800 bg-gray-500 text-white rounded-[4px] hover:bg-slate-400 scale-105 duration-300"
+        class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 rounded-md transition"
       >
         Gestionar Menú de hoy
       </button>
       <button
         (click)="mostrarVistaPedidos()"
-        class="m-1 w-full border p-2 bg-gradient-to-r from-gray-800 bg-gray-500 text-white rounded-[4px] hover:bg-slate-400 scale-105 duration-300"
+        class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded-md transition"
       >
         Pedidos de hoy ({{ pedidosHoy.length }})
       </button>
       <button
         (click)="mostrarVistaHistorial()"
-        class="w-full border p-2 bg-gradient-to-r from-gray-800 bg-gray-500 text-white rounded-[4px] hover:bg-slate-400 scale-105 duration-300"
+        class="bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 rounded-md transition"
       >
         Historial
       </button>
@@ -67,19 +47,19 @@
   </div>
 
   <!-- Vista de Gestión de Menú -->
-  <div *ngIf="vistaActual === 'menu'" 
+  <div
+    *ngIf="vistaActual === 'menu'"
     class="bg-white rounded-lg shadow-md p-6 w-full max-w-2xl"
   >
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-2xl font-bold text-gray-700">Gestión de Menú</h2>
-      <button 
+      <button
         (click)="volverAlPanel()"
         class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
       >
         Volver
       </button>
     </div>
-    
     <div class="text-center text-gray-500 py-8">
       <p>Funcionalidad de gestión de menú en desarrollo...</p>
       <p class="text-sm mt-2">Aquí podrás crear y editar los menús diarios</p>
@@ -87,12 +67,13 @@
   </div>
 
   <!-- Vista de Pedidos -->
-  <div *ngIf="vistaActual === 'pedidos'" 
+  <div
+    *ngIf="vistaActual === 'pedidos'"
     class="bg-white rounded-lg shadow-md p-6 w-full max-w-4xl"
   >
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-2xl font-bold text-gray-700">Pedidos de Hoy</h2>
-      <button 
+      <button
         (click)="volverAlPanel()"
         class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
       >
@@ -105,15 +86,17 @@
     </div>
 
     <div *ngIf="pedidosHoy.length > 0" class="space-y-4">
-      <div *ngFor="let pedido of pedidosHoy" 
-        class="border rounded-lg p-4 hover:shadow-md transition-shadow"
+      <div
+        *ngFor="let pedido of pedidosHoy"
+        class="border rounded-lg p-4 hover:shadow transition"
       >
-        <div class="flex justify-between items-start">
+        <div class="flex justify-between">
           <div>
             <h3 class="font-semibold">Pedido #{{ pedido.id }}</h3>
             <p class="text-sm text-gray-600">Cliente: {{ pedido.cliente }}</p>
             <p class="text-sm text-gray-600">Total: ${{ pedido.total }}</p>
-            <p class="text-sm" 
+            <p
+              class="text-sm"
               [class.text-yellow-600]="pedido.estado === 'pendiente'"
               [class.text-green-600]="pedido.estado === 'aceptado'"
               [class.text-red-600]="pedido.estado === 'rechazado'"
@@ -121,16 +104,16 @@
               Estado: {{ pedido.estado }}
             </p>
           </div>
-          <div *ngIf="pedido.estado === 'pendiente'" class="flex space-x-2">
-            <button 
+          <div *ngIf="pedido.estado === 'pendiente'" class="flex gap-2">
+            <button
               (click)="aceptarPedido(pedido.id)"
-              class="bg-green-500 text-white px-3 py-1 rounded text-sm hover:bg-green-600"
+              class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm"
             >
               Aceptar
             </button>
-            <button 
+            <button
               (click)="rechazarPedido(pedido.id)"
-              class="bg-red-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600"
+              class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm"
             >
               Rechazar
             </button>
@@ -141,23 +124,24 @@
   </div>
 
   <!-- Vista de Historial -->
-  <div *ngIf="vistaActual === 'historial'" 
+  <div
+    *ngIf="vistaActual === 'historial'"
     class="bg-white rounded-lg shadow-md p-6 w-full max-w-4xl"
   >
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-2xl font-bold text-gray-700">Historial</h2>
-      <button 
+      <button
         (click)="volverAlPanel()"
         class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
       >
         Volver
       </button>
     </div>
-    
     <div class="text-center text-gray-500 py-8">
       <p>Funcionalidad de historial en desarrollo...</p>
-      <p class="text-sm mt-2">Aquí podrás ver el historial completo de pedidos</p>
+      <p class="text-sm mt-2">
+        Aquí podrás ver el historial completo de pedidos
+      </p>
     </div>
   </div>
->>>>>>> d43132e3eeba370ddc9affde0eeb5eb3b551c564
 </div>

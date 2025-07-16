@@ -1,81 +1,105 @@
-<<<<<<< HEAD
-<link rel="stylesheet" href="/frontend/src/styles.css">
-
-<div class="form-container">
-  <div class="form-box">
-    <img src="logo.png" alt="Logo" class="logo" />
-
-    <form class="formulario" #registerForm="ngForm" (ngSubmit)="onRegister()" autocomplete="off">
-      <h1>Registrarse</h1>
-
-      <select name="tipo" [(ngModel)]="tipo" class="select" required>
-=======
-<div class="flex items-center justify-center h-screen">
-  <div
-    class="min-w-fit flex-col border bg-white px-6 py-14 shadow-md rounded-[4px] w-[360px]"
-  >
-    <div class="mb-8 flex justify-center">
+<div class="flex items-center justify-center min-h-screen bg-gray-100 px-4">
+  <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
+    <!-- Logo -->
+    <div class="flex justify-center mb-6">
       <img class="w-24" src="restoLogo.svg" alt="Logo" />
     </div>
 
+    <!-- Formulario de Registro -->
     <form
       #registerForm="ngForm"
       (ngSubmit)="onRegister()"
       autocomplete="off"
-      class="flex flex-col text-sm rounded-md space-y-4"
+      class="flex flex-col space-y-4 text-sm"
     >
+      <h1 class="text-xl font-bold text-center text-gray-700">Registrarse</h1>
+
+      <!-- Selector de tipo de cuenta -->
       <select
         name="tipo"
         [(ngModel)]="tipo"
-        class="rounded-[4px] border p-3 focus:outline-none hover:border-yellow-500"
+        class="border p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
         required
       >
->>>>>>> d43132e3eeba370ddc9affde0eeb5eb3b551c564
         <option value="" disabled selected>Selecciona el tipo de cuenta</option>
         <option value="cliente">Cliente</option>
         <option value="restaurante">Restaurante</option>
       </select>
 
-      <input *ngIf="tipo === 'cliente'" type="text" name="username" [(ngModel)]="username" class="input" placeholder="Nombre de usuario" required />
+      <!-- Campo para cliente -->
+      <input
+        *ngIf="tipo === 'cliente'"
+        type="text"
+        name="username"
+        [(ngModel)]="username"
+        class="border p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+        placeholder="Nombre de usuario"
+        required
+      />
 
-      <input *ngIf="tipo === 'restaurante'" type="text" name="nombreRestaurante" [(ngModel)]="nombreRestaurante" class="input" placeholder="Nombre del Restaurante" required />
-      <input *ngIf="tipo === 'restaurante'" type="text" name="username" [(ngModel)]="username" class="input" placeholder="Nombre de usuario para el restaurante" required />
+      <!-- Campos para restaurante -->
+      <input
+        *ngIf="tipo === 'restaurante'"
+        type="text"
+        name="nombreRestaurante"
+        [(ngModel)]="nombreRestaurante"
+        class="border p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+        placeholder="Nombre del Restaurante"
+        required
+      />
+      <input
+        *ngIf="tipo === 'restaurante'"
+        type="text"
+        name="username"
+        [(ngModel)]="username"
+        class="border p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+        placeholder="Nombre de usuario para el restaurante"
+        required
+      />
 
-      <input type="password" name="password" [(ngModel)]="password" class="input" placeholder="Contraseña" required />
-      <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword" class="input" placeholder="Confirmar Contraseña" required />
+      <!-- Contraseñas -->
+      <input
+        type="password"
+        name="password"
+        [(ngModel)]="password"
+        class="border p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+        placeholder="Contraseña"
+        required
+      />
+      <input
+        type="password"
+        name="confirmPassword"
+        [(ngModel)]="confirmPassword"
+        class="border p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+        placeholder="Confirmar Contraseña"
+        required
+      />
 
-      <p *ngIf="passwordMismatch" class="error-message">Las contraseñas no coinciden</p>
-
-      <button class="btn" type="submit" [disabled]="!registerForm.form.valid || passwordMismatch">Registrarse</button>
-
-<<<<<<< HEAD
-      <p *ngIf="error" class="error-message">{{ error }}</p>
-      <p *ngIf="success" class="success-message">¡Registro exitoso!</p>
-=======
+      <!-- Validaciones -->
       <p *ngIf="passwordMismatch" class="text-red-500 text-sm text-center">
         Las contraseñas no coinciden
       </p>
 
       <button
         type="submit"
-        class="w-full border p-2 bg-gradient-to-r from-gray-800 bg-gray-500 text-white rounded-[4px] hover:bg-slate-400 scale-105 duration-300"
+        class="bg-yellow-500 hover:bg-yellow-600 text-white py-2 rounded-md font-semibold transition"
         [disabled]="!registerForm.form.valid || passwordMismatch"
       >
         Registrarse
       </button>
 
-      <p *ngIf="error" class="text-red-500 text-sm mt-2 text-center">
+      <p *ngIf="error" class="text-red-500 text-sm text-center mt-2">
         {{ error }}
       </p>
-      <p *ngIf="success" class="text-green-500 text-sm mt-2 text-center">
+      <p *ngIf="success" class="text-green-500 text-sm text-center mt-2">
         ¡Registro exitoso!
       </p>
->>>>>>> d43132e3eeba370ddc9affde0eeb5eb3b551c564
     </form>
 
-    <div class="mt-5 flex justify-between text-sm text-gray-600">
-      <a href="#">¿Ya tienes cuenta?</a>
-      <a href="/login">Iniciar sesión</a>
+    <!-- Enlaces -->
+    <div class="mt-6 flex justify-between text-sm text-gray-600">
+      <a href="#" class="hover:underline">¿Ya tienes cuenta?</a>
+      <a href="/login" class="hover:underline">Iniciar sesión</a>
     </div>
   </div>
 </div>

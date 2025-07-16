@@ -1,12 +1,12 @@
-/* === Estilo General === */
+@import "tailwindcss";
+/* === Estilo General ===
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: #fff4f4;
   color: #3d1f00;
 }
 
-/* === Contenedor principal de formularios === */
 .form-container {
   display: flex;
   justify-content: center;
@@ -16,29 +16,29 @@ body {
 
 .form-box {
   background-color: #ffffff;
-  border: 2px solid #d62828;
+  bologinrder: 2px solid #d62828;
   padding: 2rem;
   width: 360px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(110, 30, 30, 0.2);
 }
 
-/* === Logo === */
 .logo {
-  width: 100px;
+  width: 20px;
+  height: 20px;
   display: block;
   margin: 0 auto 1rem auto;
 }
 
-/* === Títulos === */
-h1, h2 {
+h1,
+h2 {
   color: #b30000;
   text-align: center;
   margin-bottom: 0.5rem;
 }
 
-/* === Inputs y Select === */
-.input, .select {
+.input,
+.select {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid #ccc;
@@ -47,12 +47,12 @@ h1, h2 {
   transition: border 0.3s;
 }
 
-.input:focus, .select:focus {
+.input:focus,
+.select:focus {
   border: 2px solid #ffb703;
   outline: none;
 }
 
-/* === Botones === */
 .btn {
   width: 100%;
   background: linear-gradient(to right, #b30000, #8c1c13);
@@ -63,7 +63,9 @@ h1, h2 {
   font-weight: bold;
   margin-top: 1rem;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.3s ease;
+  transition:
+    transform 0.2s ease,
+    background 0.3s ease;
 }
 
 .btn:hover {
@@ -71,7 +73,6 @@ h1, h2 {
   transform: scale(1.05);
 }
 
-/* === Mensajes === */
 .error-message {
   color: #e63946;
   text-align: center;
@@ -84,7 +85,6 @@ h1, h2 {
   font-size: 0.9rem;
 }
 
-/* === Panel del restaurante === */
 .contenedor-principal {
   padding: 2rem;
   background-color: #fff0eb;
@@ -130,3 +130,4 @@ h1, h2 {
 .opciones-panel button:hover {
   background: #cc5200;
 }
+*/

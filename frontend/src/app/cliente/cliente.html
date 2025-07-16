@@ -1,78 +1,92 @@
-<<<<<<< HEAD
-<link rel="stylesheet" href="/frontend/src/styles.css">
+<link rel="stylesheet" href="/frontend/src/styles.css" />
 
 <div class="form-container">
   <div class="form-box w-full max-w-screen-xl mx-auto px-4">
-    <h2 class="text-xl font-bold text-gray-700 mb-6 text-center">Bienvenido Cliente</h2>
-    <input type="text" [(ngModel)]="busqueda" placeholder="Buscar restaurante..." class="input mb-4" />
+    <h2 class="text-xl font-bold text-gray-700 mb-6 text-center">
+      Bienvenido Cliente
+    </h2>
+    <input
+      type="text"
+      [(ngModel)]="busqueda"
+      placeholder="Buscar restaurante..."
+      class="input mb-4"
+    />
     <button (click)="verPedidos()" class="btn mb-6">Ver mis pedidos</button>
     <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-6">
       <div *ngFor="let r of restaurantesFiltrados" class="restaurante-card">
         <button (click)="verRestaurante(r.id)" class="btn-clickeable"></button>
         <div class="restaurante-imagen">
-          <img [src]="r.imagen || 'https://picsum.photos/400/400'" alt="Imagen restaurante" />
+          <img
+            [src]="r.imagen || 'https://picsum.photos/400/400'"
+            alt="Imagen restaurante"
+          />
         </div>
         <div class="restaurante-info">
           <h3>{{ r.nombre }}</h3>
           <p>{{ r.descripcion || 'Sin descripción disponible.' }}</p>
-=======
-<div
-  class="relative flex min-h-screen flex-col overflow-hidden bg-gray-100 py-6 sm:py-12"
->
-  <div class="mx-auto max-w-screen-xl px-4 w-full">
-    <div class="flex justify-between items-center mb-6">
-      <h2 class="font-bold text-xl text-gray-600">Bienvenido Cliente</h2>
-      <button 
-        (click)="logout()"
-        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
-      >
-        Cerrar sesión
-      </button>
-    </div>
+          <div
+            class="relative flex min-h-screen flex-col overflow-hidden bg-gray-100 py-6 sm:py-12"
+          >
+            <div class="mx-auto max-w-screen-xl px-4 w-full">
+              <div class="flex justify-between items-center mb-6">
+                <h2 class="font-bold text-xl text-gray-600">
+                  Bienvenido Cliente
+                </h2>
+                <button
+                  (click)="logout()"
+                  class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+                >
+                  Cerrar sesión
+                </button>
+              </div>
 
-    <!-- 🔍 Buscador -->
-    <input
-      type="text"
-      [(ngModel)]="busqueda"
-      placeholder="Buscar restaurante..."
-      class="w-full border border-gray-300 rounded p-3 mb-4 focus:outline-none focus:border-yellow-500"
-    />
+              <!-- 🔍 Buscador -->
+              <input
+                type="text"
+                [(ngModel)]="busqueda"
+                placeholder="Buscar restaurante..."
+                class="w-full border border-gray-300 rounded p-3 mb-4 focus:outline-none focus:border-yellow-500"
+              />
 
-    <!-- 📦 Botón para ver pedidos -->
-    <button
-      (click)="verPedidos()"
-      class="mb-6 bg-gradient-to-r from-yellow-400 via-yellow-600 to-stone-700 hover:opacity-100 opacity-80 duration-500 text-white px-4 py-2 rounded transition"
-    >
-      Ver mis pedidos
-    </button>
+              <!-- 📦 Botón para ver pedidos -->
+              <button
+                (click)="verPedidos()"
+                class="mb-6 bg-gradient-to-r from-yellow-400 via-yellow-600 to-stone-700 hover:opacity-100 opacity-80 duration-500 text-white px-4 py-2 rounded transition"
+              >
+                Ver mis pedidos
+              </button>
 
-    <!-- 🍽️ Lista de restaurantes en tarjetas -->
-    <div class="grid w-full sm:grid-cols-2 xl:grid-cols-4 gap-6">
-      <div
-        *ngFor="let r of restaurantesFiltrados"
-        class="relative flex flex-col shadow-md rounded-xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 max-w-sm bg-white"
-      >
-        <button
-          (click)="verRestaurante(r.id)"
-          class="z-20 absolute h-full w-full top-0 left-0"
-        ></button>
+              <!-- 🍽️ Lista de restaurantes en tarjetas -->
+              <div class="grid w-full sm:grid-cols-2 xl:grid-cols-4 gap-6">
+                <div
+                  *ngFor="let r of restaurantesFiltrados"
+                  class="relative flex flex-col shadow-md rounded-xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 max-w-sm bg-white"
+                >
+                  <button
+                    (click)="verRestaurante(r.id)"
+                    class="z-20 absolute h-full w-full top-0 left-0"
+                  ></button>
 
-        <div class="h-44 overflow-hidden relative">
-          <img
-            [src]="r.imagen || 'https://picsum.photos/400/400'"
-            alt="Imagen restaurante"
-            class="w-full h-full object-cover"
-          />
-        </div>
+                  <div class="h-44 overflow-hidden relative">
+                    <img
+                      [src]="r.imagen || 'https://picsum.photos/400/400'"
+                      alt="Imagen restaurante"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
 
-        <div class="py-4 px-3">
-          <h3 class="text-lg font-semibold mb-2 text-gray-700">
-            {{ r.nombre }}
-          </h3>
-          <p class="text-sm text-gray-500">
-            {{ r.descripcion || 'Sin descripción disponible.' }}
-          </p>
->>>>>>> d43132e3eeba370ddc9affde0eeb5eb3b551c564
+                  <div class="py-4 px-3">
+                    <h3 class="text-lg font-semibold mb-2 text-gray-700">
+                      {{ r.nombre }}
+                    </h3>
+                    <p class="text-sm text-gray-500">
+                      {{ r.descripcion || 'Sin descripción disponible.' }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

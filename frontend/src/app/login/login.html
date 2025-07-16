@@ -1,71 +1,59 @@
-<<<<<<< HEAD
-<link rel="stylesheet" href="/frontend/src/styles.css">
-
-<div class="form-container">
-  <div class="form-box">
-    <img src="logo.png" alt="Logo" class="logo" />
-
-    <form class="formulario" (ngSubmit)="login()" #loginForm="ngForm">
-      <h1>Iniciar Sesión</h1>
-
-      <input class="input" type="text" name="username" [(ngModel)]="username" placeholder="Username o Email" required />
-      <input class="input" type="password" name="password" [(ngModel)]="password" placeholder="Password" required />
-=======
-<div class="flex items-center justify-center h-screen">
-  <div
-    class="min-w-fit flex-col border bg-white px-6 py-14 shadow-md rounded-[4px] w-[360px]"
-  >
-    <div class="mb-8 flex justify-center">
-      <img class="w-24" src="restoLogo.svg" alt="Logo" />
+<div class="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+  <div class="bg-white w-full max-w-md p-8 rounded-lg shadow-md">
+    <div class="flex justify-center mb-6">
+      <img src="restoLogo.svg" alt="Logo" class="h-24" />
     </div>
 
     <form
+      class="flex flex-col space-y-4"
       (ngSubmit)="login()"
       #loginForm="ngForm"
-      class="flex flex-col text-sm rounded-md space-y-4"
     >
+      <h1 class="text-2xl font-bold text-center text-gray-800">
+        Iniciar Sesión
+      </h1>
+
       <input
-        class="rounded-[4px] border p-3 hover:outline-none focus:outline-none hover:border-yellow-500 duration-500"
+        class="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
         type="text"
         name="username"
         [(ngModel)]="username"
-        placeholder="Username or Email"
+        placeholder="Username o Email"
         required
       />
 
       <input
-        class="rounded-[4px] border p-3 hover:outline-none focus:outline-none hover:border-yellow-500 duration-500"
+        class="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
         type="password"
         name="password"
         [(ngModel)]="password"
         placeholder="Password"
         required
       />
->>>>>>> d43132e3eeba370ddc9affde0eeb5eb3b551c564
 
-      <button class="btn" type="submit" [disabled]="!loginForm.valid">Sign in</button>
+      <button
+        class="bg-yellow-500 text-white py-2 rounded-md hover:bg-yellow-600 transition"
+        type="submit"
+        [disabled]="!loginForm.valid"
+      >
+        Iniciar sesión
+      </button>
 
-<<<<<<< HEAD
-      <p *ngIf="error" class="error-message">{{ error }}</p>
-=======
-      <p *ngIf="error" class="text-red-500 text-sm mt-2 text-center">
-        {{ error }}
-      </p>
->>>>>>> d43132e3eeba370ddc9affde0eeb5eb3b551c564
+      <p *ngIf="error" class="text-red-500 text-sm text-center">{{ error }}</p>
+
+      <div class="flex justify-between text-sm text-gray-600 mt-2">
+        <a href="#" class="hover:underline">¿Olvidaste tu contraseña?</a>
+        <a href="/register" class="hover:underline">Regístrate</a>
+      </div>
+
+      <div class="text-center text-sm text-gray-400 mt-4">
+        o también puedes iniciar con
+      </div>
+
+      <div class="flex justify-center gap-4 mt-2">
+        <!-- Aquí puedes agregar botones sociales, por ejemplo: -->
+        <!-- <button class="bg-blue-600 text-white px-4 py-2 rounded-md">Facebook</button> -->
+      </div>
     </form>
-
-    <div class="mt-5 flex justify-between text-sm text-gray-600">
-      <a href="#">¿Olvidaste tu contraseña?</a>
-      <a href="/register">Regístrate</a>
-    </div>
-<<<<<<< HEAD
-=======
-
-    <div class="flex justify-center mt-5 text-sm">
-      <p class="text-gray-400">or you can sign with</p>
-    </div>
-
-    <div class="mt-5 flex justify-center gap-3"></div>
->>>>>>> d43132e3eeba370ddc9affde0eeb5eb3b551c564
   </div>
 </div>
