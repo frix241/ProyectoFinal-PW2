@@ -93,8 +93,17 @@
         <div class="flex justify-between">
           <div>
             <h3 class="font-semibold">Pedido #{{ pedido.id }}</h3>
-            <p class="text-sm text-gray-600">Cliente: {{ pedido.cliente }}</p>
-            <p class="text-sm text-gray-600">Total: ${{ pedido.total }}</p>
+            <p class="text-sm text-gray-600">
+              Cliente: {{ pedido.cliente.username }}
+            </p>
+
+            <p class="text-sm text-gray-600">
+              Entrada: {{ pedido.entrada.nombre }}
+            </p>
+            <p class="text-sm text-gray-600">
+              Segundo: {{ pedido.segundo.nombre }}
+            </p>
+            <p class="text-sm text-gray-600">Total: S/.{{ pedido.total }}</p>
             <p
               class="text-sm"
               [class.text-yellow-600]="pedido.estado === 'pendiente'"
