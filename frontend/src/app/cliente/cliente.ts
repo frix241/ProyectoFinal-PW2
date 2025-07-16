@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Auth } from '../services/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cliente',
@@ -13,7 +15,11 @@ export class Cliente implements OnInit {
   restaurantes: any[] = [];
   busqueda: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private auth: Auth,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.http.get<any[]>('http://127.0.0.1:8000/api/restaurantes/')
@@ -36,5 +42,10 @@ export class Cliente implements OnInit {
   verRestaurante(id: number) {
     // TODO: Implementar vista de restaurante individual
     alert(`Ver restaurante ID: ${id}`);
+  }
+
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/login']);
   }
 }
