@@ -8,7 +8,7 @@ from .views import (
 router = DefaultRouter()
 router.register(r'restaurantes', RestaurantViewSet)
 router.register(r'menus', MenuViewSet)
-router.register(r'pedidos', PedidoViewSet)
+router.register(r'pedidos', PedidoViewSet, basename='pedido')
 router.register(r'entradas', EntradaViewSet)
 router.register(r'segundos', SegundoViewSet)
 

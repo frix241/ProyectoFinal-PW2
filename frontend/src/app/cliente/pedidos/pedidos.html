@@ -1,5 +1,6 @@
-<!-- pedidos.component.html -->
-<div class="min-h-screen bg-gray-100 py-8">
+<div
+  class="min-h-screen bg-gradient-to-br from-amber-50 via-amber-50 to-amber-100 py-8"
+>
   <div class="w-full max-w-screen-xl mx-auto px-4">
     <h2 class="text-2xl font-bold text-gray-700 mb-6 text-center">
       Mis Pedidos
@@ -8,24 +9,42 @@
     <div *ngIf="pedidos.length > 0" class="space-y-6">
       <div
         *ngFor="let pedido of pedidos"
-        class="w-full flex flex-col md:flex-row justify-between bg-white border border-gray-200 rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300"
+        class="w-full flex flex-col gap-3 bg-gradient-to-b from-white to-sky-50 border border-gray-200 rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300"
       >
-        <div>
-          <h3 class="text-lg font-semibold text-gray-800 mb-2">
+        <div class="flex justify-between items-center">
+          <h3 class="text-lg font-semibold text-gray-800">
             Pedido #{{ pedido.id }}
           </h3>
-          <p class="text-sm text-gray-600">
-            Fecha: {{ pedido.fecha | date:'shortDate' }}
-          </p>
-          <p class="text-sm text-gray-600">
-            Estado: <strong>{{ pedido.estado }}</strong>
-          </p>
+          <p class="text-sm text-gray-600">{{ pedido.fecha | date:'short' }}</p>
         </div>
-        <div class="text-right">
-          <p class="text-sm text-gray-500">Total</p>
-          <p class="text-2xl font-bold text-green-600">
-            S/ {{ pedido.total?.toFixed(2) || '0.00' }}
-          </p>
+
+        <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
+          <div>
+            <p>
+              <strong>Restaurante:</strong> {{ pedido.menu.restaurante.nombre }}
+            </p>
+            <p><strong>Fecha del menú:</strong> {{ pedido.menu.fecha }}</p>
+          </div>
+
+          <div>
+            <p>
+              <strong>Entrada:</strong> {{ pedido.entrada.nombre }} - S/ {{
+              pedido.entrada.precio }}
+            </p>
+            <p>
+              <strong>Segundo:</strong> {{ pedido.segundo.nombre }} - S/ {{
+              pedido.segundo.precio }}
+            </p>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center mt-2">
+          <span class="text-sm text-gray-600">
+            Estado: <strong>{{ pedido.estado | titlecase }}</strong>
+          </span>
+          <span class="text-lg font-bold text-green-600">
+            Total: S/ {{ pedido.total }}
+          </span>
         </div>
       </div>
     </div>

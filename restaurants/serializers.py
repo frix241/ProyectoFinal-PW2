@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Restaurant, Menu, Entrada, Segundo
+from .models import Restaurant, Menu, Entrada, Segundo, Pedido
 
 class RestaurantSerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,10 +25,14 @@ class MenuSerializer(serializers.ModelSerializer):
         fields = ['id', 'restaurante', 'fecha', 'entradas', 'segundos']
 
 
-from .models import Pedido
-
 class PedidoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pedido
-        fields = '__all__'
-        read_only_fields = ['cliente', 'fecha', 'total']
+        fields = "__all__"
+        depth = 2
+
+
+class PedidoWriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Pedido
+        fields = ['id', 'menu', 'entrada', 'segundo']
