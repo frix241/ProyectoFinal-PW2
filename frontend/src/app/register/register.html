@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <link rel="stylesheet" href="/frontend/src/styles.css">
 
 <div class="form-container">
@@ -8,6 +9,28 @@
       <h1>Registrarse</h1>
 
       <select name="tipo" [(ngModel)]="tipo" class="select" required>
+=======
+<div class="flex items-center justify-center h-screen">
+  <div
+    class="min-w-fit flex-col border bg-white px-6 py-14 shadow-md rounded-[4px] w-[360px]"
+  >
+    <div class="mb-8 flex justify-center">
+      <img class="w-24" src="restoLogo.svg" alt="Logo" />
+    </div>
+
+    <form
+      #registerForm="ngForm"
+      (ngSubmit)="onRegister()"
+      autocomplete="off"
+      class="flex flex-col text-sm rounded-md space-y-4"
+    >
+      <select
+        name="tipo"
+        [(ngModel)]="tipo"
+        class="rounded-[4px] border p-3 focus:outline-none hover:border-yellow-500"
+        required
+      >
+>>>>>>> d43132e3eeba370ddc9affde0eeb5eb3b551c564
         <option value="" disabled selected>Selecciona el tipo de cuenta</option>
         <option value="cliente">Cliente</option>
         <option value="restaurante">Restaurante</option>
@@ -25,8 +48,29 @@
 
       <button class="btn" type="submit" [disabled]="!registerForm.form.valid || passwordMismatch">Registrarse</button>
 
+<<<<<<< HEAD
       <p *ngIf="error" class="error-message">{{ error }}</p>
       <p *ngIf="success" class="success-message">¡Registro exitoso!</p>
+=======
+      <p *ngIf="passwordMismatch" class="text-red-500 text-sm text-center">
+        Las contraseñas no coinciden
+      </p>
+
+      <button
+        type="submit"
+        class="w-full border p-2 bg-gradient-to-r from-gray-800 bg-gray-500 text-white rounded-[4px] hover:bg-slate-400 scale-105 duration-300"
+        [disabled]="!registerForm.form.valid || passwordMismatch"
+      >
+        Registrarse
+      </button>
+
+      <p *ngIf="error" class="text-red-500 text-sm mt-2 text-center">
+        {{ error }}
+      </p>
+      <p *ngIf="success" class="text-green-500 text-sm mt-2 text-center">
+        ¡Registro exitoso!
+      </p>
+>>>>>>> d43132e3eeba370ddc9affde0eeb5eb3b551c564
     </form>
 
     <div class="mt-5 flex justify-between text-sm text-gray-600">
