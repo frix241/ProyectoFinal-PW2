@@ -42,6 +42,7 @@ export class Cliente implements OnInit {
   }
 
   verRestaurante(id: number) {
+    this.router.navigate(["cliente/restaurante", id]);
     // TODO: Implementar vista de restaurante individual
     alert(`Ver restaurante ID: ${id}`);
   }

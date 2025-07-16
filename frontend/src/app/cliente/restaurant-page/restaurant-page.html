@@ -1,0 +1,21 @@
+<div class="max-w-screen-xl mx-auto px-4 py-8">
+  <h2 class="text-2xl font-bold mb-6 text-gray-700">Menús disponibles</h2>
+
+  <div *ngFor="let menu of menus" class="bg-white shadow rounded p-4 mb-6">
+    <p class="text-sm text-gray-500">Fecha: {{ menu.fecha }}</p>
+
+    <h3 class="font-semibold text-gray-700 mt-4">Entradas:</h3>
+    <ul class="list-disc list-inside">
+      <li *ngFor="let entrada of menu.entradas">
+        {{ entrada.nombre }} - S/. {{ entrada.precio }}
+      </li>
+    </ul>
+
+    <h3 class="font-semibold text-gray-700 mt-4">Segundos:</h3>
+    <ul class="list-disc list-inside">
+      <li *ngFor="let segundo of menu.segundos">
+        {{ segundo.nombre }} - S/. {{ segundo.precio }}
+      </li>
+    </ul>
+  </div>
+</div>
