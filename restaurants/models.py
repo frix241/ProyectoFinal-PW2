@@ -10,19 +10,29 @@ class Restaurant(models.Model):
         return self.nombre
 
 class Entrada(models.Model):
-    menu = models.ForeignKey('Menu', related_name='entradas', on_delete=models.CASCADE)
+    #menu = models.ForeignKey('Menu', related_name='entradas', on_delete=models.CASCADE)
     nombre = models.CharField(max_length=100)
-    disponible = models.BooleanField(default=True)
+    cantidad = models.PositiveIntegerField(default=0)
     precio = models.DecimalField(max_digits=6, decimal_places=2)
+    imagen = models.ImageField(upload_to='entradas/', blank=True, null=True)  # Cambiado de URL a ImageField
+
+    @property
+    def disponible(self):
+        return self.cantidad > 0
 
     def __str__(self):
         return f"{self.nombre} ({self.menu.fecha})"
 
 class Segundo(models.Model):
-    menu = models.ForeignKey('Menu', related_name='segundos', on_delete=models.CASCADE)
+    #menu = models.ForeignKey('Menu', related_name='segundos', on_delete=models.CASCADE)
     nombre = models.CharField(max_length=100)
-    disponible = models.BooleanField(default=True)
+    cantidad = models.PositiveIntegerField(default=0)
     precio = models.DecimalField(max_digits=6, decimal_places=2)
+    imagen = models.ImageField(upload_to='segundos/', blank=True, null=True)
+
+    @property
+    def disponible(self):
+        return self.cantidad > 0
 
     def __str__(self):
         return f"{self.nombre} ({self.menu.fecha})"
