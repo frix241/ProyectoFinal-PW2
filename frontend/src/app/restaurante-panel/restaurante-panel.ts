@@ -207,4 +207,22 @@ export class RestaurantePanel implements OnInit {
     this.fileInputSegundo.nativeElement.value = '';
     this.editandoSegundoId = null;
   }
+
+  editarEntrada(entrada: any, index: number) {
+    this.editandoEntradaId = entrada.id;
+    this.entradaEditadaIndex = index;
+    this.nuevaEntrada = { ...entrada };
+    setTimeout(() => {
+      this.seccionEntradas.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  }
+
+  editarSegundo(segundo: any, index: number) {
+    this.editandoSegundoId = segundo.id;
+    this.segundoEditadoIndex = index;
+    this.nuevoSegundo = { ...segundo };
+    setTimeout(() => {
+      this.seccionSegundos.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  }
 }
