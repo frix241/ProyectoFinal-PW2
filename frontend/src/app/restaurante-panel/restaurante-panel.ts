@@ -225,4 +225,74 @@ export class RestaurantePanel implements OnInit {
       this.seccionSegundos.nativeElement.scrollIntoView({ behavior: 'smooth' });
     }, 100);
   }
+
+
+  actualizarEntrada() {
+    if (this.editandoEntradaId) {
+      const formData = new FormData();
+      formData.append('nombre', this.nuevaEntrada.nombre);
+      formData.append('precio', this.nuevaEntrada.precio.toString());
+      formData.append('cantidad', this.nuevaEntrada.cantidad.toString());
+
+      // Agregar imagen si hay cambios
+      const fileInput = this.fileInputEntrada.nativeElement;
+      if (fileInput.files && fileInput.files[0]) {
+        formData.append('imagen', fileInput.files[0]);
+      }
+
+      this.restauranteService.actualizarEntrada(this.editandoEntradaId, formData).subscribe({
+        next: () => {
+          this.cargarEntradas(); // Ahora es síncrono
+          
+          // Usa setTimeout directamente sin then()
+          setTimeout(() => {
+            if (this.entradaEditadaIndex !== null) {
+              const element = document.getElementById(`entrada-${this.editandoEntradaId}`);
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+            }
+            this.cancelarEdicionEntrada();
+          }, 300);
+        },
+        error: (err) => {
+          console.error('Error al actualizar entrada:', err);
+        }
+      });
+    }
+  }
+
+  actualizarSegundo() {
+    if (this.editandoSegundoId) {
+      this.restauranteService.actualizarSegundo(this.editandoSegundoId, this.nuevoSegundo).subscribe({
+        next: () => {
+          this.cargarSegundos().then(() => {
+            if (this.segundoEditadoIndex !== null) {
+              setTimeout(() => {
+                const element = document.getElementById(`segundo-${this.editandoSegundoId}`);
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+              }, 300);
+            }
+            this.cancelarEdicionSegundo();
+          });
+        }
+      });
+    }
+  }
+
+  cancelarEdicionEntrada() {
+    this.editandoEntradaId = null;
+    this.entradaEditadaIndex = null;
+    this.nuevaEntrada = { nombre: "", precio: 0, cantidad: 0, imagenUrl: "" };
+    this.fileInputEntrada.nativeElement.value = '';
+  }
+
+  cancelarEdicionSegundo() {
+    this.editandoSegundoId = null;
+    this.segundoEditadoIndex = null;
+    this.nuevoSegundo = { nombre: "", precio: 0, cantidad: 0, imagenUrl: "" };
+    this.fileInputSegundo.nativeElement.value = '';
+  }
 }
