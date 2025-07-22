@@ -7,33 +7,33 @@ class RestaurantSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class EntradaSerializer(serializers.ModelSerializer):
-    imagen_url = serializers.SerializerMethodField()  # Cambia el nombre a imagen_url para coincidir con tu frontend
+    imagen_url = serializers.SerializerMethodField()
 
     def get_imagen_url(self, obj):
         if obj.imagen:
-            return self.context['request'].build_absolute_uri(obj.imagen.url)  # URL completa
+            return self.context['request'].build_absolute_uri(obj.imagen.url)
         return None
 
     class Meta:
         model = Entrada
         fields = '__all__'
         extra_kwargs = {
-            'imagen': {'required': False, 'write_only': True}  # imagen es solo para escritura
+            'imagen': {'required': False, 'write_only': True}
         }
 
 class SegundoSerializer(serializers.ModelSerializer):
-    imagen_url = serializers.SerializerMethodField()  # Cambia el nombre a imagen_url para coincidir con tu frontend
+    imagen_url = serializers.SerializerMethodField()
 
     def get_imagen_url(self, obj):
         if obj.imagen:
-            return self.context['request'].build_absolute_uri(obj.imagen.url)  # URL completa
+            return self.context['request'].build_absolute_uri(obj.imagen.url)
         return None
 
     class Meta:
         model = Segundo
         fields = '__all__'
         extra_kwargs = {
-            'imagen': {'required': False, 'write_only': True}  # imagen es solo para escritura
+            'imagen': {'required': False, 'write_only': True}
         }
 
 
