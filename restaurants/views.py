@@ -58,9 +58,17 @@ class PedidoViewSet(viewsets.ModelViewSet):
 class EntradaViewSet(viewsets.ModelViewSet):
     queryset = Entrada.objects.all()
     serializer_class = EntradaSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context
 
 class SegundoViewSet(viewsets.ModelViewSet):
     queryset = Segundo.objects.all()
     serializer_class = SegundoSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context
