@@ -70,8 +70,23 @@ export class RestauranteService {
   }
   
   // Crear entrada
-  createEntrada(entrada: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/entradas/`, entrada, { headers: this.getHeaders() });
+  crearEntrada(formData: FormData): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('access')}`
+      // ¡No incluyas Content-Type! El navegador lo agregará automáticamente con el boundary
+    });
+    
+    return this.http.post(`${this.apiUrl}/entradas/`, formData, { headers });
+  }
+  actualizarEntrada(id: number, formData: FormData): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('access')}`
+    });
+    
+    return this.http.put(`${this.apiUrl}/entradas/${id}/`, formData, { headers });
+  }
+  eliminarEntrada(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/entradas/${id}/`, { headers: this.getHeaders() });
   }
 
   // Obtener segundos
