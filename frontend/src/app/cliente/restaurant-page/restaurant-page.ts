@@ -4,6 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { Menu } from "../../services/menu";
 import { Pedidos } from "../../services/pedidos";
+import { RestauranteService } from "../../services/restaurante.service";
 
 @Component({
   selector: "app-restaurant-page",
@@ -20,18 +21,29 @@ export class RestaurantPage implements OnInit {
     private route: ActivatedRoute,
     private MenuService: Menu,
     private PedidoService: Pedidos,
+    private restauranteService: RestauranteService
   ) {}
+
 
   ngOnInit(): void {
     this.restauranteId = Number(this.route.snapshot.paramMap.get("id"));
     if (this.restauranteId) {
       this.MenuService.getMenusPorRestaurante(this.restauranteId).subscribe({
-        next: (data) => {
-          this.menus = data.map((m: any) => ({
-            ...m,
-            entradaSeleccionada: null,
-            segundoSeleccionado: null,
-          }));
+        next: (menus) => {
+          this.menus = [];
+          menus.forEach((menu: any) => {
+            this.restauranteService.getEntradas(menu.id).subscribe(entradas => {
+              this.restauranteService.getSegundos(menu.id).subscribe(segundos => {
+                this.menus.push({
+                  ...menu,
+                  entradas: entradas,
+                  segundos: segundos,
+                  entradaSeleccionada: null,
+                  segundoSeleccionado: null
+                });
+              });
+            });
+          });
         },
         error: (err) => console.error("Error al obtener menús:", err),
       });

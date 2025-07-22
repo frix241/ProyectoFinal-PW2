@@ -11,8 +11,10 @@ export class RestauranteService {
   constructor(private http: HttpClient) {}
 
   private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('access');
     return new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('access')}`
+      'Authorization': token ? `Bearer ${token}` : '',
+      'Content-Type': 'application/json'
     });
   }
 
@@ -35,23 +37,87 @@ export class RestauranteService {
   }
 
   // Crear menú
-  createMenu(menu: any): Observable<any> {
+  crearMenu(menu: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/menus/`, menu, { headers: this.getHeaders() });
   }
 
-  // Obtener entradas
-  getEntradas(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/entradas/`, { headers: this.getHeaders() });
+  getMenuDelDia(restauranteId: number): Observable<any> {
+    const hoy = new Date().toISOString().split('T')[0];
+    return this.http.get<any>(
+      `${this.apiUrl}/menus/?restaurante_id=${restauranteId}&fecha=${hoy}`,
+      { headers: this.getHeaders() }
+    );
+  } 
+
+  actualizarEstadoPedido(pedidoId: number, estado: string): Observable<any> {
+    return this.http.patch<any>(
+      `${this.apiUrl}/pedidos/${pedidoId}/`, 
+      { estado }, 
+      { headers: this.getHeaders() }
+    );
   }
 
+  // Métodos para Entradas (en español como los necesitas)
+  getEntradas(menuId?: number): Observable<any[]> {
+    const url = menuId 
+      ? `${this.apiUrl}/entradas/?menu=${menuId}` 
+      : `${this.apiUrl}/entradas/`;
+    return this.http.get<any[]>(url, { headers: this.getHeaders() });
+  }
+
+  getEntradaById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/entradas/${id}/`, { headers: this.getHeaders() });
+  }
+  
   // Crear entrada
-  createEntrada(entrada: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/entradas/`, entrada, { headers: this.getHeaders() });
+  crearEntrada(formData: FormData): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('access')}`
+      // ¡No incluyas Content-Type! El navegador lo agregará automáticamente con el boundary
+    });
+    
+    return this.http.post(`${this.apiUrl}/entradas/`, formData, { headers });
+  }
+  actualizarEntrada(id: number, formData: FormData): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('access')}`
+    });
+    
+    return this.http.put(`${this.apiUrl}/entradas/${id}/`, formData, { headers });
+  }
+  eliminarEntrada(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/entradas/${id}/`, { headers: this.getHeaders() });
   }
 
-  // Obtener segundos
-  getSegundos(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/segundos/`, { headers: this.getHeaders() });
+  // Métodos para Segundos (en español como los necesitas)
+  getSegundos(menuId?: number): Observable<any[]> {
+    const url = menuId 
+      ? `${this.apiUrl}/segundos/?menu=${menuId}` 
+      : `${this.apiUrl}/segundos/`;
+    return this.http.get<any[]>(url, { headers: this.getHeaders() });
+  }
+
+  getSegundoById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/segundos/${id}/`, { headers: this.getHeaders() });
+  }
+
+  crearSegundo(formData: FormData): Observable<any> {
+    // IMPORTANTE: No establezcas Content-Type manualmente para FormData
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('access')}`
+      // El browser agregará automáticamente:
+      // 'Content-Type': 'multipart/form-data; boundary=...'
+    });
+
+    return this.http.post(`${this.apiUrl}/segundos/`, formData, { headers });
+  }
+
+  actualizarSegundo(id: number, segundo: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/segundos/${id}/`, segundo, { headers: this.getHeaders() });
+  }
+
+  eliminarSegundo(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/segundos/${id}/`, { headers: this.getHeaders() });
   }
 
   // Crear segundo
