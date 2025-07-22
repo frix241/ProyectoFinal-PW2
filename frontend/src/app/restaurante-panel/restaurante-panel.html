@@ -47,24 +47,31 @@
   </div>
 
   <!-- Vista de Gestión de Menú -->
-  <div
-    *ngIf="vistaActual === 'menu'"
-    class="bg-white rounded-lg shadow-md p-6 w-full max-w-2xl"
-  >
+  <div *ngIf="vistaActual === 'menu'" class="bg-white rounded-lg shadow-md p-6 w-full max-w-4xl">
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-2xl font-bold text-gray-700">Gestión de Menú</h2>
-      <button
-        (click)="volverAlPanel()"
-        class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-      >
+      <button (click)="volverAlPanel()" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
         Volver
       </button>
     </div>
-    <div class="text-center text-gray-500 py-8">
-      <p>Funcionalidad de gestión de menú en desarrollo...</p>
-      <p class="text-sm mt-2">Aquí podrás crear y editar los menús diarios</p>
+
+    <!-- Pestañas -->
+    <div class="flex border-b mb-6">
+      <button 
+        (click)="tabActual = 'entradas'; cancelarEdicionEntrada()"
+        [class]="tabActual === 'entradas' ? 'border-b-2 border-yellow-500 text-yellow-600 font-medium' : 'text-gray-500'"
+        class="px-4 py-2 focus:outline-none"
+      >
+        Entradas
+      </button>
+      <button 
+        (click)="tabActual = 'segundos'; cancelarEdicionSegundo()"
+        [class]="tabActual === 'segundos' ? 'border-b-2 border-yellow-500 text-yellow-600 font-medium' : 'text-gray-500'"
+        class="px-4 py-2 focus:outline-none"
+      >
+        Segundos
+      </button>
     </div>
-  </div>
 
   <!-- Vista de Pedidos -->
   <div
