@@ -14,7 +14,7 @@ import { Router } from "@angular/router";
 })
 export class RestaurantePanel implements OnInit {
   nombreRestaurante: string = "";
-  vistaActual: string = "panel"; // panel, menu, pedidos, historial
+  vistaActual: string = "panel";
   menuHoy: any = null;
   pedidosHoy: any[] = [];
   entradas: any[] = [];
@@ -163,7 +163,7 @@ export class RestaurantePanel implements OnInit {
 
       this.restauranteService.crearEntrada(formData).subscribe({
         next: () => {
-          this.cargarEntradas(); // Esto ahora refrescará la lista con la imagen
+          this.cargarEntradas();
         }
       });
     }
@@ -177,18 +177,18 @@ export class RestaurantePanel implements OnInit {
       // Asegúrate de que el input file esté correctamente referenciado
       const fileInput = this.fileInputSegundo.nativeElement;
       if (fileInput.files && fileInput.files[0]) {
-        formData.append('imagen', fileInput.files[0], fileInput.files[0].name); // Agrega el nombre del archivo
+        formData.append('imagen', fileInput.files[0], fileInput.files[0].name); 
       }
 
       this.restauranteService.crearSegundo(formData).subscribe({
         next: (response) => {
-          console.log('Segundo creado:', response); // Verifica la respuesta
+          console.log('Segundo creado:', response);
           this.cargarSegundos();
           this.resetFormularioSegundo();
           this.fileInputSegundo.nativeElement.value = '';
         },
         error: (err) => {
-          console.error('Error completo:', err); // Muestra el error completo
+          console.error('Error completo:', err);
           if (err.error) {
             console.error('Detalles del error:', err.error);
           }
