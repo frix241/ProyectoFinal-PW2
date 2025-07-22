@@ -12,7 +12,7 @@ class Restaurant(models.Model):
 class Entrada(models.Model):
     #menu = models.ForeignKey('Menu', related_name='entradas', on_delete=models.CASCADE)
     nombre = models.CharField(max_length=100)
-    cantidad = models.PositiveIntegerField(default=0)
+    cantidad = models.PositiveIntegerField(default=0)  # Nuevo campo para cantidad
     precio = models.DecimalField(max_digits=6, decimal_places=2)
     imagen = models.ImageField(upload_to='entradas/', blank=True, null=True)  # Cambiado de URL a ImageField
 
@@ -26,9 +26,9 @@ class Entrada(models.Model):
 class Segundo(models.Model):
     #menu = models.ForeignKey('Menu', related_name='segundos', on_delete=models.CASCADE)
     nombre = models.CharField(max_length=100)
-    cantidad = models.PositiveIntegerField(default=0)
+    cantidad = models.PositiveIntegerField(default=0)  # Nuevo campo para cantidad
     precio = models.DecimalField(max_digits=6, decimal_places=2)
-    imagen = models.ImageField(upload_to='segundos/', blank=True, null=True)
+    imagen = models.ImageField(upload_to='segundos/', blank=True, null=True)  # Cambiado de URL a ImageField
 
     @property
     def disponible(self):
