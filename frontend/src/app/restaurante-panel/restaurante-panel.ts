@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { RestauranteService } from "../services/restaurante.service";
@@ -10,6 +10,7 @@ import { Router } from "@angular/router";
   imports: [FormsModule, CommonModule],
   templateUrl: "./restaurante-panel.html",
   styleUrl: "./restaurante-panel.css",
+  standalone: true
 })
 export class RestaurantePanel implements OnInit {
   nombreRestaurante: string = "";
@@ -18,10 +19,19 @@ export class RestaurantePanel implements OnInit {
   pedidosHoy: any[] = [];
   entradas: any[] = [];
   segundos: any[] = [];
+  tabActual: 'entradas' | 'segundos' = 'entradas';
+  editandoEntradaId: number | null = null;
+  editandoSegundoId: number | null = null;
+  entradaEditadaIndex: number | null = null;
+  segundoEditadoIndex: number | null = null;
 
-  // Para crear menú
-  nuevaEntrada = { nombre: "", precio: 0, disponible: true };
-  nuevoSegundo = { nombre: "", precio: 0, disponible: true };
+  @ViewChild('seccionEntradas') seccionEntradas!: ElementRef;
+  @ViewChild('seccionSegundos') seccionSegundos!: ElementRef;
+  @ViewChild('fileInputEntrada') fileInputEntrada!: ElementRef;
+  @ViewChild('fileInputSegundo') fileInputSegundo!: ElementRef;
+
+  nuevaEntrada = { nombre: "", precio: 0, cantidad: 0, imagenUrl: "" };
+  nuevoSegundo = { nombre: "", precio: 0, cantidad: 0, imagenUrl: "" };
 
   constructor(
     private restauranteService: RestauranteService,
