@@ -153,6 +153,47 @@
           </div>
         </div>
       </div>
+
+
+      <!-- Lista de entradas existentes -->
+      <h3 class="text-lg font-medium mb-4">Entradas Disponibles</h3>
+      <div *ngIf="entradas.length === 0" class="text-center text-gray-500 py-8">
+        <p>No hay entradas registradas</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4" #listaEntradas>
+        <div *ngFor="let entrada of entradas; let i = index" class="border rounded-lg p-4 hover:shadow transition" [id]="'entrada-' + entrada.id">
+          <div class="flex">
+            <div class="mr-4 w-24 h-24 flex-shrink-0">
+              <img [src]="entrada.imagenUrl || 'assets/placeholder-food.jpg'" 
+                  alt="{{entrada.nombre}}" 
+                  class="w-full h-full object-cover rounded">
+            </div>
+            <div class="flex-1">
+              <h4 class="font-medium">{{entrada.nombre}}</h4>
+              <p class="text-sm text-gray-600">Precio: S/. {{entrada.precio | number:'1.2-2'}}</p>
+              <p class="text-sm text-gray-600">Disponibles: {{entrada.cantidad}}</p>
+              <span class="inline-block px-2 py-1 text-xs rounded mt-2"
+                    [class.bg-green-100]="entrada.cantidad > 0"
+                    [class.text-green-800]="entrada.cantidad > 0"
+                    [class.bg-red-100]="entrada.cantidad <= 0"
+                    [class.text-red-800]="entrada.cantidad <= 0">
+                {{entrada.cantidad > 0 ? 'Disponible' : 'Agotado'}}
+              </span>
+            </div>
+          </div>
+          <div class="flex justify-end mt-4 space-x-2">
+            <button (click)="editarEntrada(entrada, i)" class="text-blue-500 hover:text-blue-700 text-sm">
+              Editar
+            </button>
+            <button (click)="eliminarEntrada(entrada.id)" class="text-red-500 hover:text-red-700 text-sm">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   <!-- Vista de Pedidos -->
   <div
     *ngIf="vistaActual === 'pedidos'"
