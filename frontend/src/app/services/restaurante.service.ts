@@ -89,9 +89,35 @@ export class RestauranteService {
     return this.http.delete<any>(`${this.apiUrl}/entradas/${id}/`, { headers: this.getHeaders() });
   }
 
-  // Obtener segundos
-  getSegundos(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/segundos/`, { headers: this.getHeaders() });
+  // Métodos para Segundos (en español como los necesitas)
+  getSegundos(menuId?: number): Observable<any[]> {
+    const url = menuId 
+      ? `${this.apiUrl}/segundos/?menu=${menuId}` 
+      : `${this.apiUrl}/segundos/`;
+    return this.http.get<any[]>(url, { headers: this.getHeaders() });
+  }
+
+  getSegundoById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/segundos/${id}/`, { headers: this.getHeaders() });
+  }
+
+  crearSegundo(formData: FormData): Observable<any> {
+    // IMPORTANTE: No establezcas Content-Type manualmente para FormData
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('access')}`
+      // El browser agregará automáticamente:
+      // 'Content-Type': 'multipart/form-data; boundary=...'
+    });
+
+    return this.http.post(`${this.apiUrl}/segundos/`, formData, { headers });
+  }
+
+  actualizarSegundo(id: number, segundo: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/segundos/${id}/`, segundo, { headers: this.getHeaders() });
+  }
+
+  eliminarSegundo(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/segundos/${id}/`, { headers: this.getHeaders() });
   }
 
   // Crear segundo
