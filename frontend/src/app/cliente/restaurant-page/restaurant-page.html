@@ -5,12 +5,7 @@
     <p class="text-sm text-gray-500">Fecha: {{ menu.fecha }}</p>
 
     <h3 class="font-semibold text-gray-700 mt-4">Entradas:</h3>
-    <ul class="list-disc list-inside mb-2">
-      <li *ngFor="let entrada of menu.entradas">
-        {{ entrada.nombre }} - S/. {{ entrada.precio }}
-      </li>
-    </ul>
-
+    <!-- Elimina este ul -->
     <select
       [(ngModel)]="menu.entradaSeleccionada"
       class="border rounded px-2 py-1 mb-4 w-full"
@@ -22,12 +17,7 @@
     </select>
 
     <h3 class="font-semibold text-gray-700">Segundos:</h3>
-    <ul class="list-disc list-inside mb-2">
-      <li *ngFor="let segundo of menu.segundos">
-        {{ segundo.nombre }} - S/. {{ segundo.precio }}
-      </li>
-    </ul>
-
+    <!-- Elimina este ul -->
     <select
       [(ngModel)]="menu.segundoSeleccionado"
       class="border rounded px-2 py-1 mb-4 w-full"
