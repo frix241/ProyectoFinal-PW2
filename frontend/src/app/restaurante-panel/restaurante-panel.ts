@@ -43,13 +43,14 @@ export class RestaurantePanel implements OnInit {
     this.cargarDatosRestaurante();
     this.cargarMenuHoy();
     this.cargarPedidos();
+    this.cargarEntradas();
+    this.cargarSegundos();
   }
 
   cargarDatosRestaurante() {
     this.auth.getUserProfile().subscribe({
       next: (user) => {
         if (user.tipo === "restaurante") {
-          // Buscar el restaurante del usuario
           this.restauranteService.getRestaurantes().subscribe({
             next: (restaurantes) => {
               const miRestaurante = restaurantes.find(
@@ -101,7 +102,7 @@ export class RestaurantePanel implements OnInit {
   }
 
   aceptarPedido(pedidoId: number) {
-    this.restauranteService.updatePedidoEstado(pedidoId, "aceptado").subscribe({
+    this.restauranteService.actualizarEstadoPedido(pedidoId, "aceptado").subscribe({
       next: () => {
         this.cargarPedidos();
       },
@@ -110,7 +111,7 @@ export class RestaurantePanel implements OnInit {
 
   rechazarPedido(pedidoId: number) {
     this.restauranteService
-      .updatePedidoEstado(pedidoId, "rechazado")
+      .actualizarEstadoPedido(pedidoId, "rechazado")
       .subscribe({
         next: () => {
           this.cargarPedidos();
@@ -122,5 +123,32 @@ export class RestaurantePanel implements OnInit {
     this.auth.logout();
     this.router.navigate(["/login"]);
   }
-  irACrearMenu() {}
+
+  cargarEntradas() {
+    this.restauranteService.getEntradas().subscribe({
+      next: (entradas) => {
+        this.entradas = entradas.map(entrada => ({
+          ...entrada,
+          imagenUrl: entrada.imagen_url || 'assets/placeholder-food.jpg'
+        }));
+      },
+      error: (err) => {
+        console.error('Error cargando entradas:', err);
+      }
+    });
+  }
+
+  cargarSegundos(): Promise<void> {
+    return new Promise((resolve) => {
+      this.restauranteService.getSegundos().subscribe({
+        next: (segundos) => {
+          this.segundos = segundos.map(segundo => ({
+            ...segundo,
+            imagenUrl: segundo.imagen_url || 'assets/placeholder-food.jpg'
+          }));
+          resolve();
+        }
+      });
+    });
+  }
 }
