@@ -295,4 +295,49 @@ export class RestaurantePanel implements OnInit {
     this.nuevoSegundo = { nombre: "", precio: 0, cantidad: 0, imagenUrl: "" };
     this.fileInputSegundo.nativeElement.value = '';
   }
+
+  eliminarEntrada(id: number) {
+    if (confirm('¿Estás seguro de eliminar esta entrada?')) {
+      this.restauranteService.eliminarEntrada(id).subscribe({
+        next: () => {
+          this.cargarEntradas();
+        }
+      });
+    }
+  }
+
+  eliminarSegundo(id: number) {
+    if (confirm('¿Estás seguro de eliminar este segundo?')) {
+      this.restauranteService.eliminarSegundo(id).subscribe({
+        next: () => {
+          this.cargarSegundos();
+        }
+      });
+    }
+  }
+
+  onFileSelected(event: any, tipo: 'entrada' | 'segundo') {
+    const file: File = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        if (tipo === 'entrada') {
+          this.nuevaEntrada.imagenUrl = e.target.result;
+        } else {
+          this.nuevoSegundo.imagenUrl = e.target.result;
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  eliminarImagen(tipo: 'entrada' | 'segundo') {
+    if (tipo === 'entrada') {
+      this.nuevaEntrada.imagenUrl = '';
+      this.fileInputEntrada.nativeElement.value = '';
+    } else {
+      this.nuevoSegundo.imagenUrl = '';
+      this.fileInputSegundo.nativeElement.value = '';
+    }
+  }
 }
