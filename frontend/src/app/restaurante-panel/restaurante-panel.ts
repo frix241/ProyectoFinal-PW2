@@ -151,4 +151,60 @@ export class RestaurantePanel implements OnInit {
       });
     });
   }
+    agregarEntrada() {
+      const formData = new FormData();
+      formData.append('nombre', this.nuevaEntrada.nombre);
+      formData.append('precio', this.nuevaEntrada.precio.toString());
+      formData.append('cantidad', this.nuevaEntrada.cantidad.toString());
+
+      if (this.fileInputEntrada.nativeElement.files[0]) {
+        formData.append('imagen', this.fileInputEntrada.nativeElement.files[0]);
+      }
+
+      this.restauranteService.crearEntrada(formData).subscribe({
+        next: () => {
+          this.cargarEntradas(); // Esto ahora refrescará la lista con la imagen
+        }
+      });
+    }
+
+    agregarSegundo() {
+      const formData = new FormData();
+      formData.append('nombre', this.nuevoSegundo.nombre);
+      formData.append('precio', this.nuevoSegundo.precio.toString());
+      formData.append('cantidad', this.nuevoSegundo.cantidad.toString());
+
+      // Asegúrate de que el input file esté correctamente referenciado
+      const fileInput = this.fileInputSegundo.nativeElement;
+      if (fileInput.files && fileInput.files[0]) {
+        formData.append('imagen', fileInput.files[0], fileInput.files[0].name); // Agrega el nombre del archivo
+      }
+
+      this.restauranteService.crearSegundo(formData).subscribe({
+        next: (response) => {
+          console.log('Segundo creado:', response); // Verifica la respuesta
+          this.cargarSegundos();
+          this.resetFormularioSegundo();
+          this.fileInputSegundo.nativeElement.value = '';
+        },
+        error: (err) => {
+          console.error('Error completo:', err); // Muestra el error completo
+          if (err.error) {
+            console.error('Detalles del error:', err.error);
+          }
+        }
+      });
+    }
+
+  resetFormularioEntrada() {
+    this.nuevaEntrada = { nombre: "", precio: 0, cantidad: 0, imagenUrl: "" };
+    this.fileInputEntrada.nativeElement.value = '';
+    this.editandoEntradaId = null;
+  }
+
+  resetFormularioSegundo() {
+    this.nuevoSegundo = { nombre: "", precio: 0, cantidad: 0, imagenUrl: "" };
+    this.fileInputSegundo.nativeElement.value = '';
+    this.editandoSegundoId = null;
+  }
 }
