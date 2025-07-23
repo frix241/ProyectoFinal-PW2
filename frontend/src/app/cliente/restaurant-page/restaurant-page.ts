@@ -58,8 +58,8 @@ export class RestaurantPage implements OnInit {
 
     this.PedidoService.crearPedido({
       menu: menu.id,
-      entrada: menu.entradaSeleccionada,
-      segundo: menu.segundoSeleccionado,
+      entrada: menu.entradaSeleccionada.id,
+      segundo: menu.segundoSeleccionado.id,
     }).subscribe({
       next: () => alert("Pedido realizado con éxito"),
       error: (err) => {
