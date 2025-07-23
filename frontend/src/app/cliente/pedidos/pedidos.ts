@@ -22,4 +22,8 @@ export class PedidosComponent implements OnInit {
       },
     });
   }
+
+  volverAtras() {
+    window.history.back();
+  }
 }
