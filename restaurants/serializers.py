@@ -53,7 +53,8 @@ class PedidoSerializer(serializers.ModelSerializer):
         depth = 2
 
 
+
 class PedidoWriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pedido
-        fields = ['id', 'menu', 'entrada', 'segundo']
+        fields = ['id', 'menu', 'entrada', 'segundo', 'estado']  # Ahora permite actualizar el estado

@@ -204,7 +204,9 @@ export class RestaurantePanel implements OnInit {
 
   resetFormularioSegundo() {
     this.nuevoSegundo = { nombre: "", precio: 0, cantidad: 0, imagenUrl: "" };
-    this.fileInputSegundo.nativeElement.value = '';
+    if (this.fileInputSegundo && this.fileInputSegundo.nativeElement) {
+      this.fileInputSegundo.nativeElement.value = '';
+    }
     this.editandoSegundoId = null;
   }
 
@@ -293,7 +295,9 @@ export class RestaurantePanel implements OnInit {
     this.editandoSegundoId = null;
     this.segundoEditadoIndex = null;
     this.nuevoSegundo = { nombre: "", precio: 0, cantidad: 0, imagenUrl: "" };
-    this.fileInputSegundo.nativeElement.value = '';
+    if (this.fileInputSegundo && this.fileInputSegundo.nativeElement) {
+      this.fileInputSegundo.nativeElement.value = '';
+    }
   }
 
   eliminarEntrada(id: number) {
@@ -337,7 +341,9 @@ export class RestaurantePanel implements OnInit {
       this.fileInputEntrada.nativeElement.value = '';
     } else {
       this.nuevoSegundo.imagenUrl = '';
-      this.fileInputSegundo.nativeElement.value = '';
+      if (this.fileInputSegundo && this.fileInputSegundo.nativeElement) {
+        this.fileInputSegundo.nativeElement.value = '';
+      }
     }
   }
 }
