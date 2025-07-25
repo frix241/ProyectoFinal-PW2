@@ -16,22 +16,26 @@ class RestaurantViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = RestaurantSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
-class MenuViewSet(viewsets.ReadOnlyModelViewSet):
+
+class MenuViewSet(viewsets.ModelViewSet):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
-
-    def get_queryset(self):
-        restaurante_id = self.request.query_params.get('restaurante_id')
-        if restaurante_id:
-           return Menu.objects.filter(restaurante_id=restaurante_id).order_by('-fecha')
-        return Menu.objects.all().order_by('-fecha')
+    permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
         restaurante_id = self.request.query_params.get('restaurante_id')
         if restaurante_id:
             return Menu.objects.filter(restaurante_id=restaurante_id).order_by('-fecha')
         return Menu.objects.all().order_by('-fecha')
+
+    def perform_create(self, serializer):
+        # Asocia el menú al restaurante del usuario autenticado
+        user = self.request.user
+        try:
+            restaurante = user.restaurant
+        except Exception:
+            raise Exception('El usuario autenticado no tiene un restaurante asociado.')
+        serializer.save(restaurante=restaurante)
 
 
 
