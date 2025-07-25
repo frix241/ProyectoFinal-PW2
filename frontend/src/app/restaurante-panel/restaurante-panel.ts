@@ -17,6 +17,7 @@ export class RestaurantePanel implements OnInit {
   vistaActual: string = "panel";
   menuHoy: any = null;
   pedidosHoy: any[] = [];
+  historialPedidos: any[] = [];
   entradas: any[] = [];
   segundos: any[] = [];
   tabActual: 'entradas' | 'segundos' = 'entradas';
@@ -79,7 +80,10 @@ export class RestaurantePanel implements OnInit {
     this.restauranteService.getPedidos().subscribe({
       next: (pedidos) => {
         const hoy = new Date().toISOString().split("T")[0];
-        this.pedidosHoy = pedidos.filter((p) => p.fecha.startsWith(hoy));
+        // Solo pedidos pendientes para la vista de hoy
+        this.pedidosHoy = pedidos.filter((p) => p.fecha.startsWith(hoy) && p.estado === 'pendiente');
+        // Historial: solo aceptados o rechazados
+        this.historialPedidos = pedidos.filter((p) => p.estado !== 'pendiente');
       },
     });
   }
@@ -95,6 +99,24 @@ export class RestaurantePanel implements OnInit {
 
   mostrarVistaHistorial() {
     this.vistaActual = "historial";
+    this.cargarPedidos(); // Asegura que el historial esté actualizado
+  }
+  imprimirRecibo(pedido: any) {
+    // Lógica básica para imprimir recibo en PDF (puedes mejorarla con jsPDF)
+    const ventana = window.open('', '_blank');
+    if (ventana) {
+      ventana.document.write('<html><head><title>Recibo Pedido #' + pedido.id + '</title></head><body>');
+      ventana.document.write('<h2>Recibo de Pedido #' + pedido.id + '</h2>');
+      ventana.document.write('<p><strong>Cliente:</strong> ' + pedido.cliente.username + '</p>');
+      ventana.document.write('<p><strong>Entrada:</strong> ' + pedido.entrada.nombre + '</p>');
+      ventana.document.write('<p><strong>Segundo:</strong> ' + pedido.segundo.nombre + '</p>');
+      ventana.document.write('<p><strong>Total:</strong> S/.' + pedido.total + '</p>');
+      ventana.document.write('<p><strong>Estado:</strong> ' + pedido.estado + '</p>');
+      ventana.document.write('<p><strong>Fecha:</strong> ' + pedido.fecha + '</p>');
+      ventana.document.write('</body></html>');
+      ventana.print();
+      ventana.close();
+    }
   }
 
   volverAlPanel() {

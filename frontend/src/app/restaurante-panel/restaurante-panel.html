@@ -397,11 +397,28 @@
         Volver
       </button>
     </div>
-    <div class="text-center text-gray-500 py-8">
-      <p>Funcionalidad de historial en desarrollo...</p>
-      <p class="text-sm mt-2">
-        Aquí podrás ver el historial completo de pedidos
-      </p>
+    <div *ngIf="historialPedidos.length === 0" class="text-center text-gray-500 py-8">
+      <p>No hay pedidos en el historial</p>
+    </div>
+    <div *ngIf="historialPedidos.length > 0" class="space-y-4">
+      <div *ngFor="let pedido of historialPedidos" class="border rounded-lg p-4 hover:shadow transition">
+        <div class="flex justify-between">
+          <div>
+            <h3 class="font-semibold">Pedido #{{ pedido.id }}</h3>
+            <p class="text-sm text-gray-600">Cliente: {{ pedido.cliente.username }}</p>
+            <p class="text-sm text-gray-600">Entrada: {{ pedido.entrada.nombre }}</p>
+            <p class="text-sm text-gray-600">Segundo: {{ pedido.segundo.nombre }}</p>
+            <p class="text-sm text-gray-600">Total: S/.{{ pedido.total }}</p>
+            <p class="text-sm" [class.text-green-600]="pedido.estado === 'aceptado'" [class.text-red-600]="pedido.estado === 'rechazado'">
+              Estado: {{ pedido.estado }}
+            </p>
+            <p class="text-xs text-gray-400">Fecha: {{ pedido.fecha }}</p>
+          </div>
+          <div *ngIf="pedido.estado === 'aceptado'">
+            <button (click)="imprimirRecibo(pedido)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm">Imprimir Recibo</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
