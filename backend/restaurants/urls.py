@@ -9,6 +9,7 @@ from .views import (
     PedidosRecibidosView,
     PedidoEstadoUpdateView,
     RestaurantUpdateView,
+    MisPedidosView,
 )
 
 urlpatterns = [
@@ -21,4 +22,5 @@ urlpatterns = [
     path('pedidos-recibidos/', PedidosRecibidosView.as_view(), name='pedidos-recibidos'),
     path('pedidos/<int:pk>/estado/', PedidoEstadoUpdateView.as_view(), name='pedido-estado-update'),
     path('mi-restaurante/editar/', RestaurantUpdateView.as_view(), name='restaurant-update'),
+    path('mis-pedidos/', MisPedidosView.as_view(), name='mis-pedidos'),
 ]

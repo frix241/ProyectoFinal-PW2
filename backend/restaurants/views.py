@@ -81,4 +81,12 @@ class RestaurantUpdateView(generics.UpdateAPIView):
     def get_object(self):
         # Solo el restaurante dueño puede editar su perfil
         return Restaurant.objects.get(user=self.request.user)
-    
+
+# Vistas para pedidos de clientes
+class MisPedidosView(generics.ListAPIView):
+    serializer_class = PedidoReadSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        # Solo pedidos realizados por el usuario autenticado (cliente)
+        return Pedido.objects.filter(cliente=self.request.user)
