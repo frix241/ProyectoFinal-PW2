@@ -17,3 +17,17 @@ class Menu(models.Model):
 
     def __str__(self):
         return f"{self.restaurante.nombre} - {self.fecha}"
+    
+class Entrada(models.Model):
+    nombre = models.CharField(max_length=100)
+    cantidad = models.PositiveIntegerField(default=0)
+    precio = models.DecimalField(max_digits=6, decimal_places=2)
+    imagen = models.ImageField(upload_to='entradas/', blank=True, null=True)
+    menu = models.ForeignKey('Menu', related_name='entradas', on_delete=models.CASCADE, null=True, blank=True)
+
+class Segundo(models.Model):
+    nombre = models.CharField(max_length=100)
+    cantidad = models.PositiveIntegerField(default=0)
+    precio = models.DecimalField(max_digits=6, decimal_places=2)
+    imagen = models.ImageField(upload_to='segundos/', blank=True, null=True)
+    menu = models.ForeignKey('Menu', related_name='segundos', on_delete=models.CASCADE, null=True, blank=True)
