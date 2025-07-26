@@ -7,6 +7,7 @@ from .serializers import (
     MenuReadSerializer,
     RestaurantListSerializer,
     PedidoCreateSerializer,
+    PedidoReadSerializer,
 )
 
 class MenuListCreateView(generics.ListCreateAPIView):
@@ -53,3 +54,12 @@ class PedidoCreateView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(cliente=self.request.user)
+
+# Vistas para que restaurantes puedan ver sus pedidos
+class PedidosRecibidosView(generics.ListAPIView):
+    serializer_class = PedidoReadSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        # Solo pedidos de menús del restaurante del usuario autenticado
+        return Pedido.objects.filter(menu__restaurante__user=self.request.user)

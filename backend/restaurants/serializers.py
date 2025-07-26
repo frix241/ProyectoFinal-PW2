@@ -53,3 +53,10 @@ class PedidoCreateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("El segundo seleccionado no pertenece al menú elegido.")
 
         return data
+    
+# Serializer para que restaurantes puedan ver sus pedidos
+class PedidoReadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Pedido
+        fields = ['id', 'cliente', 'menu', 'entrada', 'segundo', 'estado', 'fecha']
+        depth = 2
