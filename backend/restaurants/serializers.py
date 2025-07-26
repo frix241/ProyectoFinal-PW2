@@ -38,3 +38,18 @@ class PedidoCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pedido
         fields = ['id', 'menu', 'entrada', 'segundo']
+
+    def validate(self, data):
+        menu = data['menu']
+        entrada = data['entrada']
+        segundo = data['segundo']
+
+        # Verifica que la entrada pertenezca al menú
+        if entrada.menu != menu:
+            raise serializers.ValidationError("La entrada seleccionada no pertenece al menú elegido.")
+
+        # Verifica que el segundo pertenezca al menú
+        if segundo.menu != menu:
+            raise serializers.ValidationError("El segundo seleccionado no pertenece al menú elegido.")
+
+        return data
