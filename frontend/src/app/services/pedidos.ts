@@ -7,7 +7,7 @@ import { Auth } from "./auth";
   providedIn: "root",
 })
 export class Pedidos {
-  private baseUrl = "http://127.0.0.1:8000/api/pedidos/";
+  private baseUrl = "https://proyectofinal-pw2.onrender.com/api/pedidos/";
 
   constructor(
     private http: HttpClient,

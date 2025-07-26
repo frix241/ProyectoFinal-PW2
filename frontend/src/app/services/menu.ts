@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
   providedIn: "root",
 })
 export class Menu {
-  private BASE_URL = "http://127.0.0.1:8000/api";
+  private BASE_URL = "https://proyectofinal-pw2.onrender.com/api";
 
   constructor(private http: HttpClient) {}
 
