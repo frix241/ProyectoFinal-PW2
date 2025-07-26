@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
   selector: 'app-login',
   standalone: true,
   imports: [FormsModule, NgIf],
-  templateUrl: './login.html'
+  templateUrl: './login.html',
+  styleUrls: ['./login.css']
 })
 export class LoginComponent {
   username = '';

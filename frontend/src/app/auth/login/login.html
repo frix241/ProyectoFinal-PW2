@@ -1,6 +1,21 @@
-<form (ngSubmit)="onSubmit()">
-  <input [(ngModel)]="username" name="username" placeholder="Usuario" required>
-  <input [(ngModel)]="password" name="password" type="password" placeholder="Contraseña" required>
-  <button type="submit">Ingresar</button>
-  <div *ngIf="error" style="color:red">{{ error }}</div>
-</form>
+<div class="login">
+  <form class="custom-form" (ngSubmit)="onSubmit()" autocomplete="off">
+    <h1>Login</h1>
+    <input
+      type="email"
+      [(ngModel)]="username"
+      name="username"
+      placeholder="Email"
+      required
+    />
+    <input
+      type="password"
+      [(ngModel)]="password"
+      name="password"
+      placeholder="Password"
+      required
+    />
+    <button type="submit">Log in</button>
+    <div *ngIf="error" style="color:#ff8080; margin-top:10px;">{{ error }}</div>
+  </form>
+</div>
