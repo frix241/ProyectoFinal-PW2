@@ -1,6 +1,6 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, filters
 from .models import Menu, Entrada, Segundo, Restaurant
-from .serializers import MenuCreateSerializer, EntradaCreateSerializer, SegundoCreateSerializer, MenuReadSerializer
+from .serializers import MenuCreateSerializer, EntradaCreateSerializer, SegundoCreateSerializer, MenuReadSerializer, RestaurantListSerializer
 
 class MenuListCreateView(generics.ListCreateAPIView):
     serializer_class = MenuCreateSerializer
@@ -30,3 +30,10 @@ class MenusByRestaurantView(generics.ListAPIView):
     def get_queryset(self):
         restaurante_id = self.kwargs['restaurante_id']
         return Menu.objects.filter(restaurante__id=restaurante_id)
+    
+class RestaurantListView(generics.ListAPIView):
+    queryset = Restaurant.objects.all()
+    serializer_class = RestaurantListSerializer
+    permission_classes = [permissions.AllowAny]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['nombre']

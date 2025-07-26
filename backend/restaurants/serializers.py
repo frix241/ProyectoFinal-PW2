@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Menu, Entrada, Segundo
+from .models import Restaurant, Menu, Entrada, Segundo
 
 # Crear serializers para Menu, Entrada y Segundo
 class MenuCreateSerializer(serializers.ModelSerializer):
@@ -25,3 +25,8 @@ class MenuReadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Menu
         fields = ['id', 'restaurante', 'fecha', 'entradas', 'segundos']
+
+class RestaurantListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Restaurant
+        fields = ['id', 'nombre', 'imagen']
