@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class Auth {
-  private apiUrl = 'http://localhost:8000/auth/'; // Ajusta la URL según tu backend
+  private apiUrl = 'http://localhost:8000/auth/';
 
   constructor(private http: HttpClient) {}
 
@@ -16,6 +16,10 @@ export class Auth {
 
   register(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}users/`, data);
+  }
+
+  getCurrentUser(): Observable<any> {
+    return this.http.get(`${this.apiUrl}users/me/`);
   }
 
   saveToken(token: string) {

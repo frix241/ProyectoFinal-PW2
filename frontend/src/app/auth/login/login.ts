@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // <-- importa FormsModule
+import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
 import { Auth } from '../../services/auth';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  standalone: true, // <-- si no está, agrégalo
-  imports: [FormsModule], // <-- agrega FormsModule aquí
+  standalone: true,
+  imports: [FormsModule, NgIf],
   templateUrl: './login.html'
 })
 export class LoginComponent {
@@ -18,9 +19,18 @@ export class LoginComponent {
 
   onSubmit() {
     this.auth.login({ username: this.username, password: this.password }).subscribe({
-      next: (res: any) => {
+      next: (res) => {
         this.auth.saveToken(res.access);
-        this.router.navigate(['/']);
+        // Ahora obtenemos el usuario autenticado
+        this.auth.getCurrentUser().subscribe({
+          next: (user) => {
+            if (user.tipo === 'restaurante') {
+              this.router.navigate(['/restaurants/menu-dia']);
+            } else {
+              this.router.navigate(['/clientes/explorador-restaurantes']);
+            }
+          }
+        });
       },
       error: () => {
         this.error = 'Usuario o contraseña incorrectos';
