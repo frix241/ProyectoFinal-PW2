@@ -40,7 +40,12 @@ class Pedido(models.Model):
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
     entrada = models.ForeignKey(Entrada, on_delete=models.CASCADE)
     segundo = models.ForeignKey(Segundo, on_delete=models.CASCADE)
-    estado = models.CharField(max_length=20, default='pendiente')  # pendiente, entregado, etc.
+    ESTADOS = (
+        ('aceptado', 'Aceptado'),
+        ('rechazado', 'Rechazado'),
+        ('pendiente', 'Pendiente'),
+    )
+    estado = models.CharField(max_length=20, choices=ESTADOS, default='pendiente')
     fecha = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
