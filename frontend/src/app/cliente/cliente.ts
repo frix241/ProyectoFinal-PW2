@@ -37,13 +37,11 @@ export class Cliente implements OnInit {
 
   verPedidos() {
     this.router.navigate(["/cliente/pedidos"]);
-    // TODO: Implementar vista de pedidos
     alert("Funcionalidad de pedidos próximamente");
   }
 
   verRestaurante(id: number) {
     this.router.navigate(["cliente/restaurante", id]);
-    // TODO: Implementar vista de restaurante individual
     alert(`Ver restaurante ID: ${id}`);
   }
 
