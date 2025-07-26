@@ -60,3 +60,15 @@ class PedidoReadSerializer(serializers.ModelSerializer):
         model = Pedido
         fields = ['id', 'cliente', 'menu', 'entrada', 'segundo', 'estado', 'fecha']
         depth = 2
+
+# Actualizar el estado del pedido
+class PedidoEstadoUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Pedido
+        fields = ['estado']
+
+# Editar el restaurante
+class RestaurantUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Restaurant
+        fields = ['nombre', 'imagen']

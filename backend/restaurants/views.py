@@ -8,6 +8,8 @@ from .serializers import (
     RestaurantListSerializer,
     PedidoCreateSerializer,
     PedidoReadSerializer,
+    PedidoEstadoUpdateSerializer,
+    RestaurantUpdateSerializer,
 )
 
 class MenuListCreateView(generics.ListCreateAPIView):
@@ -63,3 +65,20 @@ class PedidosRecibidosView(generics.ListAPIView):
     def get_queryset(self):
         # Solo pedidos de menús del restaurante del usuario autenticado
         return Pedido.objects.filter(menu__restaurante__user=self.request.user)
+    
+class PedidoEstadoUpdateView(generics.UpdateAPIView):
+    serializer_class = PedidoEstadoUpdateSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        # Solo permite actualizar pedidos de menús del restaurante autenticado
+        return Pedido.objects.filter(menu__restaurante__user=self.request.user)
+
+class RestaurantUpdateView(generics.UpdateAPIView):
+    serializer_class = RestaurantUpdateSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        # Solo el restaurante dueño puede editar su perfil
+        return Restaurant.objects.get(user=self.request.user)
+    
