@@ -1,6 +1,13 @@
 from rest_framework import generics, permissions, filters
-from .models import Menu, Entrada, Segundo, Restaurant
-from .serializers import MenuCreateSerializer, EntradaCreateSerializer, SegundoCreateSerializer, MenuReadSerializer, RestaurantListSerializer
+from .models import Menu, Restaurant, Pedido
+from .serializers import (
+    MenuCreateSerializer,
+    EntradaCreateSerializer,
+    SegundoCreateSerializer,
+    MenuReadSerializer,
+    RestaurantListSerializer,
+    PedidoCreateSerializer,
+)
 
 class MenuListCreateView(generics.ListCreateAPIView):
     serializer_class = MenuCreateSerializer
@@ -37,3 +44,12 @@ class RestaurantListView(generics.ListAPIView):
     permission_classes = [permissions.AllowAny]
     filter_backends = [filters.SearchFilter]
     search_fields = ['nombre']
+
+# Vistas para pedidos de clientes
+
+class PedidoCreateView(generics.CreateAPIView):
+    serializer_class = PedidoCreateSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(cliente=self.request.user)

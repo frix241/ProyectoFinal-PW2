@@ -31,3 +31,17 @@ class Segundo(models.Model):
     precio = models.DecimalField(max_digits=6, decimal_places=2)
     imagen = models.ImageField(upload_to='segundos/', blank=True, null=True)
     menu = models.ForeignKey('Menu', related_name='segundos', on_delete=models.CASCADE, null=True, blank=True)
+
+
+# Modelos para clientes (pedidos)
+
+class Pedido(models.Model):
+    cliente = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'tipo': 'cliente'})
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    entrada = models.ForeignKey(Entrada, on_delete=models.CASCADE)
+    segundo = models.ForeignKey(Segundo, on_delete=models.CASCADE)
+    estado = models.CharField(max_length=20, default='pendiente')  # pendiente, entregado, etc.
+    fecha = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Pedido de {self.cliente.username} a {self.menu.restaurante.nombre} ({self.fecha})"
