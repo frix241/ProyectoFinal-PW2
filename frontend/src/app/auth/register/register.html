@@ -1,11 +1,45 @@
-<form (ngSubmit)="onSubmit()">
-  <input type="text" [(ngModel)]="username" name="username" placeholder="Usuario" required>
-  <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña" required>
-  <select [(ngModel)]="tipo" name="tipo" required>
-    <option value="cliente">Cliente</option>
-    <option value="restaurante">Restaurante</option>
-  </select>
-  <button type="submit">Registrarse</button>
-  <div *ngIf="success" style="color:green">{{ success }}</div>
-  <div *ngIf="error" style="color:red">{{ error }}</div>
-</form>
+<div class="register">
+  <form class="register-form" (ngSubmit)="onSubmit()" autocomplete="off" enctype="multipart/form-data">
+    <img src="restoLogo.svg" alt="Logo" class="register-logo">
+    <h1 class="register-form-title">Registro</h1>
+    <input
+      type="text"
+      [(ngModel)]="username"
+      name="username"
+      placeholder="Nombre de usuario"
+      required
+    />
+    <input
+      type="password"
+      [(ngModel)]="password"
+      name="password"
+      placeholder="Contraseña"
+      required
+    />
+    <select [(ngModel)]="tipo" name="tipo" required>
+      <option value="cliente">Cliente</option>
+      <option value="restaurante">Restaurante</option>
+    </select>
+    <input
+      *ngIf="tipo === 'restaurante'"
+      type="text"
+      [(ngModel)]="nombreRestaurante"
+      name="nombreRestaurante"
+      placeholder="Nombre del restaurante"
+      required
+    />
+    <input
+      *ngIf="tipo === 'restaurante'"
+      type="file"
+      (change)="onFileChange($event)"
+      accept="image/*"
+      name="imagenRestaurante"
+      class="register-img-input"
+      required
+    />
+    <button type="submit">Registrarse</button>
+    <button type="button" class="register-alt-btn" (click)="goToLogin()">Volver al Login</button>
+    <div *ngIf="success" class="register-success">{{ success }}</div>
+    <div *ngIf="error" class="register-error">{{ error }}</div>
+  </form>
+</div>

@@ -1,0 +1,102 @@
+/* Reset y fondo */
+* {
+  box-sizing: border-box;
+}
+body, html {
+  background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+/* Título */
+.register-form-title {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* Contenedor principal del formulario */
+.register-form {
+  width: 340px;
+  margin: 8rem auto 0 auto;
+  background: rgba(255, 255, 255, 0.18);
+  padding: 2.5rem 2rem 2rem 2rem;
+  border-radius: 1.5rem;
+  background-color: #ecf0f3cc;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18), 0 1.5px 6px #cbced1;
+  color: #222;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Inputs del formulario */
+.register-form input,
+.register-form select {
+  margin: 1.2rem 0;
+  width: 100%;
+  border-radius: 0.7rem;
+  padding: 0.9rem 1rem;
+  border: none;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  background: #f7fbff;
+  font-size: 1rem;
+}
+
+/* Botón principal */
+.register-form button[type="submit"] {
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  border: none;
+  font-size: 0.875rem;
+  color: #ffffff;
+  font-weight: bold;
+  background-color: #bcd8c1;
+  width: 100%;
+  display: block;
+  padding: 0.875rem 1rem;
+  border-radius: 1.5rem;
+  box-shadow: 3px 3px 8px #b1b1b1, -3px -3px 8px #ffffff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+/* Logo */
+.register-logo {
+  display: block;
+  margin: 0 auto 2rem auto;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+/* Botón alternativo (por ejemplo, para ir a login) */
+.register-alt-btn {
+  margin-top: 1rem;
+  background-color: #1161ee;
+  color: #fff;
+  border: none;
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border-radius: 1.5rem;
+  font-weight: bold;
+  font-size: 0.875rem;
+  letter-spacing: 0.15em;
+  box-shadow: 3px 3px 8px #b1b1b1, -3px -3px 8px #ffffff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.register-alt-btn:hover {
+  background-color: #1845ad;
+}
+
+/* Mensajes */
+.register-success {
+  color: green;
+  margin-top: 1rem;
+}
+.register-error {
+  color: red;
+  margin-top: 1rem;
+}

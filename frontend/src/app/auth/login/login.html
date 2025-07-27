@@ -1,5 +1,6 @@
 <div class="login">
   <form class="custom-form" (ngSubmit)="onSubmit()" autocomplete="off">
+    <img src="restoLogo.svg" alt="Logo" class="login-logo">
     <h1>Login</h1>
     <input
       type="email"
@@ -16,6 +17,7 @@
       required
     />
     <button type="submit">Log in</button>
+    <button type="button" class="register-btn" (click)="goToRegister()">Registrarse</button>
     <div *ngIf="error" style="color:#ff8080; margin-top:10px;">{{ error }}</div>
   </form>
 </div>
