@@ -123,18 +123,22 @@ export class MenuDia implements OnInit {
 
   editarEntradaFn(entrada: Plato) {
     this.editandoEntrada = { ...entrada };
+    this.nuevoEntrada = { ...entrada };
   }
 
   guardarEdicionEntrada() {
     if (!this.editandoEntrada) return;
-    this.restaurantService.updateEntrada(this.editandoEntrada.id, this.editandoEntrada).subscribe(() => {
+    this.restaurantService.updateEntrada(this.editandoEntrada.id, this.nuevoEntrada).subscribe(() => {
       this.editandoEntrada = null;
+      this.nuevoEntrada = { nombre: '', cantidad: 1, precio: 0, imagen: '', menu: this.menuSeleccionado.id };
       this.cargarEntradas(this.menuSeleccionado.id);
+      if (this.fileInputEntrada) this.fileInputEntrada.nativeElement.value = '';
     });
   }
 
   cancelarEdicionEntrada() {
     this.editandoEntrada = null;
+    this.nuevoEntrada = { nombre: '', cantidad: 1, precio: 0, imagen: '', menu: this.menuSeleccionado.id };
     if (this.fileInputEntrada) this.fileInputEntrada.nativeElement.value = '';
   }
 
@@ -172,18 +176,22 @@ export class MenuDia implements OnInit {
 
   editarSegundoFn(segundo: Plato) {
     this.editandoSegundo = { ...segundo };
+    this.nuevoSegundo = { ...segundo };
   }
 
   guardarEdicionSegundo() {
     if (!this.editandoSegundo) return;
-    this.restaurantService.updateSegundo(this.editandoSegundo.id, this.editandoSegundo).subscribe(() => {
+    this.restaurantService.updateSegundo(this.editandoSegundo.id, this.nuevoSegundo).subscribe(() => {
       this.editandoSegundo = null;
+      this.nuevoSegundo = { nombre: '', cantidad: 1, precio: 0, imagen: '', menu: this.menuSeleccionado.id };
       this.cargarSegundos(this.menuSeleccionado.id);
+      if (this.fileInputSegundo) this.fileInputSegundo.nativeElement.value = '';
     });
   }
 
   cancelarEdicionSegundo() {
     this.editandoSegundo = null;
+    this.nuevoSegundo = { nombre: '', cantidad: 1, precio: 0, imagen: '', menu: this.menuSeleccionado.id };
     if (this.fileInputSegundo) this.fileInputSegundo.nativeElement.value = '';
   }
 
