@@ -75,7 +75,7 @@ export class MenuDia implements OnInit {
       if (menus.length > 0) {
         this.seleccionarMenu(menus[0]);
       } else {
-        // créalo automáticamente
+        // Si no hay menú, créalo automáticamente
         this.restaurantService.crearMenuHoy().subscribe(menu => {
           this.menus = [menu];
           this.seleccionarMenu(menu);
@@ -164,6 +164,35 @@ export class MenuDia implements OnInit {
     if (confirm('¿Estás seguro de eliminar este segundo?')) {
       this.restaurantService.deleteSegundo(id).subscribe(() => this.cargarSegundos(this.menuSeleccionado.id));
     }
+  }
+
+  // --- Métodos para manejo de archivos de imagen ---
+  onFileEntradaSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => this.nuevoEntrada.imagen = e.target.result;
+      reader.readAsDataURL(file);
+    }
+  }
+
+  eliminarImagenEntrada() {
+    this.nuevoEntrada.imagen = '';
+    if (this.fileInputEntrada) this.fileInputEntrada.nativeElement.value = '';
+  }
+
+  onFileSegundoSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => this.nuevoSegundo.imagen = e.target.result;
+      reader.readAsDataURL(file);
+    }
+  }
+
+  eliminarImagenSegundo() {
+    this.nuevoSegundo.imagen = '';
+    if (this.fileInputSegundo) this.fileInputSegundo.nativeElement.value = '';
   }
 
   // --- Sesión ---
