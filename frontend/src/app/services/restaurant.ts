@@ -41,6 +41,10 @@ export class RestaurantService {
     return this.http.get(this.apiUrl + 'menus/');
   }
 
+  getMenuHoy(restauranteId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}restaurante/${restauranteId}/menu-hoy/`);
+  }
+
   addMenu(data: { fecha: string }): Observable<any> {
     return this.http.post(this.apiUrl + 'menus/', data);
   }
@@ -52,7 +56,7 @@ export class RestaurantService {
 
   // --- Entradas ---
   getEntradas(menuId: number): Observable<Plato[]> {
-    return this.http.get<Plato[]>(`${this.apiUrl}entradas/?menu=${menuId}`);
+    return this.http.get<Plato[]>(`${this.apiUrl}entradas/?menu_id=${menuId}`);
   }
 
   addEntrada(formData: FormData): Observable<Plato> {
@@ -69,7 +73,7 @@ export class RestaurantService {
 
   // --- Segundos ---
   getSegundos(menuId: number): Observable<Plato[]> {
-    return this.http.get<Plato[]>(`${this.apiUrl}segundos/?menu=${menuId}`);
+    return this.http.get<Plato[]>(`${this.apiUrl}segundos/?menu_id=${menuId}`);return this.http.get<Plato[]>(`${this.apiUrl}segundos/?menu_id=${menuId}`);
   }
 
   addSegundo(formData: FormData): Observable<Plato> {

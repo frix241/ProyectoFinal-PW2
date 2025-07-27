@@ -1,6 +1,7 @@
 from rest_framework import viewsets, generics, permissions, filters, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from datetime import date 
 from .models import Restaurant, Menu, Entrada, Segundo, Pedido
 from .serializers import (
     RestaurantListSerializer, MenuCreateSerializer,
@@ -27,15 +28,27 @@ class MenuViewSet(viewsets.ModelViewSet):
         serializer.save(restaurante=restaurante)
 
 class EntradaViewSet(viewsets.ModelViewSet):
-    queryset = Entrada.objects.all()
+    queryset = Entrada.objects.all()  # <-- Agrega esto
     serializer_class = EntradaCreateSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+    def get_queryset(self):
+        menu_id = self.request.query_params.get('menu_id')
+        if menu_id:
+            return Entrada.objects.filter(menu_id=menu_id)
+        return Entrada.objects.all()
+
 class SegundoViewSet(viewsets.ModelViewSet):
-    queryset = Segundo.objects.all()
+    queryset = Segundo.objects.all()  # <-- Agrega esto
     serializer_class = SegundoCreateSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+    def get_queryset(self):
+        menu_id = self.request.query_params.get('menu_id')
+        if menu_id:
+            return Segundo.objects.filter(menu_id=menu_id)
+        return Segundo.objects.all()
+    
 # --- Vistas personalizadas útiles para tu app ---
 
 class MenusByRestaurantView(generics.ListAPIView):
@@ -56,6 +69,15 @@ class RestaurantByUserView(APIView):
             return Response(serializer.data)
         except Restaurant.DoesNotExist:
             return Response({'detail': 'No existe restaurante para este usuario.'}, status=status.HTTP_404_NOT_FOUND)
+        
+class MenuHoyByRestaurantView(generics.RetrieveAPIView):
+    serializer_class = MenuReadSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def get_object(self):
+        restaurante_id = self.kwargs['restaurante_id']
+        hoy = date.today()
+        return Menu.objects.get(restaurante__id=restaurante_id, fecha=hoy)
 
 class RestaurantDetailView(generics.RetrieveAPIView):
     queryset = Restaurant.objects.all()

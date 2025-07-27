@@ -56,7 +56,7 @@ export class MenuDia implements OnInit {
       this.restaurantService.getRestaurantePorUsuario(user.id).subscribe(restaurante => {
         this.restauranteNombre = restaurante.nombre;
         this.restauranteImagen = restaurante.imagen;
-        // Opcional: guardar en localStorage si lo necesitas en otros componentes
+        // Opcional: guardar en localStorage solo si se necesita en otros componentes
         // localStorage.setItem('restaurantId', restaurante.id.toString());
       });
     });
@@ -70,17 +70,22 @@ export class MenuDia implements OnInit {
 
   // --- Métodos de menú del día ---
   cargarMenus() {
-    this.restaurantService.getMenus().subscribe(menus => {
-      this.menus = menus;
-      if (menus.length > 0) {
-        this.seleccionarMenu(menus[0]);
-      } else {
-        // Si no hay menú, créalo automáticamente
-        this.restaurantService.crearMenuHoy().subscribe(menu => {
-          this.menus = [menu];
-          this.seleccionarMenu(menu);
+    this.auth.getCurrentUser().subscribe(user => {
+      this.restaurantService.getRestaurantePorUsuario(user.id).subscribe(restaurante => {
+        this.restaurantService.getMenuHoy(restaurante.id).subscribe({
+          next: menu => {
+            this.menus = [menu];
+            this.seleccionarMenu(menu);
+          },
+          error: err => {
+            // Si no hay menú de hoy, créalo automáticamente
+            this.restaurantService.crearMenuHoy().subscribe(menu => {
+              this.menus = [menu];
+              this.seleccionarMenu(menu);
+            });
+          }
         });
-      }
+      });
     });
   }
 
