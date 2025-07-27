@@ -12,12 +12,12 @@ export const routes: Routes = [
     path: 'register', 
     loadComponent: () => import('./auth/register/register').then(m => m.RegisterComponent) 
   },
-/**  {
+  {
     path: 'restaurants/menu-dia',
-    loadComponent: () => import('./restaurants/menu-dia/menu-dia').then(m => m.MenuDiaComponent),
+    loadComponent: () => import('./restaurants/menu-dia/menu-dia').then(m => m.MenuDia),
     canActivate: [restaurantGuard]
   },
-  {
+/**  {
     path: 'clientes/explorador-restaurantes',
     loadComponent: () => import('./clientes/explorador-restaurantes/explorador-restaurantes').then(m => m.ExploradorRestaurantesComponent),
     canActivate: [clienteGuard]
