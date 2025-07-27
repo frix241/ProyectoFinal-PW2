@@ -1,5 +1,5 @@
 from rest_framework import generics, permissions, filters
-from .models import Menu, Restaurant, Pedido
+from .models import Menu, Restaurant, Pedido, Entrada, Segundo
 from .serializers import (
     MenuCreateSerializer,
     EntradaCreateSerializer,
@@ -90,3 +90,11 @@ class MisPedidosView(generics.ListAPIView):
     def get_queryset(self):
         # Solo pedidos realizados por el usuario autenticado (cliente)
         return Pedido.objects.filter(cliente=self.request.user)
+# Vistas para editar segundo y entrada
+class EntradaRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Entrada.objects.all()
+    serializer_class = EntradaCreateSerializer
+
+class SegundoRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Segundo.objects.all()
+    serializer_class = SegundoCreateSerializer
