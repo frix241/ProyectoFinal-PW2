@@ -41,31 +41,41 @@
       <!-- Contenido para Entradas -->
       <div *ngIf="tabActual === 'entradas'" #seccionEntradas>
         <div class="flex flex-col md:flex-row gap-6 mb-8 bg-gray-50 p-4 rounded-lg">
-          <!-- Selector de imagen -->
-          <div class="w-full md:w-1/3">
-            <div class="border-2 border-dashed border-gray-300 rounded-lg h-64 flex flex-col items-center justify-center overflow-hidden bg-gray-100 relative">
-              <img *ngIf="nuevoEntrada.imagen" [src]="nuevoEntrada.imagen" alt="Vista previa de entrada" class="object-cover w-full h-full">
-              <div *ngIf="!nuevoEntrada.imagen" class="text-center p-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <p class="mt-2 text-sm text-gray-600">No hay imagen seleccionada</p>
-              </div>
-              <button type="button" (click)="fileInputEntrada.click()" class="mt-4 bg-white text-gray-700 px-4 py-2 rounded-md border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-yellow-500">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-1" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
-                </svg>
-                Seleccionar imagen
-              </button>
-              <input #fileInputEntrada type="file" accept="image/*" class="hidden" (change)="onFileEntradaSelected($event)">
+        <!-- Selector de imagen para Entrada -->
+        <div class="selector-imagen-row">
+          <div class="selector-imagen-contenedor">
+            <img *ngIf="nuevoEntrada.imagen"
+                [src]="nuevoEntrada.imagen"
+                alt="Vista previa de entrada"
+                class="selector-imagen-img" />
+            <div *ngIf="!nuevoEntrada.imagen" class="selector-imagen-placeholder">
+              <svg xmlns="http://www.w3.org/2000/svg" class="selector-imagen-svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <p class="selector-imagen-text">No hay imagen seleccionada</p>
             </div>
-            <button *ngIf="nuevoEntrada.imagen" type="button" (click)="eliminarImagenEntrada()" class="mt-2 w-full text-red-500 hover:text-red-700 text-sm flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+          </div>
+          <div class="selector-imagen-botones">
+            <button type="button"
+                    (click)="fileInputEntrada.click()"
+                    class="selector-imagen-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" class="selector-imagen-btn-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+              </svg>
+              Seleccionar
+            </button>
+            <input #fileInputEntrada type="file" accept="image/*" class="selector-imagen-input" (change)="onFileEntradaSelected($event)">
+            <button *ngIf="nuevoEntrada.imagen"
+                    type="button"
+                    (click)="eliminarImagenEntrada()"
+                    class="selector-imagen-btn-eliminar">
+              <svg xmlns="http://www.w3.org/2000/svg" class="selector-imagen-btn-icon" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
               </svg>
-              Eliminar imagen
+              Eliminar
             </button>
           </div>
+        </div>
           <!-- Formulario de datos -->
           <div class="w-full md:w-2/3">
             <h3 class="text-lg font-medium mb-4">{{ editandoEntrada ? 'Editar Entrada' : 'Agregar Nueva Entrada' }}</h3>
@@ -134,31 +144,41 @@
       <!-- Contenido para Segundos -->
       <div *ngIf="tabActual === 'segundos'" #seccionSegundos>
         <div class="flex flex-col md:flex-row gap-6 mb-8 bg-gray-50 p-4 rounded-lg">
-          <!-- Selector de imagen -->
-          <div class="w-full md:w-1/3">
-            <div class="border-2 border-dashed border-gray-300 rounded-lg h-64 flex flex-col items-center justify-center overflow-hidden bg-gray-100 relative">
-              <img *ngIf="nuevoSegundo.imagen" [src]="nuevoSegundo.imagen" alt="Vista previa de segundo" class="object-cover w-full h-full">
-              <div *ngIf="!nuevoSegundo.imagen" class="text-center p-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <p class="mt-2 text-sm text-gray-600">No hay imagen seleccionada</p>
-              </div>
-              <button type="button" (click)="fileInputSegundo.click()" class="mt-4 bg-white text-gray-700 px-4 py-2 rounded-md border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-yellow-500">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-1" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
-                </svg>
-                Seleccionar imagen
-              </button>
-              <input #fileInputSegundo type="file" accept="image/*" class="hidden" (change)="onFileSegundoSelected($event)">
+        <!-- Selector de imagen para Segundo -->
+        <div class="selector-imagen-row">
+          <div class="selector-imagen-contenedor">
+            <img *ngIf="nuevoSegundo.imagen"
+                [src]="nuevoSegundo.imagen"
+                alt="Vista previa de segundo"
+                class="selector-imagen-img" />
+            <div *ngIf="!nuevoSegundo.imagen" class="selector-imagen-placeholder">
+              <svg xmlns="http://www.w3.org/2000/svg" class="selector-imagen-svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <p class="selector-imagen-text">No hay imagen seleccionada</p>
             </div>
-            <button *ngIf="nuevoSegundo.imagen" type="button" (click)="eliminarImagenSegundo()" class="mt-2 w-full text-red-500 hover:text-red-700 text-sm flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+          </div>
+          <div class="selector-imagen-botones">
+            <button type="button"
+                    (click)="fileInputSegundo.click()"
+                    class="selector-imagen-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" class="selector-imagen-btn-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+              </svg>
+              Seleccionar
+            </button>
+            <input #fileInputSegundo type="file" accept="image/*" class="selector-imagen-input" (change)="onFileSegundoSelected($event)">
+            <button *ngIf="nuevoSegundo.imagen"
+                    type="button"
+                    (click)="eliminarImagenSegundo()"
+                    class="selector-imagen-btn-eliminar">
+              <svg xmlns="http://www.w3.org/2000/svg" class="selector-imagen-btn-icon" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
               </svg>
-              Eliminar imagen
+              Eliminar
             </button>
           </div>
+        </div>
           <!-- Formulario de datos -->
           <div class="w-full md:w-2/3">
             <h3 class="text-lg font-medium mb-4">{{ editandoSegundo ? 'Editar Segundo' : 'Agregar Nuevo Segundo' }}</h3>

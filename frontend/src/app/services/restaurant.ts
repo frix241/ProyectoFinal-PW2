@@ -55,8 +55,8 @@ export class RestaurantService {
     return this.http.get<Plato[]>(`${this.apiUrl}entradas/?menu=${menuId}`);
   }
 
-  addEntrada(entrada: Partial<Plato>): Observable<Plato> {
-    return this.http.post<Plato>(this.apiUrl + 'entradas/', entrada);
+  addEntrada(formData: FormData): Observable<Plato> {
+    return this.http.post<Plato>(this.apiUrl + 'entradas/', formData);
   }
 
   updateEntrada(id: number, entrada: Partial<Plato>): Observable<Plato> {
@@ -72,8 +72,8 @@ export class RestaurantService {
     return this.http.get<Plato[]>(`${this.apiUrl}segundos/?menu=${menuId}`);
   }
 
-  addSegundo(segundo: Partial<Plato>): Observable<Plato> {
-    return this.http.post<Plato>(this.apiUrl + 'segundos/', segundo);
+  addSegundo(formData: FormData): Observable<Plato> {
+    return this.http.post<Plato>(this.apiUrl + 'segundos/', formData);
   }
 
   updateSegundo(id: number, segundo: Partial<Plato>): Observable<Plato> {

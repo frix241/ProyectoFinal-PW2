@@ -98,8 +98,19 @@ export class MenuDia implements OnInit {
   agregarEntrada() {
     if (!this.nuevoEntrada.nombre || !this.menuSeleccionado) return;
     this.nuevoEntrada.menu = this.menuSeleccionado.id;
-    this.restaurantService.addEntrada(this.nuevoEntrada).subscribe(() => {
+
+    const formData = new FormData();
+    formData.append('nombre', this.nuevoEntrada.nombre || '');
+    formData.append('cantidad', String(this.nuevoEntrada.cantidad || 0));
+    formData.append('precio', String(this.nuevoEntrada.precio || 0));
+    formData.append('menu', String(this.nuevoEntrada.menu || ''));
+    if (this.entradaFile) {
+      formData.append('imagen', this.entradaFile);
+    }
+
+    this.restaurantService.addEntrada(formData).subscribe(() => {
       this.nuevoEntrada = { nombre: '', cantidad: 1, precio: 0, imagen: '', menu: this.menuSeleccionado.id };
+      this.entradaFile = null;
       this.cargarEntradas(this.menuSeleccionado.id);
       if (this.fileInputEntrada) this.fileInputEntrada.nativeElement.value = '';
     });
@@ -136,8 +147,19 @@ export class MenuDia implements OnInit {
   agregarSegundo() {
     if (!this.nuevoSegundo.nombre || !this.menuSeleccionado) return;
     this.nuevoSegundo.menu = this.menuSeleccionado.id;
-    this.restaurantService.addSegundo(this.nuevoSegundo).subscribe(() => {
+
+    const formData = new FormData();
+    formData.append('nombre', this.nuevoSegundo.nombre || '');
+    formData.append('cantidad', String(this.nuevoSegundo.cantidad || 0));
+    formData.append('precio', String(this.nuevoSegundo.precio || 0));
+    formData.append('menu', String(this.nuevoSegundo.menu || ''));
+    if (this.segundoFile) {
+      formData.append('imagen', this.segundoFile);
+    }
+
+    this.restaurantService.addSegundo(formData).subscribe(() => {
       this.nuevoSegundo = { nombre: '', cantidad: 1, precio: 0, imagen: '', menu: this.menuSeleccionado.id };
+      this.segundoFile = null;
       this.cargarSegundos(this.menuSeleccionado.id);
       if (this.fileInputSegundo) this.fileInputSegundo.nativeElement.value = '';
     });
@@ -167,9 +189,12 @@ export class MenuDia implements OnInit {
   }
 
   // --- Métodos para manejo de archivos de imagen ---
+  entradaFile: File | null = null;
+
   onFileEntradaSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
+      this.entradaFile = file;
       const reader = new FileReader();
       reader.onload = (e: any) => this.nuevoEntrada.imagen = e.target.result;
       reader.readAsDataURL(file);
@@ -181,9 +206,12 @@ export class MenuDia implements OnInit {
     if (this.fileInputEntrada) this.fileInputEntrada.nativeElement.value = '';
   }
 
+  segundoFile: File | null = null;
+
   onFileSegundoSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
+      this.segundoFile = file;
       const reader = new FileReader();
       reader.onload = (e: any) => this.nuevoSegundo.imagen = e.target.result;
       reader.readAsDataURL(file);
