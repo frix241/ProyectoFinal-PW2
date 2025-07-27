@@ -13,10 +13,12 @@ from .views import (
     EntradaRetrieveUpdateDestroyView,
     SegundoRetrieveUpdateDestroyView,
     RestaurantDetailView,
+    RestaurantByUserView,
 )
 
 urlpatterns = [
     path('restaurantes/', RestaurantListView.as_view(), name='restaurant-list'),
+    path('restaurantes/id/<int:user_id>/', RestaurantByUserView.as_view(), name='restaurant-by-user'),
     path('menus/', MenuListCreateView.as_view(), name='menu-list-create'),
     path('entradas/', EntradaCreateView.as_view(), name='entrada-create'),
     path('segundos/', SegundoCreateView.as_view(), name='segundo-create'),

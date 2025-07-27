@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RestaurantService, Plato } from '../../services/restaurant';
+import { Auth }     from '../../services/auth';
 
 @Component({
   selector: 'app-menu-dia',
@@ -28,7 +29,10 @@ export class MenuDia implements OnInit {
   @ViewChild('fileInputEntrada') fileInputEntrada!: ElementRef;
   @ViewChild('fileInputSegundo') fileInputSegundo!: ElementRef;
 
-  constructor(private restaurantService: RestaurantService) {}
+  constructor(
+    private restaurantService: RestaurantService,
+    private auth: Auth
+  ) {}
 
   ngOnInit() {
     this.cargarRestaurante();
@@ -36,14 +40,22 @@ export class MenuDia implements OnInit {
   }
 
   cargarRestaurante() {
-    const restaurantId = localStorage.getItem('restaurantId');
-    console.log('Cargando restaurante con ID:', restaurantId); // <-- Aquí verás el ID que se está intentando cargar
-    if (restaurantId) {
-      this.restaurantService.getRestaurant(+restaurantId).subscribe(restaurant => {
-        this.restauranteNombre = restaurant.nombre;
-        this.restauranteImagen = restaurant.imagen;
+    this.auth.getCurrentUser().subscribe(user => {
+      this.restaurantService.getRestaurantePorUsuario(user.id).subscribe(restaurante => {
+        this.restauranteNombre = restaurante.nombre;
+        this.restauranteImagen = restaurante.imagen;
+        console.log('Restaurante cargado:', restaurante);
+        console.log('Nombre del restaurante:', this.restauranteNombre);
+        console.log('Imagen del restaurante:', this.restauranteImagen);
       });
-    }
+    });
+  }
+
+  // menu-dia.ts
+  get imagenRestauranteUrl(): string {
+    if (!this.restauranteImagen) return 'restoLogo.svg';
+    if (this.restauranteImagen.startsWith('http')) return this.restauranteImagen;
+    return `http://localhost:8000${this.restauranteImagen}`;
   }
 
   cargarMenus() {

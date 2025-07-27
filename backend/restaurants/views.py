@@ -1,4 +1,6 @@
-from rest_framework import generics, permissions, filters
+from rest_framework import generics, permissions, filters, status
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from .models import Menu, Restaurant, Pedido, Entrada, Segundo
 from .serializers import (
     MenuCreateSerializer,
@@ -48,6 +50,18 @@ class RestaurantListView(generics.ListAPIView):
     permission_classes = [permissions.AllowAny]
     filter_backends = [filters.SearchFilter]
     search_fields = ['nombre']
+
+# Vistas para mostrar los datos de restaurantes por id
+class RestaurantByUserView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request, user_id):
+        try:
+            restaurante = Restaurant.objects.get(user__id=user_id)
+            serializer = RestaurantListSerializer(restaurante)
+            return Response(serializer.data)
+        except Restaurant.DoesNotExist:
+            return Response({'detail': 'No existe restaurante para este usuario.'}, status=status.HTTP_404_NOT_FOUND)
 
 # Vistas para pedidos de clientes
 

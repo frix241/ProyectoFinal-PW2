@@ -2,6 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+export interface Restaurant {
+  id: number;
+  nombre: string;
+  imagen: string;
+  user: number;
+}
+
 export interface Plato {
   id: number;
   nombre: string;
@@ -22,6 +29,11 @@ export class RestaurantService {
   // Mostrar los detalles de un restaurante
   getRestaurant(id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}restaurantes/${id}/`);
+  }
+
+  // Obtener el restaurante por usuario
+  getRestaurantePorUsuario(userId: number) {
+    return this.http.get<Restaurant>(`${this.apiUrl}restaurantes/id/${userId}/`);
   }
   
   // Menú del día

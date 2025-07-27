@@ -2,8 +2,8 @@
   <!-- Dock lateral izquierdo -->
   <aside class="menu-dia-dock">
     <div class="resto-info">
-        <img [src]="restauranteImagen || 'restoLogo.svg'" alt="Restaurante" class="resto-img" />
-        <div class="resto-nombre">{{ restauranteNombre || 'Restaurante' }}</div>
+      <img [src]="imagenRestauranteUrl" alt="Restaurante" class="resto-img" />
+      <div class="resto-nombre">{{ restauranteNombre || 'Restaurante' }}</div>
     </div>
     <nav class="dock-nav">
         <button routerLink="/restaurants/menu-dia" routerLinkActive="active">Menú del Día</button>
