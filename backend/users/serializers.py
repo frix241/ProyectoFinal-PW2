@@ -30,3 +30,8 @@ class UserCreateSerializer(BaseUserCreateSerializer):
                 imagen=imagen_restaurante
             )
         return user
+    
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'tipo')

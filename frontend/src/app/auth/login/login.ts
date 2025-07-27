@@ -25,6 +25,7 @@ export class LoginComponent {
         // Ahora obtenemos el usuario autenticado
         this.auth.getCurrentUser().subscribe({
           next: (user) => {
+            console.log('Usuario autenticado:', user);
             if (user.tipo === 'restaurante') {
               this.router.navigate(['/restaurants/menu-dia']);
             } else {
