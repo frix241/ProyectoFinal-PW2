@@ -6,78 +6,49 @@
       <div class="resto-nombre">{{ restauranteNombre || 'Restaurante' }}</div>
     </div>
     <nav class="dock-nav">
-        <button routerLink="/restaurants/menu-dia" routerLinkActive="active">Menú del Día</button>
-        <button routerLink="/restaurants/pedidos-dia" routerLinkActive="active">Pedidos del Día</button>
-        <button routerLink="/restaurants/historial" routerLinkActive="active">Historial</button>
-        <button (click)="logout()" class="logout-btn">Cerrar sesión</button>
+      <button routerLink="/restaurants/menu-dia" routerLinkActive="active">Menú del Día</button>
+      <button routerLink="/restaurants/pedidos-dia" routerLinkActive="active">Pedidos del Día</button>
+      <button routerLink="/restaurants/historial" routerLinkActive="active">Historial</button>
+      <button (click)="logout()" class="logout-btn">Cerrar sesión</button>
     </nav>
   </aside>
+
   <!-- Contenido principal -->
   <div class="menu-dia-main">
-    <h2>Menú del Día</h2>
-    <div *ngIf="menuSeleccionado">
-      <h3>{{ menuSeleccionado.fecha | date:'fullDate' }}</h3>
-      <!-- Formularios para agregar entrada y segundo -->
-      <div class="crud-forms">
-        <form (ngSubmit)="agregarEntrada()" class="crud-form">
-          <h4>Agregar Entrada</h4>
-          <input [(ngModel)]="nuevoEntrada.nombre" name="nombreEntrada" placeholder="Nombre" required />
-          <input [(ngModel)]="nuevoEntrada.cantidad" name="cantidadEntrada" type="number" min="1" placeholder="Cantidad" required />
-          <input [(ngModel)]="nuevoEntrada.precio" name="precioEntrada" type="number" min="0" placeholder="Precio" required />
-          <button type="submit">Agregar</button>
-        </form>
-        <form (ngSubmit)="agregarSegundo()" class="crud-form">
-          <h4>Agregar Segundo</h4>
-          <input [(ngModel)]="nuevoSegundo.nombre" name="nombreSegundo" placeholder="Nombre" required />
-          <input [(ngModel)]="nuevoSegundo.cantidad" name="cantidadSegundo" type="number" min="1" placeholder="Cantidad" required />
-          <input [(ngModel)]="nuevoSegundo.precio" name="precioSegundo" type="number" min="0" placeholder="Precio" required />
-          <button type="submit">Agregar</button>
-        </form>
+    <div class="bg-white rounded-lg shadow-md p-6 w-full max-w-4xl mx-auto">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-700">Gestión de Menú</h2>
       </div>
-      <!-- Listas de entradas y segundos -->
-      <div class="menu-listas">
-        <div>
-          <h4>Entradas</h4>
-          <ul>
-            <li *ngFor="let entrada of entradas">
-              <div *ngIf="editandoEntrada?.id !== entrada.id">
-                {{ entrada.nombre }} ({{ entrada.cantidad }}) - S/ {{ entrada.precio }}
-                <button (click)="editarEntradaFn(entrada)">Editar</button>
-                <button (click)="eliminarEntrada(entrada.id)">Eliminar</button>
-              </div>
-              <div *ngIf="editandoEntrada?.id === entrada.id">
-                <input [(ngModel)]="editandoEntrada!.nombre" name="editNombreEntrada" required />
-                <input [(ngModel)]="editandoEntrada!.cantidad" name="editCantidadEntrada" type="number" min="1" required />
-                <input [(ngModel)]="editandoEntrada!.precio" name="editPrecioEntrada" type="number" min="0" required />
-                <button (click)="guardarEdicionEntrada()">Guardar</button>
-                <button (click)="cancelarEdicionEntrada()">Cancelar</button>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <h4>Segundos</h4>
-          <ul>
-            <li *ngFor="let segundo of segundos">
-              <div *ngIf="editandoSegundo?.id !== segundo.id">
-                {{ segundo.nombre }} ({{ segundo.cantidad }}) - S/ {{ segundo.precio }}
-                <button (click)="editarSegundoFn(segundo)">Editar</button>
-                <button (click)="eliminarSegundo(segundo.id)">Eliminar</button>
-              </div>
-              <div *ngIf="editandoSegundo?.id === segundo.id">
-                <input [(ngModel)]="editandoSegundo!.nombre" name="editNombreSegundo" required />
-                <input [(ngModel)]="editandoSegundo!.cantidad" name="editCantidadSegundo" type="number" min="1" required />
-                <input [(ngModel)]="editandoSegundo!.precio" name="editPrecioSegundo" type="number" min="0" required />
-                <button (click)="guardarEdicionSegundo()">Guardar</button>
-                <button (click)="cancelarEdicionSegundo()">Cancelar</button>
-              </div>
-            </li>
-          </ul>
-        </div>
+
+      <!-- Pestañas -->
+      <div class="flex border-b mb-6">
+        <button 
+          (click)="tabActual = 'entradas'; cancelarEdicionEntrada()"
+          [class]="tabActual === 'entradas' ? 'border-b-2 border-yellow-500 text-yellow-600 font-medium' : 'text-gray-500'"
+          class="px-4 py-2 focus:outline-none"
+        >
+          Entradas
+        </button>
+        <button 
+          (click)="tabActual = 'segundos'; cancelarEdicionSegundo()"
+          [class]="tabActual === 'segundos' ? 'border-b-2 border-yellow-500 text-yellow-600 font-medium' : 'text-gray-500'"
+          class="px-4 py-2 focus:outline-none"
+        >
+          Segundos
+        </button>
       </div>
-    </div>
-    <div *ngIf="!menuSeleccionado">
-      <p>No hay menú del día seleccionado.</p>
+
+      <!-- Contenido para Entradas -->
+      <div *ngIf="tabActual === 'entradas'" #seccionEntradas>
+        <!-- Formulario y lista de entradas -->
+        <!-- ...Pega aquí el bloque de Entradas de tu prompt... -->
+      </div>
+
+      <!-- Contenido para Segundos -->
+      <div *ngIf="tabActual === 'segundos'" #seccionSegundos>
+        <!-- Formulario y lista de segundos -->
+        <!-- ...Pega aquí el bloque de Segundos de tu prompt... -->
+      </div>
     </div>
   </div>
 </div>

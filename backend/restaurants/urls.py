@@ -1,31 +1,29 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from .views import (
-    RestaurantListView,
-    MenuListCreateView,
-    EntradaCreateView,
-    SegundoCreateView,
-    MenusByRestaurantView,
-    PedidoCreateView,
-    PedidosRecibidosView,
-    PedidoEstadoUpdateView,
-    RestaurantUpdateView,
-    MisPedidosView,
-    EntradaRetrieveUpdateDestroyView,
-    SegundoRetrieveUpdateDestroyView,
-    RestaurantDetailView,
-    RestaurantByUserView,
+    RestaurantViewSet, MenuViewSet, EntradaViewSet, SegundoViewSet,
+    MenusByRestaurantView, PedidoCreateView, PedidosRecibidosView,
+    PedidoEstadoUpdateView, RestaurantUpdateView, MisPedidosView,
+    RestaurantDetailView, RestaurantByUserView
 )
 
+# --- Routers para CRUD automático ---
+router = DefaultRouter()
+router.register(r'restaurantes', RestaurantViewSet)
+router.register(r'menus', MenuViewSet)
+router.register(r'entradas', EntradaViewSet)
+router.register(r'segundos', SegundoViewSet)
+
 urlpatterns = [
-    path('restaurantes/', RestaurantListView.as_view(), name='restaurant-list'),
+    # --- CRUD básico (ViewSets) ---
+    path('', include(router.urls)),
+
+    # --- Vistas personalizadas y detalles ---
     path('restaurantes/id/<int:user_id>/', RestaurantByUserView.as_view(), name='restaurant-by-user'),
-    path('menus/', MenuListCreateView.as_view(), name='menu-list-create'),
-    path('entradas/', EntradaCreateView.as_view(), name='entrada-create'),
-    path('segundos/', SegundoCreateView.as_view(), name='segundo-create'),
-    path('entradas/<int:pk>/', EntradaRetrieveUpdateDestroyView.as_view(), name='entrada-detail'),
-    path('segundos/<int:pk>/', SegundoRetrieveUpdateDestroyView.as_view(), name='segundo-detail'),
     path('restaurantes/<int:pk>/', RestaurantDetailView.as_view(), name='restaurant-detail'),
     path('restaurante/<int:restaurante_id>/menus/', MenusByRestaurantView.as_view(), name='menus-by-restaurant'),
+
+    # --- Pedidos ---
     path('pedidos/', PedidoCreateView.as_view(), name='pedido-create'),
     path('pedidos-recibidos/', PedidosRecibidosView.as_view(), name='pedidos-recibidos'),
     path('pedidos/<int:pk>/estado/', PedidoEstadoUpdateView.as_view(), name='pedido-estado-update'),
