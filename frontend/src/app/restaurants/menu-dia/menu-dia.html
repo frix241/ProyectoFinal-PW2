@@ -112,11 +112,11 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4" #listaEntradas>
           <div *ngFor="let entrada of entradas; let i = index" class="border rounded-lg p-4 hover:shadow transition" [id]="'entrada-' + entrada.id">
-            <div class="flex">
-              <div class="mr-4 w-24 h-24 flex-shrink-0">
-                <img [src]="entrada.imagen || 'assets/placeholder-food.jpg'" alt="{{entrada.nombre}}" class="w-full h-full object-cover rounded">
+            <div class="entrada-card">
+              <div class="entrada-card-img">
+                <img [src]="entrada.imagen || 'assets/placeholder-food.jpg'" alt="{{entrada.nombre}}">
               </div>
-              <div class="flex-1">
+              <div class="entrada-card-info">
                 <h4 class="font-medium">{{entrada.nombre}}</h4>
                 <p class="text-sm text-gray-600">Precio: S/. {{entrada.precio | number:'1.2-2'}}</p>
                 <p class="text-sm text-gray-600">Disponibles: {{entrada.cantidad}}</p>
@@ -127,15 +127,15 @@
                       [class.text-red-800]="entrada.cantidad <= 0">
                   {{entrada.cantidad > 0 ? 'Disponible' : 'Agotado'}}
                 </span>
+                <div class="flex justify-end mt-4 space-x-2">
+                  <button (click)="editarEntradaFn(entrada)" class="text-blue-500 hover:text-blue-700 text-sm">
+                    Editar
+                  </button>
+                  <button (click)="eliminarEntrada(entrada.id)" class="text-red-500 hover:text-red-700 text-sm">
+                    Eliminar
+                  </button>
+                </div>
               </div>
-            </div>
-            <div class="flex justify-end mt-4 space-x-2">
-              <button (click)="editarEntradaFn(entrada)" class="text-blue-500 hover:text-blue-700 text-sm">
-                Editar
-              </button>
-              <button (click)="eliminarEntrada(entrada.id)" class="text-red-500 hover:text-red-700 text-sm">
-                Eliminar
-              </button>
             </div>
           </div>
         </div>
@@ -215,11 +215,11 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4" #listaSegundos>
           <div *ngFor="let segundo of segundos; let i = index" class="border rounded-lg p-4 hover:shadow transition" [id]="'segundo-' + segundo.id">
-            <div class="flex">
-              <div class="mr-4 w-24 h-24 flex-shrink-0">
-                <img [src]="segundo.imagen || 'assets/placeholder-food.jpg'" alt="{{segundo.nombre}}" class="w-full h-full object-cover rounded">
+            <div class="entrada-card">
+              <div class="entrada-card-img">
+                <img [src]="segundo.imagen || 'assets/placeholder-food.jpg'" alt="{{segundo.nombre}}">
               </div>
-              <div class="flex-1">
+              <div class="entrada-card-info">
                 <h4 class="font-medium">{{segundo.nombre}}</h4>
                 <p class="text-sm text-gray-600">Precio: S/. {{segundo.precio | number:'1.2-2'}}</p>
                 <p class="text-sm text-gray-600">Disponibles: {{segundo.cantidad}}</p>
@@ -230,15 +230,15 @@
                       [class.text-red-800]="segundo.cantidad <= 0">
                   {{segundo.cantidad > 0 ? 'Disponible' : 'Agotado'}}
                 </span>
+                <div class="flex justify-end mt-4 space-x-2">
+                  <button (click)="editarSegundoFn(segundo)" class="text-blue-500 hover:text-blue-700 text-sm">
+                    Editar
+                  </button>
+                  <button (click)="eliminarSegundo(segundo.id)" class="text-red-500 hover:text-red-700 text-sm">
+                    Eliminar
+                  </button>
+                </div>
               </div>
-            </div>
-            <div class="flex justify-end mt-4 space-x-2">
-              <button (click)="editarSegundoFn(segundo)" class="text-blue-500 hover:text-blue-700 text-sm">
-                Editar
-              </button>
-              <button (click)="eliminarSegundo(segundo.id)" class="text-red-500 hover:text-red-700 text-sm">
-                Eliminar
-              </button>
             </div>
           </div>
         </div>
