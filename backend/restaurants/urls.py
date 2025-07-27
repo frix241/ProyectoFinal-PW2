@@ -12,6 +12,7 @@ from .views import (
     MisPedidosView,
     EntradaRetrieveUpdateDestroyView,
     SegundoRetrieveUpdateDestroyView,
+    RestaurantDetailView,
 )
 
 urlpatterns = [
@@ -21,6 +22,7 @@ urlpatterns = [
     path('segundos/', SegundoCreateView.as_view(), name='segundo-create'),
     path('entradas/<int:pk>/', EntradaRetrieveUpdateDestroyView.as_view(), name='entrada-detail'),
     path('segundos/<int:pk>/', SegundoRetrieveUpdateDestroyView.as_view(), name='segundo-detail'),
+    path('restaurantes/<int:pk>/', RestaurantDetailView.as_view(), name='restaurant-detail'),
     path('restaurante/<int:restaurante_id>/menus/', MenusByRestaurantView.as_view(), name='menus-by-restaurant'),
     path('pedidos/', PedidoCreateView.as_view(), name='pedido-create'),
     path('pedidos-recibidos/', PedidosRecibidosView.as_view(), name='pedidos-recibidos'),

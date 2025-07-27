@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { RestaurantService, Plato } from '../../services/restaurant';
 
 @Component({
   selector: 'app-menu-dia',
   standalone: true,
-  imports: [],
+  imports: [FormsModule, CommonModule],
   templateUrl: './menu-dia.html',
   styleUrl: './menu-dia.css'
 })
@@ -14,16 +16,34 @@ export class MenuDia implements OnInit {
   segundos: Plato[] = [];
   menuSeleccionado: any = null;
 
+  restauranteNombre: string = '';
+  restauranteImagen: string = '';
+
   nuevoEntrada: Partial<Plato> = { nombre: '', cantidad: 1, precio: 0, imagen: '', menu: 0 };
   nuevoSegundo: Partial<Plato> = { nombre: '', cantidad: 1, precio: 0, imagen: '', menu: 0 };
 
   editandoEntrada: Plato | null = null;
   editandoSegundo: Plato | null = null;
 
+  @ViewChild('fileInputEntrada') fileInputEntrada!: ElementRef;
+  @ViewChild('fileInputSegundo') fileInputSegundo!: ElementRef;
+
   constructor(private restaurantService: RestaurantService) {}
 
   ngOnInit() {
+    this.cargarRestaurante();
     this.cargarMenus();
+  }
+
+  cargarRestaurante() {
+    const restaurantId = localStorage.getItem('restaurantId');
+    console.log('Cargando restaurante con ID:', restaurantId); // <-- Aquí verás el ID que se está intentando cargar
+    if (restaurantId) {
+      this.restaurantService.getRestaurant(+restaurantId).subscribe(restaurant => {
+        this.restauranteNombre = restaurant.nombre;
+        this.restauranteImagen = restaurant.imagen;
+      });
+    }
   }
 
   cargarMenus() {
@@ -55,6 +75,7 @@ export class MenuDia implements OnInit {
     this.restaurantService.addEntrada(this.nuevoEntrada).subscribe(() => {
       this.nuevoEntrada = { nombre: '', cantidad: 1, precio: 0, imagen: '', menu: this.menuSeleccionado.id };
       this.cargarEntradas(this.menuSeleccionado.id);
+      if (this.fileInputEntrada) this.fileInputEntrada.nativeElement.value = '';
     });
   }
 
@@ -64,6 +85,7 @@ export class MenuDia implements OnInit {
     this.restaurantService.addSegundo(this.nuevoSegundo).subscribe(() => {
       this.nuevoSegundo = { nombre: '', cantidad: 1, precio: 0, imagen: '', menu: this.menuSeleccionado.id };
       this.cargarSegundos(this.menuSeleccionado.id);
+      if (this.fileInputSegundo) this.fileInputSegundo.nativeElement.value = '';
     });
   }
 
@@ -81,10 +103,13 @@ export class MenuDia implements OnInit {
 
   cancelarEdicionEntrada() {
     this.editandoEntrada = null;
+    if (this.fileInputEntrada) this.fileInputEntrada.nativeElement.value = '';
   }
 
   eliminarEntrada(id: number) {
-    this.restaurantService.deleteEntrada(id).subscribe(() => this.cargarEntradas(this.menuSeleccionado.id));
+    if (confirm('¿Estás seguro de eliminar esta entrada?')) {
+      this.restaurantService.deleteEntrada(id).subscribe(() => this.cargarEntradas(this.menuSeleccionado.id));
+    }
   }
 
   editarSegundoFn(segundo: Plato) {
@@ -101,9 +126,17 @@ export class MenuDia implements OnInit {
 
   cancelarEdicionSegundo() {
     this.editandoSegundo = null;
+    if (this.fileInputSegundo) this.fileInputSegundo.nativeElement.value = '';
   }
 
   eliminarSegundo(id: number) {
-    this.restaurantService.deleteSegundo(id).subscribe(() => this.cargarSegundos(this.menuSeleccionado.id));
+    if (confirm('¿Estás seguro de eliminar este segundo?')) {
+      this.restaurantService.deleteSegundo(id).subscribe(() => this.cargarSegundos(this.menuSeleccionado.id));
+    }
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    window.location.href = '/login';
   }
 }

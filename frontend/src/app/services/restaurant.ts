@@ -19,6 +19,11 @@ export class RestaurantService {
 
   constructor(private http: HttpClient) {}
 
+  // Mostrar los detalles de un restaurante
+  getRestaurant(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}restaurantes/${id}/`);
+  }
+  
   // Menú del día
   getMenus(): Observable<any> {
     return this.http.get(this.apiUrl + 'menus/');

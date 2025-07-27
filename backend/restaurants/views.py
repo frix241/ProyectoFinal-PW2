@@ -10,6 +10,7 @@ from .serializers import (
     PedidoReadSerializer,
     PedidoEstadoUpdateSerializer,
     RestaurantUpdateSerializer,
+    RestaurantDetailSerializer,
 )
 
 class MenuListCreateView(generics.ListCreateAPIView):
@@ -98,3 +99,8 @@ class EntradaRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 class SegundoRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Segundo.objects.all()
     serializer_class = SegundoCreateSerializer
+
+# Vistas para mostrar los datos de restaurantes por id
+class RestaurantDetailView(generics.RetrieveAPIView):
+    queryset = Restaurant.objects.all()
+    serializer_class = RestaurantDetailSerializer

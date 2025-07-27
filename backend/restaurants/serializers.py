@@ -16,6 +16,19 @@ class SegundoCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Segundo
         fields = ['id', 'nombre', 'cantidad', 'precio', 'imagen', 'menu']
+# Serializador para listar los restaurantes
+class RestaurantListSerializer(serializers.ModelSerializer):
+    imagen = serializers.ImageField(use_url=True)
+    class Meta:
+        model = Restaurant
+        fields = ['id', 'nombre', 'imagen']
+
+
+# Serializador para mostrar los datos de restaurantes por id
+class RestaurantDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Restaurant
+        fields = ['id', 'nombre', 'imagen']
 
 # listar los menús con entradas y segundos
 class MenuReadSerializer(serializers.ModelSerializer):
@@ -25,11 +38,6 @@ class MenuReadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Menu
         fields = ['id', 'restaurante', 'fecha', 'entradas', 'segundos']
-
-class RestaurantListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Restaurant
-        fields = ['id', 'nombre', 'imagen']
 
 
 # Serializer para pedidos de clientes
