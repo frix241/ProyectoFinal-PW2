@@ -17,12 +17,12 @@ export const routes: Routes = [
     loadComponent: () => import('./restaurants/menu-dia/menu-dia').then(m => m.MenuDia),
     canActivate: [restaurantGuard]
   },
-/**  {
+  {
     path: 'clientes/explorador-restaurantes',
-    loadComponent: () => import('./clientes/explorador-restaurantes/explorador-restaurantes').then(m => m.ExploradorRestaurantesComponent),
+    loadComponent: () => import('./clientes/explorador-restaurantes/explorador-restaurantes').then(m => m.ExploradorRestaurantes),
     canActivate: [clienteGuard]
   },
-  {
+/**  {
     path: 'clientes/menu-restaurante',
     loadComponent: () => import('./clientes/menu-restaurante/menu-restaurante').then(m => m.MenuRestauranteComponent),
     canActivate: [clienteGuard]
