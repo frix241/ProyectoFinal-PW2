@@ -132,7 +132,7 @@ export class MenuRestaurante implements OnInit {
     this.clienteService.crearPedido(data).subscribe({
       next: () => {
         alert('¡Pedido realizado con éxito!');
-        this.router.navigate(['/clientes/mis-pedidos']);
+        this.router.navigate(['/clientes/confirmacion-pedido']);
       },
       error: () => {
         alert('Error al realizar el pedido.');

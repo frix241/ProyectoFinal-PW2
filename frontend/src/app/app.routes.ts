@@ -27,12 +27,12 @@ export const routes: Routes = [
     loadComponent: () => import('./clientes/menu-restaurante/menu-restaurante').then(m => m.MenuRestaurante),
     canActivate: [clienteGuard]
   },
-/**  {
+  {
     path: 'clientes/confirmacion-pedido',
-    loadComponent: () => import('./clientes/confirmacion-pedido/confirmacion-pedido').then(m => m.ConfirmacionPedidoComponent),
+    loadComponent: () => import('./clientes/confirmacion-pedido/confirmacion-pedido').then(m => m.ConfirmacionPedido),
     canActivate: [clienteGuard]
   },
-  {
+/**  {
     path: 'clientes/mis-pedidos',
     loadComponent: () => import('./clientes/mis-pedidos/mis-pedidos').then(m => m.MisPedidosComponent),
     canActivate: [clienteGuard]
