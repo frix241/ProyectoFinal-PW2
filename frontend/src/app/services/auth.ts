@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class Auth {
-  private apiUrl = 'http://localhost:8000/auth/';
+  private apiUrl = "https://report-api-7eey.onrender.com/auth/";
 
   constructor(private http: HttpClient) {}
 
@@ -23,14 +23,14 @@ export class Auth {
   }
 
   saveToken(token: string) {
-    localStorage.setItem('token', token);
+    localStorage.setItem("token", token);
   }
 
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return localStorage.getItem("token");
   }
 
   logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
   }
 }

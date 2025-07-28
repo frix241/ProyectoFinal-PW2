@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 // --- Interfaces ---
 export interface Restaurant {
@@ -20,10 +20,10 @@ export interface Plato {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class RestaurantService {
-  private apiUrl = 'http://localhost:8000/api/restaurants/';
+  private apiUrl = "https://report-api-7eey.onrender.com/api/restaurants/";
 
   constructor(private http: HttpClient) {}
 
@@ -33,29 +33,35 @@ export class RestaurantService {
   }
 
   getRestaurantePorUsuario(userId: number): Observable<Restaurant> {
-    return this.http.get<Restaurant>(`${this.apiUrl}restaurantes/id/${userId}/`);
+    return this.http.get<Restaurant>(
+      `${this.apiUrl}restaurantes/id/${userId}/`,
+    );
   }
 
   getPedidosHistorialRestaurante(restauranteId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}restaurante/${restauranteId}/historial-pedidos/`);
+    return this.http.get<any[]>(
+      `${this.apiUrl}restaurante/${restauranteId}/historial-pedidos/`,
+    );
   }
 
   // --- Menú del Día ---
   getMenus(): Observable<any> {
-    return this.http.get(this.apiUrl + 'menus/');
+    return this.http.get(this.apiUrl + "menus/");
   }
 
   getMenuHoy(restauranteId: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}restaurante/${restauranteId}/menu-hoy/`);
+    return this.http.get<any>(
+      `${this.apiUrl}restaurante/${restauranteId}/menu-hoy/`,
+    );
   }
 
   addMenu(data: { fecha: string }): Observable<any> {
-    return this.http.post(this.apiUrl + 'menus/', data);
+    return this.http.post(this.apiUrl + "menus/", data);
   }
 
   crearMenuHoy(): Observable<any> {
     const hoy = new Date().toISOString().slice(0, 10); // "YYYY-MM-DD"
-    return this.http.post<any>(this.apiUrl + 'menus/', { fecha: hoy });
+    return this.http.post<any>(this.apiUrl + "menus/", { fecha: hoy });
   }
 
   // --- Entradas ---
@@ -64,7 +70,7 @@ export class RestaurantService {
   }
 
   addEntrada(formData: FormData): Observable<Plato> {
-    return this.http.post<Plato>(this.apiUrl + 'entradas/', formData);
+    return this.http.post<Plato>(this.apiUrl + "entradas/", formData);
   }
 
   updateEntrada(id: number, data: Partial<Plato> | FormData) {
@@ -77,11 +83,12 @@ export class RestaurantService {
 
   // --- Segundos ---
   getSegundos(menuId: number): Observable<Plato[]> {
-    return this.http.get<Plato[]>(`${this.apiUrl}segundos/?menu_id=${menuId}`);return this.http.get<Plato[]>(`${this.apiUrl}segundos/?menu_id=${menuId}`);
+    return this.http.get<Plato[]>(`${this.apiUrl}segundos/?menu_id=${menuId}`);
+    return this.http.get<Plato[]>(`${this.apiUrl}segundos/?menu_id=${menuId}`);
   }
 
   addSegundo(formData: FormData): Observable<Plato> {
-    return this.http.post<Plato>(this.apiUrl + 'segundos/', formData);
+    return this.http.post<Plato>(this.apiUrl + "segundos/", formData);
   }
 
   updateSegundo(id: number, data: Partial<Plato> | FormData) {
@@ -94,10 +101,17 @@ export class RestaurantService {
 
   // --- Pedidos ---
   getPedidosPendientesRestaurante(restauranteId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}restaurante/${restauranteId}/pedidos-pendientes/`);
+    return this.http.get<any[]>(
+      `${this.apiUrl}restaurante/${restauranteId}/pedidos-pendientes/`,
+    );
   }
 
-  updateEstadoPedido(pedidoId: number, estado: 'aceptado' | 'rechazado'): Observable<any> {
-    return this.http.patch(`${this.apiUrl}pedidos/${pedidoId}/estado/`, { estado });
+  updateEstadoPedido(
+    pedidoId: number,
+    estado: "aceptado" | "rechazado",
+  ): Observable<any> {
+    return this.http.patch(`${this.apiUrl}pedidos/${pedidoId}/estado/`, {
+      estado,
+    });
   }
 }

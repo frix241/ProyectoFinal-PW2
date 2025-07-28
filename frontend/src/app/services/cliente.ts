@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class ClienteService {
-  private apiUrl = 'http://localhost:8000/api/restaurants/';
+  private apiUrl = "https://report-api-7eey.onrender.com/api/restaurants/";
 
   constructor(private http: HttpClient) {}
 
@@ -22,12 +22,16 @@ export class ClienteService {
 
   // Ver menús de un restaurante
   getMenusByRestaurante(restauranteId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}restaurante/${restauranteId}/menus/`);
+    return this.http.get<any[]>(
+      `${this.apiUrl}restaurante/${restauranteId}/menus/`,
+    );
   }
 
   // Ver menú del día de un restaurante
   getMenuHoy(restauranteId: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}restaurante/${restauranteId}/menu-hoy/`);
+    return this.http.get<any>(
+      `${this.apiUrl}restaurante/${restauranteId}/menu-hoy/`,
+    );
   }
 
   // Ver entradas de un menú
@@ -41,7 +45,11 @@ export class ClienteService {
   }
 
   // Realizar un pedido
-  crearPedido(data: { menu: number, entrada: number, segundo: number }): Observable<any> {
+  crearPedido(data: {
+    menu: number;
+    entrada: number;
+    segundo: number;
+  }): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}pedidos/`, data);
   }
 
@@ -57,7 +65,9 @@ export class ClienteService {
 
   // Actualizar estado del pedido (si el cliente puede cancelar, etc.)
   actualizarEstadoPedido(id: number, estado: string): Observable<any> {
-    return this.http.patch<any>(`${this.apiUrl}pedidos/${id}/estado/`, { estado });
+    return this.http.patch<any>(`${this.apiUrl}pedidos/${id}/estado/`, {
+      estado,
+    });
   }
 
   // Mostrar detalle de un menú específico
