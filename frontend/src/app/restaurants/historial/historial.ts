@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RestaurantService, Restaurant } from '../../services/restaurant';
 import { Auth } from '../../services/auth';
 import { CommonModule } from '@angular/common';
+import jsPDF from 'jspdf';
+import jsPDFInvoiceTemplate, { OutputType } from "jspdf-invoice-template";
 
 @Component({
   selector: 'app-historial',
@@ -71,16 +73,51 @@ export class Historial implements OnInit {
     window.location.href = '/login';
   }
 
-  async imprimirRecibo(pedido: any) {
-    const jsPDFModule = await import('jspdf');
-    const doc = new jsPDFModule.jsPDF();
-    doc.text(`Recibo de Pedido #${pedido.id}`, 10, 10);
-    doc.text(`Restaurante: ${this.restauranteNombre}`, 10, 20);
-    doc.text(`Cliente: ${pedido.cliente_nombre || pedido.cliente}`, 10, 30);
-    doc.text(`Entrada: ${pedido.entrada?.nombre || 'Sin entrada'}`, 10, 40);
-    doc.text(`Segundo: ${pedido.segundo?.nombre || 'Sin segundo'}`, 10, 50);
-    doc.text(`Total: S/ ${(Number(pedido.entrada?.precio) || 0) + (Number(pedido.segundo?.precio) || 0)}`, 10, 60);
-    doc.text(`Estado: ${pedido.estado}`, 10, 70);
-    doc.save(`recibo_pedido_${pedido.id}.pdf`);
+  imprimirRecibo(pedido: any) {
+    const props = {
+      outputType: OutputType.Save,
+      fileName: `recibo_pedido_${pedido.id}`,
+      logo: {
+        src: "https://i.imgur.com/M3F1rfd.png", 
+        width: 53.33, // px
+        height: 26.66, // px
+      },
+      business: {
+        name: this.restauranteNombre,
+        address: "Dirección del restaurante",
+        phone: "Teléfono",
+        email: "correo@restaurante.com",
+        website: "www.restaurante.com",
+      },
+      contact: {
+        label: "Cliente:",
+        name: String(pedido.cliente_nombre || pedido.cliente),
+      },
+      invoice: {
+        label: "N° Pedido",
+        num: pedido.id, // Debe ser number, no string
+        invDate: pedido.fecha ? (pedido.fecha + '').slice(0, 10) : '',
+        headerBorder: false,
+        tableBodyBorder: false,
+        header: [
+          { title: "Plato", style: { width: 50 } },
+          { title: "Precio", style: { width: 50 } }
+        ],
+        table: [
+          [pedido.entrada?.nombre || 'Sin entrada', String(pedido.entrada?.precio) || '-'],
+          [pedido.segundo?.nombre || 'Sin segundo', String(pedido.segundo?.precio) || '-'],
+          ['Total', ((Number(pedido.entrada?.precio) || 0) + (Number(pedido.segundo?.precio) || 0)).toFixed(2)]
+        ],
+        invTotalLabel: "Total:",
+        invTotal: ((Number(pedido.entrada?.precio) || 0) + (Number(pedido.segundo?.precio) || 0)).toFixed(2),
+        invGenLabel: "Estado:",
+        invGen: pedido.estado ? String(pedido.estado) : '', // Asegura string válido
+      },
+      footer: {
+        text: "Gracias por su preferencia.",
+      },
+    };
+
+    jsPDFInvoiceTemplate(props);
   }
 }
