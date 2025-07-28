@@ -44,16 +44,19 @@ export class ConfirmacionPedido implements OnInit, OnDestroy {
           this.estado = 'aceptado';
           this.mensaje = '¡Pedido aceptado! Tu pedido está en camino 🍽️';
           clearInterval(this.pollingInterval);
+          setTimeout(() => this.router.navigate(['/clientes/mis-pedidos']), 5000);
         } else if (pedido.estado === 'rechazado') {
           this.estado = 'rechazado';
           this.mensaje = 'Pedido rechazado. Lo sentimos, tu pedido no pudo ser procesado.';
           clearInterval(this.pollingInterval);
+          setTimeout(() => this.router.navigate(['/clientes/mis-pedidos']), 5000);
         }
       },
       error: () => {
         this.estado = 'rechazado';
         this.mensaje = 'No se pudo consultar el estado del pedido.';
         clearInterval(this.pollingInterval);
+        setTimeout(() => this.router.navigate(['/clientes/mis-pedidos']), 5000);
       }
     });
   }
