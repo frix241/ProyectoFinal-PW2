@@ -33,12 +33,33 @@ export class PedidosDia implements OnInit {
     });
   }
 
+  get imagenRestauranteUrl(): string {
+    if (!this.restauranteImagen) return 'restoLogo.svg';
+    if (this.restauranteImagen.startsWith('http')) return this.restauranteImagen;
+    return `http://localhost:8000${this.restauranteImagen}`;
+  }
+
   cargarPedidos() {
     this.cargando = true;
     this.restaurantService.getPedidosPendientesRestaurante(this.restauranteId).subscribe(pedidos => {
-      this.pedidos = pedidos;
+      // Solo nombre, imagen pequeña y total calculado
+      this.pedidos = pedidos.map(p => ({
+        id: p.id,
+        cliente: p.cliente_nombre || p.cliente || 'Desconocido',
+        entradaNombre: p.entrada?.nombre || 'Sin entrada',
+        entradaImg: p.entrada?.imagen || '',
+        segundoNombre: p.segundo?.nombre || 'Sin segundo',
+        segundoImg: p.segundo?.imagen || '',
+        total: (p.entrada?.precio || 0) + (p.segundo?.precio || 0)
+      }));
       this.cargando = false;
     });
+  }
+
+  getPlatoImgUrl(imagen: string): string {
+    if (!imagen) return 'assets/placeholder-food.jpg';
+    if (imagen.startsWith('http')) return imagen;
+    return `http://localhost:8000${imagen}`;
   }
 
   aceptarPedido(pedidoId: number) {
@@ -53,7 +74,16 @@ export class PedidosDia implements OnInit {
     });
   }
 
+  irAHistorial() {
+    window.location.href = '/restaurants/historial';
+  }
+
+  irAMenuDia() {
+    window.location.href = '/restaurants/menu-dia';
+  }
+
   logout() {
-    this.auth.logout();
+    localStorage.removeItem('token');
+    window.location.href = '/login';
   }
 }

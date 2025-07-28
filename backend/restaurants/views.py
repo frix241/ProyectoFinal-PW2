@@ -107,8 +107,7 @@ class PedidosRecibidosView(generics.ListAPIView):
         return Pedido.objects.filter(menu__restaurante__user=self.request.user)
 
 class PedidosPendientesRestauranteView(ListAPIView):
-    serializer_class = PedidoSerializer
-
+    serializer_class = PedidoReadSerializer
     def get_queryset(self):
         restaurante_id = self.kwargs['restaurante_id']
         return Pedido.objects.filter(menu__restaurante_id=restaurante_id, estado='pendiente')

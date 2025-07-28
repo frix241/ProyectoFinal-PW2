@@ -63,11 +63,28 @@ class PedidoCreateSerializer(serializers.ModelSerializer):
         return data
     
 # Serializer para que restaurantes puedan ver sus pedidos
+
+class EntradaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Entrada
+        fields = ['id', 'nombre', 'precio', 'imagen']
+
+class SegundoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Segundo
+        fields = ['id', 'nombre', 'precio', 'imagen']
+
 class PedidoReadSerializer(serializers.ModelSerializer):
+    entrada = EntradaSerializer(read_only=True)
+    segundo = SegundoSerializer(read_only=True)
+
     class Meta:
         model = Pedido
-        fields = ['id', 'cliente', 'menu', 'entrada', 'segundo', 'estado', 'fecha']
-        depth = 2
+        fields = [
+            'id', 'cliente', 'menu', 'entrada', 'segundo',
+            'estado', 'fecha'
+        ]
+        
 
 # Actualizar el estado del pedido
 class PedidoEstadoUpdateSerializer(serializers.ModelSerializer):
