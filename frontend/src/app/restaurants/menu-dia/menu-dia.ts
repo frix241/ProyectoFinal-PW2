@@ -72,23 +72,14 @@ export class MenuDia implements OnInit {
   cargarMenus() {
     this.auth.getCurrentUser().subscribe(user => {
       this.restaurantService.getRestaurantePorUsuario(user.id).subscribe(restaurante => {
-        this.restaurantService.getMenuHoy(restaurante.id).subscribe({
-          next: menu => {
-            this.menus = [menu];
-            this.seleccionarMenu(menu);
-          },
-          error: err => {
-            // Si no hay menú de hoy, créalo automáticamente
-            this.restaurantService.crearMenuHoy().subscribe(menu => {
-              this.menus = [menu];
-              this.seleccionarMenu(menu);
-            });
-          }
+        this.restaurantService.getMenuHoy(restaurante.id).subscribe(menu => {
+          this.menus = [menu];
+          this.seleccionarMenu(menu);
         });
       });
     });
   }
-
+  
   seleccionarMenu(menu: any) {
     this.menuSeleccionado = menu;
     this.cargarEntradas(menu.id);

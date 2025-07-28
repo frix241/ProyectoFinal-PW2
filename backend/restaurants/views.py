@@ -77,7 +77,13 @@ class MenuHoyByRestaurantView(generics.RetrieveAPIView):
     def get_object(self):
         restaurante_id = self.kwargs['restaurante_id']
         hoy = date.today()
-        return Menu.objects.get(restaurante__id=restaurante_id, fecha=hoy)
+        try:
+            return Menu.objects.get(restaurante__id=restaurante_id, fecha=hoy)
+        except Menu.DoesNotExist:
+            # Crear el menú si no existe
+            restaurante = Restaurant.objects.get(id=restaurante_id)
+            menu = Menu.objects.create(restaurante=restaurante, fecha=hoy)
+            return menu
 
 class RestaurantDetailView(generics.RetrieveAPIView):
     queryset = Restaurant.objects.all()
