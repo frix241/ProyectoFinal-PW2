@@ -1,0 +1,167 @@
+.explorador-bg {
+  min-height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0; left: 0;
+  z-index: -1;
+  background: url('https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.explorador-container {
+  max-width: 1000px;
+  margin: 3rem auto;
+  padding: 2.5rem 2rem;
+  background: rgba(255,255,255,0.85);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(60, 72, 100, 0.18);
+  backdrop-filter: blur(2px);
+}
+
+.explorador-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.explorador-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e293b;
+  letter-spacing: 0.5px;
+}
+
+.explorador-actions .btn {
+  margin-left: 0.7rem;
+  padding: 0.55rem 1.5rem;
+  border: none;
+  border-radius: 0.7rem;
+  background: linear-gradient(90deg, #2563eb 60%, #60a5fa 100%);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(37,99,235,0.10);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.explorador-actions .btn-logout {
+  background: linear-gradient(90deg, #ef4444 60%, #f87171 100%);
+}
+
+.explorador-actions .btn:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 18px rgba(37,99,235,0.18);
+  opacity: 0.95;
+}
+
+.bienvenida {
+  font-size: 1.15rem;
+  color: #2563eb;
+  margin-bottom: 1.2rem;
+  font-weight: 500;
+  text-align: left;
+}
+
+.usuario-nombre {
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.explorador-busqueda {
+  margin-bottom: 2.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.busqueda-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.8rem 1.2rem;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 0.7rem;
+  font-size: 1.1rem;
+  background: #f1f5f9;
+  color: #1e293b;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 4px rgba(37,99,235,0.04);
+}
+
+.busqueda-input:focus {
+  border: 1.5px solid #2563eb;
+  box-shadow: 0 2px 12px rgba(37,99,235,0.10);
+  background: #fff;
+}
+
+.restaurantes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+}
+
+.restaurante-card {
+  background: rgba(255,255,255,0.92);
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 16px rgba(37,99,235,0.07), 0 1.5px 8px rgba(0,0,0,0.04);
+  cursor: pointer;
+  transition: box-shadow 0.22s, transform 0.18s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.7rem 1.2rem 1.2rem 1.2rem;
+  outline: none;
+  border: 1.5px solid #e0e7ef;
+  position: relative;
+  overflow: hidden;
+}
+
+.restaurante-card::before {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, #2563eb33 0%, #60a5fa22 100%);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.restaurante-card:hover, .restaurante-card:focus {
+  box-shadow: 0 8px 32px rgba(37,99,235,0.18), 0 2px 8px rgba(0,0,0,0.07);
+  transform: translateY(-4px) scale(1.035);
+  border-color: #2563eb55;
+}
+
+.restaurante-img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1.2rem;
+  background: #e0e7ef;
+  border: 3px solid #2563eb22;
+  box-shadow: 0 2px 8px rgba(37,99,235,0.09);
+  z-index: 1;
+}
+
+.restaurante-info h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1e293b;
+  text-align: center;
+  letter-spacing: 0.2px;
+  z-index: 1;
+}
+
+.no-result {
+  grid-column: 1/-1;
+  text-align: center;
+  color: #64748b;
+  font-size: 1.15rem;
+  padding: 2.5rem 0;
+  opacity: 0.85;
+}

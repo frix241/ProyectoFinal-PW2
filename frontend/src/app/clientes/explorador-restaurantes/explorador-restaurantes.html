@@ -1,1 +1,47 @@
-<p>explorador-restaurantes works!</p>
+<div class="explorador-bg">
+  <div class="explorador-container">
+    <div class="explorador-header">
+      <h2>Explorar Restaurantes</h2>
+      <div class="explorador-actions">
+        <button class="btn" (click)="irAMisPedidos()">Mis Pedidos</button>
+        <button class="btn btn-logout" (click)="logout()">Cerrar Sesión</button>
+      </div>
+    </div>
+
+    <div class="bienvenida">
+      Bienvenido, <span class="usuario-nombre">{{ nombreUsuario }}</span>
+    </div>
+
+    <div class="explorador-busqueda">
+      <input
+        type="text"
+        [(ngModel)]="busqueda"
+        (input)="filtrarRestaurantes()"
+        placeholder="Buscar restaurante por nombre..."
+        class="busqueda-input"
+      />
+    </div>
+
+    <div class="restaurantes-grid">
+      <div
+        class="restaurante-card"
+        *ngFor="let restaurante of restaurantesFiltrados"
+        (click)="seleccionarRestaurante(restaurante)"
+        tabindex="0"
+        title="Ver menú del día"
+      >
+        <img
+          [src]="restaurante.imagen || 'assets/placeholder-restaurant.jpg'"
+          alt="{{ restaurante.nombre }}"
+          class="restaurante-img"
+        />
+        <div class="restaurante-info">
+          <h3>{{ restaurante.nombre }}</h3>
+        </div>
+      </div>
+      <div *ngIf="restaurantesFiltrados.length === 0" class="no-result">
+        No se encontraron restaurantes.
+      </div>
+    </div>
+  </div>
+</div>
