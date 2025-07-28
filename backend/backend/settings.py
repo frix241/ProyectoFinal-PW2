@@ -1,7 +1,7 @@
 """
 Django settings for backend project.
 """
-
+from datetime import timedelta
 from pathlib import Path
 import os
 
@@ -15,6 +15,12 @@ STATIC_URL = 'static/'
 SECRET_KEY = 'django-insecure-gq@t_h(*n$d^0ad007--89^oaqjz258@hn)zho^qr9wxm*1m*='
 DEBUG = True
 ALLOWED_HOSTS = []
+
+# --- Configuración de JWT ---
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),  
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+}
 
 # --- Aplicaciones instaladas ---
 INSTALLED_APPS = [
