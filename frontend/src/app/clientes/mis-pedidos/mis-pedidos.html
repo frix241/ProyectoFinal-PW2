@@ -1,1 +1,50 @@
-<p>mis-pedidos works!</p>
+<div class="mis-pedidos-bg">
+  <div class="mis-pedidos-container">
+    <div class="mis-pedidos-header">
+      <h2>Mis Pedidos</h2>
+      <button class="btn-ir-menu" (click)="irAMenuRestaurante()">Ir a Menú de Restaurantes</button>
+    </div>
+
+    <div *ngIf="cargando" class="cargando">
+      Cargando pedidos...
+    </div>
+
+    <div *ngIf="!cargando && pedidos.length === 0" class="no-pedidos">
+      No tienes pedidos realizados.
+    </div>
+
+    <ul *ngIf="!cargando && pedidos.length > 0" class="lista-mis-pedidos">
+      <li *ngFor="let pedido of pedidos" class="pedido-card">
+        <div class="pedido-info">
+          <div class="pedido-id-estado">
+            <b>Pedido #{{ pedido.id }}</b>
+            <span class="estado" [ngClass]="{
+              'pendiente': pedido.estado === 'pendiente',
+              'aceptado': pedido.estado === 'aceptado',
+              'rechazado': pedido.estado === 'rechazado'
+            }">
+              {{ pedido.estado | titlecase }}
+            </span>
+          </div>
+            <div>
+            <span class="label">ID Menú:</span> {{ pedido.menu }}
+            </div>
+          <div>
+            <span class="label">Entrada:</span>
+            <img *ngIf="pedido.entrada?.imagen" [src]="pedido.entrada.imagen" alt="Entrada" class="plato-img-mini" />
+            {{ pedido.entrada?.nombre || 'Sin entrada' }}
+          </div>
+          <div>
+            <span class="label">Segundo:</span>
+            <img *ngIf="pedido.segundo?.imagen" [src]="pedido.segundo.imagen" alt="Segundo" class="plato-img-mini" />
+            {{ pedido.segundo?.nombre || 'Sin segundo' }}
+          </div>
+          <div>
+            <span class="label">Total:</span>
+            S/ {{ getTotalPedido(pedido) | number:'1.2-2' }}
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

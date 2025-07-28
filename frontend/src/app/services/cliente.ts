@@ -59,4 +59,9 @@ export class ClienteService {
   actualizarEstadoPedido(id: number, estado: string): Observable<any> {
     return this.http.patch<any>(`${this.apiUrl}pedidos/${id}/estado/`, { estado });
   }
+
+  // Mostrar detalle de un menú específico
+  getMenuDetalle(menuId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}menus/${menuId}/`);
+  }
 }
