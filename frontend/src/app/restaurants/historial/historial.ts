@@ -48,6 +48,12 @@ export class Historial implements OnInit {
     });
   }
 
+  getTotalPedido(pedido: any): number {
+    const entrada = Number(pedido.entrada?.precio) || 0;
+    const segundo = Number(pedido.segundo?.precio) || 0;
+    return entrada + segundo;
+  }
+
   irAMenuDia() {
     window.location.href = '/restaurants/menu-dia';
   }

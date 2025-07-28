@@ -48,7 +48,7 @@
             </div>
             <div>
               <span class="label">Total:</span>
-              S/ {{ (pedido.entrada?.precio || 0) + (pedido.segundo?.precio || 0) | number:'1.2-2' }}
+              S/ {{ getTotalPedido(pedido) | number:'1.2-2' }}
             </div>
           </div>
           <button class="btn-ir-menu" (click)="imprimirRecibo(pedido)">Imprimir recibo</button>
