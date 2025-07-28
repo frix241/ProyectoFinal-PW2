@@ -37,5 +37,14 @@ export const routes: Routes = [
     loadComponent: () => import('./clientes/mis-pedidos/mis-pedidos').then(m => m.MisPedidos),
     canActivate: [clienteGuard]
   },
-
+  {
+    path: 'restaurants/historial',
+    loadComponent: () => import('./restaurants/historial/historial').then(m => m.Historial),
+    canActivate: [restaurantGuard]
+  },
+  {
+    path: 'restaurants/pedidos-dia',
+    loadComponent: () => import('./restaurants/pedidos-dia/pedidos-dia').then(m => m.PedidosDia),
+    canActivate: [restaurantGuard]
+  },
 ];

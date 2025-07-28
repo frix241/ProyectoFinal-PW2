@@ -7,8 +7,8 @@
     </div>
     <nav class="dock-nav">
       <button routerLink="/restaurants/menu-dia" routerLinkActive="active">Menú del Día</button>
-      <button routerLink="/restaurants/pedidos-dia" routerLinkActive="active">Pedidos del Día</button>
-      <button routerLink="/restaurants/historial" routerLinkActive="active">Historial</button>
+      <button (click)="irAPedidosDia()">Pedidos del Día</button>
+      <button (click)="irAHistorial()">Historial</button>
       <button (click)="logout()" class="logout-btn">Cerrar sesión</button>
     </nav>
   </aside>

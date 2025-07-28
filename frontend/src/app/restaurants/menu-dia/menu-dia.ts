@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RestaurantService, Plato } from '../../services/restaurant';
 import { Auth } from '../../services/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-dia',
@@ -41,7 +42,8 @@ export class MenuDia implements OnInit {
 
   constructor(
     private restaurantService: RestaurantService,
-    private auth: Auth
+    private auth: Auth,
+    private router: Router
   ) {}
 
   // --- Ciclo de vida ---
@@ -267,6 +269,14 @@ export class MenuDia implements OnInit {
   eliminarImagenSegundo() {
     this.nuevoSegundo.imagen = '';
     if (this.fileInputSegundo) this.fileInputSegundo.nativeElement.value = '';
+  }
+
+  irAHistorial() {
+    this.router.navigate(['/restaurants/historial']);
+  }
+
+  irAPedidosDia() {
+    this.router.navigate(['/restaurants/pedidos-dia']);
   }
 
   // --- Sesión ---
