@@ -30,7 +30,8 @@ ALLOWED_HOSTS = ['report-api-7eey.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
-
+from dotenv import load_dotenv
+load_dotenv()
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
