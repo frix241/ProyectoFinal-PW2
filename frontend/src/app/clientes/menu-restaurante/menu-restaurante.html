@@ -1,1 +1,79 @@
-<p>menu-restaurante works!</p>
+<div class="menu-restaurante-bg">
+  <div class="menu-restaurante-container">
+    <div class="restaurante-header" *ngIf="restaurante">
+      <img [src]="restaurante.imagen || 'assets/placeholder-restaurant.jpg'" alt="Restaurante" class="restaurante-img" />
+      <h2>{{ restaurante.nombre }}</h2>
+    </div>
+
+    <div class="menu-content">
+      <div class="platos-listas">
+        <div class="platos-seccion">
+          <h3>Entradas</h3>
+          <div *ngIf="entradas.length > 0; else noEntradas">
+            <div *ngFor="let entrada of entradas" class="plato-card">
+              <img [src]="entrada.imagen || 'assets/placeholder-restaurant.jpg'" alt="{{ entrada.nombre }}" class="plato-img" />
+              <div class="plato-info">
+                <span class="plato-nombre">{{ entrada.nombre }}</span>
+                <span class="plato-precio">S/. {{ entrada.precio | number:'1.2-2' }}</span>
+              </div>
+              <div class="plato-cantidad">
+                <input type="number" min="0" [max]="entrada.cantidad"
+                  [(ngModel)]="seleccionEntradas[entrada.id]"
+                  (ngModelChange)="seleccionarEntrada(entrada, seleccionEntradas[entrada.id] || 0)"
+                  placeholder="0"
+                />
+                <span class="plato-stock">Disponibles: {{ entrada.cantidad }}</span>
+              </div>
+            </div>
+          </div>
+          <ng-template #noEntradas>
+            <div class="no-platos">No hay entradas disponibles.</div>
+          </ng-template>
+        </div>
+
+        <div class="platos-seccion">
+          <h3>Segundos</h3>
+          <div *ngIf="segundos.length > 0; else noSegundos">
+            <div *ngFor="let segundo of segundos" class="plato-card">
+              <img [src]="segundo.imagen || 'assets/placeholder-restaurant.jpg'" alt="{{ segundo.nombre }}" class="plato-img" />
+              <div class="plato-info">
+                <span class="plato-nombre">{{ segundo.nombre }}</span>
+                <span class="plato-precio">S/. {{ segundo.precio | number:'1.2-2' }}</span>
+              </div>
+              <div class="plato-cantidad">
+                <input type="number" min="0" [max]="segundo.cantidad"
+                  [(ngModel)]="seleccionSegundos[segundo.id]"
+                  (ngModelChange)="seleccionarSegundo(segundo, seleccionSegundos[segundo.id] || 0)"
+                  placeholder="0"
+                />
+                <span class="plato-stock">Disponibles: {{ segundo.cantidad }}</span>
+              </div>
+            </div>
+          </div>
+          <ng-template #noSegundos>
+            <div class="no-platos">No hay segundos disponibles.</div>
+          </ng-template>
+        </div>
+      </div>
+
+      <div class="pedido-panel">
+        <h3>Tu Pedido</h3>
+        <div *ngIf="pedidoPlatos.length > 0; else sinPedido">
+          <div *ngFor="let plato of pedidoPlatos" class="pedido-item">
+            <span>{{ plato.nombre }}</span>
+            <span>x{{ plato.cantidad }}</span>
+            <span>S/. {{ (plato.precio * plato.cantidad) | number:'1.2-2' }}</span>
+          </div>
+          <div class="pedido-total">
+            <span>Total:</span>
+            <span>S/. {{ totalPedido | number:'1.2-2' }}</span>
+          </div>
+          <button class="btn-pedido" (click)="realizarPedido()">Realizar Pedido</button>
+        </div>
+        <ng-template #sinPedido>
+          <div class="no-pedido">Selecciona platos para tu pedido.</div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

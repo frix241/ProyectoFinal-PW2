@@ -1,0 +1,210 @@
+.menu-restaurante-bg {
+  min-height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0; left: 0;
+  z-index: -1;
+  background: url('https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.menu-restaurante-container {
+  max-width: 1100px;
+  margin: 3rem auto;
+  padding: 2.5rem 2rem;
+  background: rgba(255,255,255,0.92);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(60, 72, 100, 0.18);
+  backdrop-filter: blur(2px);
+}
+
+.restaurante-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.restaurante-img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #2563eb33;
+  box-shadow: 0 2px 8px rgba(37,99,235,0.09);
+  background: #e0e7ef;
+}
+
+.restaurante-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.menu-content {
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.platos-listas {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.platos-seccion h3 {
+  font-size: 1.25rem;
+  color: #2563eb;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.plato-card {
+  background: #f1f5f9;
+  border-radius: 1rem;
+  box-shadow: 0 1px 6px rgba(37,99,235,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1rem;
+  gap: 1.5rem;
+}
+
+.plato-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.plato-nombre {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 1.08rem;
+}
+
+.plato-precio {
+  color: #2563eb;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.plato-cantidad {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.3rem;
+}
+
+.plato-cantidad input[type="number"] {
+  width: 60px;
+  padding: 0.3rem 0.5rem;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background: #fff;
+  color: #1e293b;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.plato-cantidad input[type="number"]:focus {
+  border: 1.5px solid #2563eb;
+}
+
+.plato-stock {
+  font-size: 0.95rem;
+  color: #64748b;
+}
+
+.no-platos {
+  color: #64748b;
+  font-size: 1rem;
+  padding: 1rem 0;
+}
+
+.pedido-panel {
+  flex: 1;
+  background: #f9fafb;
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 12px rgba(37,99,235,0.07);
+  padding: 1.5rem 1.2rem;
+  min-width: 260px;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1rem;
+  height: fit-content;
+}
+
+.pedido-panel h3 {
+  color: #1e293b;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.pedido-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+  color: #1e293b;
+}
+
+.pedido-total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #2563eb;
+  margin: 1rem 0 1.5rem 0;
+}
+
+.btn-pedido {
+  padding: 0.7rem 1.2rem;
+  border: none;
+  border-radius: 0.7rem;
+  background: linear-gradient(90deg, #2563eb 60%, #60a5fa 100%);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.08rem;
+  box-shadow: 0 2px 8px rgba(37,99,235,0.10);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.btn-pedido:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 18px rgba(37,99,235,0.18);
+  opacity: 0.95;
+}
+
+.no-pedido {
+  color: #64748b;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.plato-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 0.7rem;
+  margin-right: 1rem;
+  background: #e0e7ef;
+  border: 2px solid #2563eb22;
+  box-shadow: 0 1px 4px rgba(37,99,235,0.07);
+}
+.plato-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  /* ...el resto de tus estilos previos... */
+}
