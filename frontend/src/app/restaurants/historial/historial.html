@@ -1,1 +1,59 @@
-<p>historial works!</p>
+<div class="restaurante-panel-container">
+  <!-- Dock lateral izquierdo -->
+  <aside class="menu-dia-dock">
+    <div class="resto-info">
+      <img [src]="imagenRestauranteUrl" alt="Restaurante" class="resto-img" />
+      <div class="resto-nombre">{{ restauranteNombre || 'Restaurante' }}</div>
+    </div>
+    <nav class="dock-nav">
+      <button (click)="irAMenuDia()" routerLinkActive="active">Menú del Día</button>
+      <button (click)="irAPedidosDia()" routerLinkActive="active">Pedidos del Día</button>
+      <button (click)="irAHistorial()" routerLinkActive="active" class="active">Historial</button>
+      <button (click)="logout()" class="logout-btn">Cerrar sesión</button>
+    </nav>
+  </aside>
+
+  <!-- Contenido principal -->
+  <div class="pedidos-dia-main">
+    <div class="pedidos-dia-contenedor">
+      <h2>Historial de Pedidos</h2>
+      <div *ngIf="cargando" class="cargando">
+        Cargando historial...
+      </div>
+      <div *ngIf="!cargando && pedidos.length === 0" class="no-pedidos">
+        No hay pedidos aceptados o rechazados.
+      </div>
+      <ul *ngIf="!cargando && pedidos.length > 0" class="lista-pedidos">
+        <li *ngFor="let pedido of pedidos" class="pedido-card">
+          <div class="pedido-info">
+            <div class="pedido-id-estado">
+              <b>Pedido #{{ pedido.id }}</b>
+              <span class="estado" [ngClass]="{
+                'aceptado': pedido.estado === 'aceptado',
+                'rechazado': pedido.estado === 'rechazado'
+              }">
+                {{ pedido.estado | titlecase }}
+              </span>
+            </div>
+            <div>
+              <span class="label">Cliente:</span> {{ pedido.cliente_nombre || pedido.cliente }}
+            </div>
+            <div>
+              <span class="label">Entrada:</span>
+              {{ pedido.entrada?.nombre || 'Sin entrada' }}
+            </div>
+            <div>
+              <span class="label">Segundo:</span>
+              {{ pedido.segundo?.nombre || 'Sin segundo' }}
+            </div>
+            <div>
+              <span class="label">Total:</span>
+              S/ {{ (pedido.entrada?.precio || 0) + (pedido.segundo?.precio || 0) | number:'1.2-2' }}
+            </div>
+          </div>
+          <button class="btn-ir-menu" (click)="imprimirRecibo(pedido)">Imprimir recibo</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

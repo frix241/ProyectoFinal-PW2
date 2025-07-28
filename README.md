@@ -19,3 +19,6 @@ src/
       confirmacion-pedido/       # Confirmación de pedido: muestra estado tras seleccionar y confirmar platos
       mis-pedidos/               # Ver los pedidos realizados por el usuario
     services/                    # Servicios generales (auth, guards, interceptors)
+
+  ## Angular usamos 
+  npm install jspdf

@@ -36,6 +36,10 @@ export class RestaurantService {
     return this.http.get<Restaurant>(`${this.apiUrl}restaurantes/id/${userId}/`);
   }
 
+  getPedidosHistorialRestaurante(restauranteId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}restaurante/${restauranteId}/historial-pedidos/`);
+  }
+
   // --- Menú del Día ---
   getMenus(): Observable<any> {
     return this.http.get(this.apiUrl + 'menus/');

@@ -130,6 +130,17 @@ class PedidoDetailView(RetrieveAPIView):
     queryset = Pedido.objects.all()
     serializer_class = PedidoSerializer
 
+class PedidosHistorialRestauranteView(generics.ListAPIView):
+    serializer_class = PedidoReadSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        restaurante_id = self.kwargs['restaurante_id']
+        return Pedido.objects.filter(
+            menu__restaurante_id=restaurante_id,
+            estado__in=['aceptado', 'rechazado']
+        )
+
 # --- Actualización de perfil restaurante ---
 class RestaurantUpdateView(generics.UpdateAPIView):
     serializer_class = RestaurantUpdateSerializer
