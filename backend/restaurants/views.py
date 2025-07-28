@@ -1,4 +1,5 @@
 from rest_framework import viewsets, generics, permissions, filters, status
+from rest_framework.generics import RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from datetime import date 
@@ -7,7 +8,8 @@ from .serializers import (
     RestaurantListSerializer, MenuCreateSerializer,
     EntradaCreateSerializer, SegundoCreateSerializer,
     MenuReadSerializer, PedidoCreateSerializer, PedidoReadSerializer,
-    PedidoEstadoUpdateSerializer, RestaurantUpdateSerializer, RestaurantDetailSerializer
+    PedidoEstadoUpdateSerializer, RestaurantUpdateSerializer, RestaurantDetailSerializer,
+    PedidoSerializer,
 )
 
 # --- ViewSets para CRUD completo ---
@@ -117,6 +119,10 @@ class MisPedidosView(generics.ListAPIView):
 
     def get_queryset(self):
         return Pedido.objects.filter(cliente=self.request.user)
+    
+class PedidoDetailView(RetrieveAPIView):
+    queryset = Pedido.objects.all()
+    serializer_class = PedidoSerializer
 
 # --- Actualización de perfil restaurante ---
 class RestaurantUpdateView(generics.UpdateAPIView):

@@ -5,6 +5,7 @@ from .views import (
     MenusByRestaurantView, PedidoCreateView, PedidosRecibidosView,
     PedidoEstadoUpdateView, RestaurantUpdateView, MisPedidosView,
     RestaurantDetailView, RestaurantByUserView, MenuHoyByRestaurantView,
+    PedidoDetailView, PedidoSerializer
 )
 
 # --- Routers para CRUD automático ---
@@ -30,4 +31,5 @@ urlpatterns = [
     path('pedidos/<int:pk>/estado/', PedidoEstadoUpdateView.as_view(), name='pedido-estado-update'),
     path('mi-restaurante/editar/', RestaurantUpdateView.as_view(), name='restaurant-update'),
     path('mis-pedidos/', MisPedidosView.as_view(), name='mis-pedidos'),
+    path('pedidos/<int:pk>/', PedidoDetailView.as_view(), name='pedido-detail'),
 ]

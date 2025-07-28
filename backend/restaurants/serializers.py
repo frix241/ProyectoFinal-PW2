@@ -80,3 +80,9 @@ class RestaurantUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Restaurant
         fields = ['nombre', 'imagen']
+
+# Serializer para detalles de pedidos
+class PedidoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Pedido
+        fields = '__all__'

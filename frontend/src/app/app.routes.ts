@@ -28,7 +28,7 @@ export const routes: Routes = [
     canActivate: [clienteGuard]
   },
   {
-    path: 'clientes/confirmacion-pedido',
+    path: 'clientes/confirmacion-pedido/:id',
     loadComponent: () => import('./clientes/confirmacion-pedido/confirmacion-pedido').then(m => m.ConfirmacionPedido),
     canActivate: [clienteGuard]
   },

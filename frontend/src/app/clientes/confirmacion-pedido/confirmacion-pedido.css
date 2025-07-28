@@ -1,0 +1,63 @@
+.confirmacion-bg {
+  min-height: 100vh;
+  width: 100vw;
+  background: #f5f7fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 1s;
+}
+
+.aceptado-bg {
+  animation: fondoVerde 1.2s forwards;
+}
+
+.rechazado-bg {
+  animation: fondoRojo 1.2s forwards;
+}
+
+@keyframes fondoVerde {
+  from { background: #f5f7fa; }
+  to   { background: #d1fae5; }
+}
+
+@keyframes fondoRojo {
+  from { background: #f5f7fa; }
+  to   { background: #fee2e2; }
+}
+
+.confirmacion-container {
+  background: #fff;
+  padding: 3rem 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(60, 72, 100, 0.18);
+  text-align: center;
+  min-width: 320px;
+}
+
+.loading .spinner {
+  margin: 0 auto 1.5rem auto;
+  border: 6px solid #e0eaff;
+  border-top: 6px solid #2563eb;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+.aceptado h2 { color: #22c55e; }
+.rechazado h2 { color: #ef4444; }
+
+.icono-animado {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  animation: pop 0.6s;
+}
+@keyframes pop {
+  0% { transform: scale(0.5); opacity: 0.2; }
+  70% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); }
+}

@@ -1,1 +1,24 @@
-<p>confirmacion-pedido works!</p>
+<div [ngClass]="{
+      'confirmacion-bg': true,
+      'aceptado-bg': estado === 'aceptado',
+      'rechazado-bg': estado === 'rechazado'
+    }">
+  <div class="confirmacion-container">
+    <ng-container [ngSwitch]="estado">
+      <div *ngSwitchCase="'loading'" class="loading">
+        <div class="spinner"></div>
+        <p>{{ mensaje }}</p>
+      </div>
+      <div *ngSwitchCase="'aceptado'" class="aceptado">
+        <div class="icono-animado">&#x1F389;</div>
+        <h2>¡Pedido aceptado!</h2>
+        <p>{{ mensaje }}</p>
+      </div>
+      <div *ngSwitchCase="'rechazado'" class="rechazado">
+        <div class="icono-animado">&#x1F625;</div>
+        <h2>Pedido rechazado</h2>
+        <p>{{ mensaje }}</p>
+      </div>
+    </ng-container>
+  </div>
+</div>
