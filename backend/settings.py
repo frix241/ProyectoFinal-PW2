@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'djoser',
-    'dj-database-url',
+    'dj_database_url',
     'users',          # la crearemos
     'restaurants',    # también la crearemos
 ]
@@ -84,7 +84,7 @@ import dj_database_url
 import os
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL')
+        default=os.getenv('DATABASE_URL')
     )
 }
 
