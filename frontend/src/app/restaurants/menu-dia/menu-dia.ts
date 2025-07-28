@@ -193,12 +193,33 @@ export class MenuDia implements OnInit {
 
   guardarEdicionSegundo() {
     if (!this.editandoSegundo) return;
-    this.restaurantService.updateSegundo(this.editandoSegundo.id, this.nuevoSegundo).subscribe(() => {
-      this.editandoSegundo = null;
-      this.nuevoSegundo = { nombre: '', cantidad: 1, precio: 0, imagen: '', menu: this.menuSeleccionado.id };
-      this.cargarSegundos(this.menuSeleccionado.id);
-      if (this.fileInputSegundo) this.fileInputSegundo.nativeElement.value = '';
-    });
+
+    // Si hay nueva imagen, usa FormData, si no, envía objeto plano
+    if (this.segundoFile) {
+      const formData = new FormData();
+      formData.append('nombre', this.nuevoSegundo.nombre || '');
+      formData.append('cantidad', String(this.nuevoSegundo.cantidad || 0));
+      formData.append('precio', String(this.nuevoSegundo.precio || 0));
+      formData.append('menu', String(this.nuevoSegundo.menu || ''));
+      formData.append('imagen', this.segundoFile);
+
+      this.restaurantService.updateSegundo(this.editandoSegundo.id, formData).subscribe(() => {
+        this.editandoSegundo = null;
+        this.nuevoSegundo = { nombre: '', cantidad: 1, precio: 0, imagen: '', menu: this.menuSeleccionado.id };
+        this.cargarSegundos(this.menuSeleccionado.id);
+        if (this.fileInputSegundo) this.fileInputSegundo.nativeElement.value = '';
+        this.segundoFile = null;
+      });
+    } else {
+      // No hay nueva imagen, envía objeto plano (sin campo imagen)
+      const { imagen, ...rest } = this.nuevoSegundo;
+      this.restaurantService.updateSegundo(this.editandoSegundo.id, rest).subscribe(() => {
+        this.editandoSegundo = null;
+        this.nuevoSegundo = { nombre: '', cantidad: 1, precio: 0, imagen: '', menu: this.menuSeleccionado.id };
+        this.cargarSegundos(this.menuSeleccionado.id);
+        if (this.fileInputSegundo) this.fileInputSegundo.nativeElement.value = '';
+      });
+    }
   }
 
   cancelarEdicionSegundo() {

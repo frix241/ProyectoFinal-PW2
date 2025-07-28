@@ -80,8 +80,8 @@ export class RestaurantService {
     return this.http.post<Plato>(this.apiUrl + 'segundos/', formData);
   }
 
-  updateSegundo(id: number, segundo: Partial<Plato>): Observable<Plato> {
-    return this.http.put<Plato>(`${this.apiUrl}segundos/${id}/`, segundo);
+  updateSegundo(id: number, data: Partial<Plato> | FormData) {
+    return this.http.put(`${this.apiUrl}segundos/${id}/`, data);
   }
 
   deleteSegundo(id: number): Observable<any> {
