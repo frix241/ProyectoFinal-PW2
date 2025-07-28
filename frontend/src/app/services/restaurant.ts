@@ -87,4 +87,13 @@ export class RestaurantService {
   deleteSegundo(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}segundos/${id}/`);
   }
+
+  // --- Pedidos ---
+  getPedidosPendientesRestaurante(restauranteId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}restaurante/${restauranteId}/pedidos-pendientes/`);
+  }
+
+  updateEstadoPedido(pedidoId: number, estado: 'aceptado' | 'rechazado'): Observable<any> {
+    return this.http.patch(`${this.apiUrl}pedidos/${pedidoId}/estado/`, { estado });
+  }
 }

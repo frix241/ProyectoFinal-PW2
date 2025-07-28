@@ -1,1 +1,36 @@
-<p>pedidos-dia works!</p>
+<div class="restaurante-panel-container">
+  <!-- Dock lateral izquierdo -->
+  <aside class="menu-dia-dock">
+    <div class="resto-info">
+      <img [src]="restauranteImagen || 'restoLogo.svg'" alt="Restaurante" class="resto-img" />
+      <div class="resto-nombre">{{ restauranteNombre || 'Restaurante' }}</div>
+    </div>
+    <nav class="dock-nav">
+      <button routerLink="/restaurants/menu-dia" routerLinkActive="active">Menú del Día</button>
+      <button routerLink="/restaurants/pedidos-dia" routerLinkActive="active">Pedidos del Día</button>
+      <button routerLink="/restaurants/historial" routerLinkActive="active">Historial</button>
+      <button (click)="logout()" class="logout-btn">Cerrar sesión</button>
+    </nav>
+  </aside>
+
+  <!-- Contenido principal -->
+  <div class="pedidos-dia-main">
+    <h2>Pedidos del Día</h2>
+    <div *ngIf="cargando">Cargando pedidos...</div>
+    <div *ngIf="!cargando && pedidos.length === 0">No hay pedidos pendientes.</div>
+    <ul *ngIf="!cargando && pedidos.length > 0" class="lista-pedidos">
+      <li *ngFor="let pedido of pedidos" class="pedido-card">
+        <div>
+          <b>Pedido #{{ pedido.id }}</b> - Cliente: {{ pedido.cliente_nombre || pedido.cliente || 'Desconocido' }}
+          <div>Entrada: {{ pedido.entrada_nombre || pedido.entrada?.nombre }}</div>
+          <div>Segundo: {{ pedido.segundo_nombre || pedido.segundo?.nombre }}</div>
+          <div>Total: S/ {{ pedido.total | number:'1.2-2' }}</div>
+        </div>
+        <div class="acciones">
+          <button class="btn-aceptar" (click)="aceptarPedido(pedido.id)">Aceptar</button>
+          <button class="btn-rechazar" (click)="rechazarPedido(pedido.id)">Rechazar</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
