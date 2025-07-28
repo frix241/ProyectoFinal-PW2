@@ -1,5 +1,5 @@
 from rest_framework import viewsets, generics, permissions, filters, status
-from rest_framework.generics import RetrieveAPIView
+from rest_framework.generics import RetrieveAPIView, ListAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from datetime import date 
@@ -105,6 +105,13 @@ class PedidosRecibidosView(generics.ListAPIView):
 
     def get_queryset(self):
         return Pedido.objects.filter(menu__restaurante__user=self.request.user)
+
+class PedidosPendientesRestauranteView(ListAPIView):
+    serializer_class = PedidoSerializer
+
+    def get_queryset(self):
+        restaurante_id = self.kwargs['restaurante_id']
+        return Pedido.objects.filter(menu__restaurante_id=restaurante_id, estado='pendiente')
 
 class PedidoEstadoUpdateView(generics.UpdateAPIView):
     serializer_class = PedidoEstadoUpdateSerializer
