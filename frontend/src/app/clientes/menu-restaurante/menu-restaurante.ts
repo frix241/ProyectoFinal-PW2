@@ -19,9 +19,9 @@ export class MenuRestaurante implements OnInit {
   entradas: any[] = [];
   segundos: any[] = [];
 
-  // Selección del usuario
-  seleccionEntradas: { [id: string]: number } = {};
-  seleccionSegundos: { [id: string]: number } = {};
+  // Solo un seleccionado de cada tipo
+  entradaSeleccionadaId: number | null = null;
+  segundoSeleccionadoId: number | null = null;
 
   // Panel de pedido
   pedidoPlatos: any[] = [];
@@ -72,14 +72,22 @@ export class MenuRestaurante implements OnInit {
     this.clienteService.getSegundos(menuId).subscribe(segundos => this.segundos = segundos);
   }
 
-  // Selección de platos
-  seleccionarEntrada(entrada: any, cantidad: number) {
-    this.seleccionEntradas[entrada.id] = cantidad;
+  // Selección de platos (solo uno de cada tipo)
+  seleccionarEntrada(entrada: any) {
+    if (this.entradaSeleccionadaId === entrada.id) {
+      this.entradaSeleccionadaId = null; // deseleccionar
+    } else {
+      this.entradaSeleccionadaId = entrada.id;
+    }
     this.actualizarPanelPedido();
   }
 
-  seleccionarSegundo(segundo: any, cantidad: number) {
-    this.seleccionSegundos[segundo.id] = cantidad;
+  seleccionarSegundo(segundo: any) {
+    if (this.segundoSeleccionadoId === segundo.id) {
+      this.segundoSeleccionadoId = null; // deseleccionar
+    } else {
+      this.segundoSeleccionadoId = segundo.id;
+    }
     this.actualizarPanelPedido();
   }
 
@@ -87,46 +95,38 @@ export class MenuRestaurante implements OnInit {
     this.pedidoPlatos = [];
     this.totalPedido = 0;
 
-    // Entradas seleccionadas
-    for (const id in this.seleccionEntradas) {
-      const cantidad = this.seleccionEntradas[id];
-      if (cantidad > 0) {
-        const entrada = this.entradas.find(e => e.id == +id);
-        if (entrada) {
-          this.pedidoPlatos.push({ ...entrada, cantidad });
-          this.totalPedido += entrada.precio * cantidad;
-        }
+    if (this.entradaSeleccionadaId) {
+      const entrada = this.entradas.find(e => e.id === this.entradaSeleccionadaId);
+      if (entrada) {
+        this.pedidoPlatos.push({ ...entrada, cantidad: 1, tipo: 'entrada' });
+        this.totalPedido += Number(entrada.precio);
       }
     }
-    // Segundos seleccionados
-    for (const id in this.seleccionSegundos) {
-      const cantidad = this.seleccionSegundos[id];
-      if (cantidad > 0) {
-        const segundo = this.segundos.find(s => s.id == +id);
-        if (segundo) {
-          this.pedidoPlatos.push({ ...segundo, cantidad });
-          this.totalPedido += segundo.precio * cantidad;
-        }
+    if (this.segundoSeleccionadoId) {
+      const segundo = this.segundos.find(s => s.id === this.segundoSeleccionadoId);
+      if (segundo) {
+        this.pedidoPlatos.push({ ...segundo, cantidad: 1, tipo: 'segundo' });
+        this.totalPedido += Number(segundo.precio);
       }
     }
+  }
+
+  trackByTipo(index: number, item: any) {
+    return item.tipo;
   }
 
   realizarPedido() {
     if (this.pedidoPlatos.length === 0) return;
 
-    // Ejemplo: solo permite un plato de cada tipo (ajusta según tu lógica)
-    const entradaId = Object.keys(this.seleccionEntradas).find(id => this.seleccionEntradas[id] > 0);
-    const segundoId = Object.keys(this.seleccionSegundos).find(id => this.seleccionSegundos[id] > 0);
-
-    if (!entradaId || !segundoId) {
-      alert('Debes seleccionar al menos una entrada y un segundo.');
+    if (!this.entradaSeleccionadaId || !this.segundoSeleccionadoId) {
+      alert('Debes seleccionar una entrada y un segundo.');
       return;
     }
 
     const data = {
       menu: this.menuDelDia.id,
-      entrada: Number(entradaId),
-      segundo: Number(segundoId)
+      entrada: this.entradaSeleccionadaId,
+      segundo: this.segundoSeleccionadoId
     };
 
     this.clienteService.crearPedido(data).subscribe({
