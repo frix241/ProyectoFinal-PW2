@@ -32,11 +32,10 @@ export const routes: Routes = [
     loadComponent: () => import('./clientes/confirmacion-pedido/confirmacion-pedido').then(m => m.ConfirmacionPedido),
     canActivate: [clienteGuard]
   },
-/**  {
+  {
     path: 'clientes/mis-pedidos',
-    loadComponent: () => import('./clientes/mis-pedidos/mis-pedidos').then(m => m.MisPedidosComponent),
+    loadComponent: () => import('./clientes/mis-pedidos/mis-pedidos').then(m => m.MisPedidos),
     canActivate: [clienteGuard]
   },
-*/
-  // ...otras rutas protegidas
+
 ];
