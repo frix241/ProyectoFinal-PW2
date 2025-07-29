@@ -23,7 +23,7 @@ export interface Plato {
   providedIn: "root",
 })
 export class RestaurantService {
-  private apiUrl = "https://report-api-7eey.onrender.com/api/";
+  private apiUrl = "https://report-api-7eey.onrender.com/api/restaurants/";
 
   constructor(private http: HttpClient) {}
 
