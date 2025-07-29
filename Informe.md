@@ -729,10 +729,10 @@ El desarrollo de este proyecto permitió aplicar de manera práctica los conocim
 
 | Integrante           | Responsabilidad (/5) | Proactividad (/5) | Aporte al grupo (/5) | Calificó a sus compañeros | Nota Individual (40%) |
 |----------------------|----------------------|-------------------|----------------------|---------------------------|----------------------|
-| Quispe Mamani Jose Gabriel  |      /5               |     /5            |      /5               |        Sí/No              |        /20           |
-| Riveros Vilca Alberth Edwar |      /5               |     /5            |      /5               |        Sí/No              |        /20           |
-| Estefanero Palma Rodrigo    |      /5               |     /5            |      /5               |        Sí/No              |        /20           |
-| Auccacusi Conde Brayan Carlos |    /5               |     /5            |      /5               |        Sí/No              |        /20           |
+| Quispe Mamani Jose Gabriel  |      3               |     3            |      2               |        Sí              |        13           |
+| Riveros Vilca Alberth Edwar |      3               |     3            |      3               |        Sí              |        14           |
+| Estefanero Palma Rodrigo    |      5               |     5            |      5               |        Sí              |        20           |
+| Auccacusi Conde Brayan Carlos |    5               |     5            |      5               |        Sí              |        20           |
 
 
 
