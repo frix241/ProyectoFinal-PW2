@@ -4,7 +4,9 @@ Django settings for backend project.
 from datetime import timedelta
 from pathlib import Path
 import os
-
+import dj_database_url
+from dotenv import load_dotenv
+load_dotenv()
 # --- Paths y archivos estáticos/media ---
 BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_URL = '/media/'
@@ -14,11 +16,11 @@ STATIC_URL = 'static/'
 # --- Seguridad ---
 SECRET_KEY = 'django-insecure-gq@t_h(*n$d^0ad007--89^oaqjz258@hn)zho^qr9wxm*1m*='
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['report-api-7eey.onrender.com', 'localhost', '127.0.0.1']
 
 # --- Configuración de JWT ---
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),  
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
 
@@ -81,11 +83,11 @@ TEMPLATES = [
 
 # --- Base de datos ---
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL')
+    )
 }
+
 
 # --- Validación de contraseñas ---
 AUTH_PASSWORD_VALIDATORS = [
