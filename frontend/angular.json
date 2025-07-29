@@ -26,7 +26,6 @@
           },
           "configurations": {
             "production": {
-              "baseHref": "./",
               "outputPath": "dist/frontend",
               "budgets": [
                 {
