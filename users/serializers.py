@@ -1,46 +1,37 @@
-from djoser.serializers import UserSerializer as BaseUserSerializer, UserCreateSerializer as BaseUserCreateSerializer
 from rest_framework import serializers
-from django.contrib.auth import get_user_model
-
-User = get_user_model()
-
-class UserSerializer(BaseUserSerializer):
-    class Meta(BaseUserSerializer.Meta):
-        model = User
-        fields = ['id', 'username', 'email', 'tipo']  # 👈 importante
+from djoser.serializers import UserCreateSerializer as BaseUserCreateSerializer
+from .models import User
+from restaurants.models import Restaurant
 
 class UserCreateSerializer(BaseUserCreateSerializer):
-    tipo = serializers.ChoiceField(choices=User.TIPO_USUARIO, default='cliente')
-    nombreRestaurante = serializers.CharField(max_length=100, required=False, allow_blank=True)
-    
+    nombre_restaurante = serializers.CharField(required=False)
+    imagen_restaurante = serializers.ImageField(required=False)
+
     class Meta(BaseUserCreateSerializer.Meta):
         model = User
-        fields = ['id', 'username', 'password', 'email', 'tipo', 'nombreRestaurante']
-    
+        fields = ('id', 'username', 'password', 'tipo', 'nombre_restaurante', 'imagen_restaurante')
+
     def validate(self, attrs):
-        # Quitar nombreRestaurante de los atributos antes de validar User
-        nombre_restaurante = attrs.pop('nombreRestaurante', None)
-        
-        # Validar con los atributos que el modelo User acepta
-        validated_attrs = super().validate(attrs)
-        
-        # Volver a agregar nombreRestaurante para usarlo en create()
-        if nombre_restaurante:
-            validated_attrs['nombreRestaurante'] = nombre_restaurante
-            
-        return validated_attrs
-    
+        # Elimina los campos extra antes de la validación de Djoser
+        attrs = attrs.copy()
+        attrs.pop('nombre_restaurante', None)
+        attrs.pop('imagen_restaurante', None)
+        return super().validate(attrs)
+
     def create(self, validated_data):
-        nombre_restaurante = validated_data.pop('nombreRestaurante', None)
+        # Recupera los datos originales enviados por el usuario
+        nombre_restaurante = self.initial_data.get('nombre_restaurante')
+        imagen_restaurante = self.initial_data.get('imagen_restaurante')
         user = super().create(validated_data)
-        
-        # Si es restaurante, crear el objeto Restaurant
-        if user.tipo == 'restaurante' and nombre_restaurante:
-            from restaurants.models import Restaurant
+        if user.tipo == 'restaurante':
             Restaurant.objects.create(
                 user=user,
-                nombre=nombre_restaurante,
-                direccion=""  # Se puede completar después
+                nombre=nombre_restaurante or user.username,
+                imagen=imagen_restaurante
             )
-        
         return user
+    
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'tipo')
