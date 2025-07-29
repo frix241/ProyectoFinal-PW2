@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # Apps propias
     'users',
     'restaurants',
+    'dj_database_url'
 ]
 
 AUTH_USER_MODEL = 'users.User'
