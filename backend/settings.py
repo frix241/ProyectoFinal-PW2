@@ -59,6 +59,7 @@ MIDDLEWARE = [
 # --- CORS ---
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
+    "https://resto-h5lu.onrender.com"
 ]
 
 # --- URLs y WSGI ---
