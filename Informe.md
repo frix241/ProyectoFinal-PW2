@@ -727,12 +727,12 @@ El desarrollo de este proyecto permitió aplicar de manera práctica los conocim
 
 ## Evaluación del Trabajo en Equipo
 
-| Integrante           | Responsabilidad | Proactividad | Aporte al grupo | Calificó a sus compañeros | Nota Individual (40%) | Nota Grupal (60%) | Nota Final |
-|----------------------|----------------|--------------|-----------------|---------------------------|----------------------|-------------------|------------|
-| Quispe Mamani Jose Gabriel  |      /5        |     /5       |      /5         |        Sí/No              |        /20           |       /20         |   /20      |
-| Riveros Vilca Alberth Edwar  |      /5        |     /5       |      /5         |        Sí/No              |        /20           |       /20         |   /20      |
-| Estefanero Palma Rodrigo  |      /5        |     /5       |      /5         |        Sí/No              |        /20           |       /20         |   /20      |
-| Nombre Integrante 4  |      /5        |     /5       |      /5         |        Sí/No              |        /20           |       /20         |   /20      |
+| Integrante           | Responsabilidad (/5) | Proactividad (/5) | Aporte al grupo (/5) | Calificó a sus compañeros | Nota Individual (40%) |
+|----------------------|----------------------|-------------------|----------------------|---------------------------|----------------------|
+| Quispe Mamani Jose Gabriel  |      /5               |     /5            |      /5               |        Sí/No              |        /20           |
+| Riveros Vilca Alberth Edwar |      /5               |     /5            |      /5               |        Sí/No              |        /20           |
+| Estefanero Palma Rodrigo    |      /5               |     /5            |      /5               |        Sí/No              |        /20           |
+| Auccacusi Conde Brayan Carlos |    /5               |     /5            |      /5               |        Sí/No              |        /20           |
 
 
 
