@@ -29,7 +29,7 @@ disable-header-and-footer: false
 header-left: Informe
 header-center: PW2
 header-right: Julio 2025
-footer-left: Rodrigo Estefanero Palma
+footer-left: RESTO
 footer-center: 
 footer-right: Página \thepage
 footnotes-pretty: true
