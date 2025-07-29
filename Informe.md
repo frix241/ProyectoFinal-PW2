@@ -1,9 +1,72 @@
+---
+title: Título del Documento
+author:
+  - Autor Principal
+  - Coautor Secundario
+  - "2"
+date: 2025-07-28
+keywords:
+  - Markdown
+  - Pandoc
+  - Eisvogel
+lang: es
+titlepage: false
+toc: true
+toc-title: Índice
+titlepage-color: "004080"
+titlepage-text-color: FFFFFF
+titlepage-rule-color: FF5733
+titlepage-rule-height: 4
+titlepage-logo: logo.png
+titlepage-background: 
+page-background: 
+page-background-opacity: 0.15
+caption-justification: centering
+toc-own-page: true
+listings-disable-line-numbers: false
+listings-no-page-break: false
+disable-header-and-footer: false
+header-left: Informe
+header-center: PW2
+header-right: Julio 2025
+footer-left: Rodrigo Estefanero Palma
+footer-center: 
+footer-right: Página \thepage
+footnotes-pretty: true
+footnotes-disable-backlinks: true
+book: false
+numbersections: true
+secnumdepth: 2
+first-chapter: 
+logo-width: 40mm
+float-placement-figure: htbp
+table-use-row-colors: true
+code-block-font-size: \footnotesize
+watermark: 
+header-includes:
+  - \usepackage{tcolorbox}
+  - \tcbuselibrary{skins}
+  - \usepackage{tikz}
+  - \usetikzlibrary{shadows,positioning}
+  - \usepackage{geometry}
+  - \usepackage{tocloft}
+  - \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+  - \usepackage{etoolbox}
+  - \patchcmd{\tableofcontents}{\cleardoublepage}
+  - \usepackage{hyperref}
+---
+
 # ProyectoFinal-PW2
 
 ## Introducción
 
-Este informe presenta el desarrollo y la arquitectura de **ProyectoFinal-PW2**, una plataforma web diseñada para la gestión de restaurantes y pedidos en línea. El sistema utiliza Django como backend y Angular como frontend, permitiendo la interacción eficiente y segura entre clientes y restaurantes.  
-A lo largo del documento se describen las configuraciones principales, la estructura de datos, los flujos de autenticación, la gestión de menús y pedidos, así como la organización de los componentes clave tanto en el backend como en el frontend.
+En los últimos años, la digitalización de los sistemas de pedidos de comida ha crecido de manera exponencial, impulsada por la necesidad de ofrecer un servicio más eficiente, mejorar la experiencia del usuario y facilitar operaciones remotas. Los métodos tradicionales de gestión de pedidos en restaurantes suelen presentar limitaciones, especialmente en horas de alta demanda, dificultando la organización interna y afectando la satisfacción del cliente.
+
+En este contexto, se desarrolló un sistema web completo de gestión de pedidos para restaurantes, utilizando Angular para el frontend y Django REST Framework para el backend. Este sistema permite a los clientes buscar restaurantes disponibles, visualizar sus menús del día, realizar pedidos y dar seguimiento al estado de los mismos en tiempo real. Por otro lado, los administradores de los restaurantes pueden gestionar sus menús, aceptar o rechazar pedidos, y consultar historiales, todo desde una interfaz personalizada según su rol.
+
+El sistema implementa un mecanismo de autenticación mediante JSON Web Tokens (JWT), lo cual garantiza un acceso seguro y controlado por tipo de usuario. La arquitectura modular y escalable facilita futuras ampliaciones como pasarelas de pago o sistemas de notificaciones.
+
+El objetivo principal del proyecto fue brindar una solución eficiente y moderna para optimizar la interacción entre clientes y restaurantes. Este informe describe la arquitectura del sistema, las funcionalidades desarrolladas y el proceso completo de implementación. Además, se presentan los resultados alcanzados, incluyendo pruebas funcionales exitosas, validación por usuarios y el cumplimiento de hitos técnicos establecidos.
 
 ## Objetivos
 
@@ -32,37 +95,37 @@ La solución propuesta fue una plataforma web compuesta por un backend en Django
 ## Estructura Django
 
 backend/  
- settings.py  
- urls.py  
+ settings.py  
+ urls.py  
 
 users/  
- models.py  
- serializers.py  
- admin.py  
+ models.py  
+ serializers.py  
+ admin.py  
 
 restaurants/  
- models.py  
- serializers.py  
- views.py  
- urls.py  
- admin.py  
+ models.py  
+ serializers.py  
+ views.py  
+ urls.py  
+ admin.py  
 
 
 ## Estructura Angular
 
 src/  
- app/  
-  auth/  
-  restaurants/  
-   menu-dia/  
-   pedidos-dia/  
-   historial/  
-  clientes/  
-   explorador-restaurantes/  
-   menu-restaurante/  
-   confirmacion-pedido/  
-   mis-pedidos/  
-  services/
+ app/  
+  auth/  
+  restaurants/  
+   menu-dia/  
+   pedidos-dia/  
+   historial/  
+  clientes/  
+   explorador-restaurantes/  
+   menu-restaurante/  
+   confirmacion-pedido/  
+   mis-pedidos/  
+  services/
 
 # Django
 
@@ -252,6 +315,7 @@ class User(AbstractUser):
 ### Modelos de la app `restaurants`
 
 #### Restaurant
+- Codigo:
 
 ```python
 class Restaurant(models.Model):
@@ -262,6 +326,7 @@ class Restaurant(models.Model):
 - Relaciona un usuario tipo restaurante con su información específica (nombre, imagen).
 
 #### Menu
+- Codigo:
 
 ```python
 class Menu(models.Model):
@@ -271,6 +336,7 @@ class Menu(models.Model):
 - Representa el menú del día de un restaurante.
 
 #### Entrada y Segundo
+- Codigo:
 
 ```python
 class Entrada(models.Model):
@@ -283,6 +349,7 @@ class Entrada(models.Model):
 - **Entrada** y **Segundo** representan los platos disponibles en el menú del día, cada uno con nombre, cantidad, precio, imagen y relación al menú.
 
 #### Pedido
+- Codigo:
 
 ```python
 class Pedido(models.Model):
@@ -684,39 +751,29 @@ cargarMisPedidos(userId: number) {
 
 A continuación se muestran algunos resultados visuales del funcionamiento de la plataforma:
 
-
-
 ### Página de registro de usuario
 
-![Registro de usuario](./docs/imagen_registro.png)
+![Registro de usuario](./docs/imagen_registro.png){ width=300pt height=200pt }
 *Formulario para registrar clientes o restaurantes, incluyendo campos adicionales para restaurantes.*
-
-
 
 ### Vista del menú del día (restaurante)
 
-![Menú del día](./docs/imagen_menu_dia.png)
+![Menú del día](./docs/imagen_menu_dia.png){ width=300pt height=200pt }
 *Gestión de entradas y segundos por parte del restaurante.*
-
-
 
 ### Pedidos del día (restaurante)
 
-![Pedidos del día](./docs/imagen_pedidos_dia.png)
+![Pedidos del día](./docs/imagen_pedidos_dia.png){ width=300pt height=200pt }
 *Listado de pedidos pendientes, con opciones para aceptar o rechazar.*
-
-
 
 ### Explorador de restaurantes (cliente)
 
-![Explorador de restaurantes](./docs/imagen_explorador.png)
+![Explorador de restaurantes](./docs/imagen_explorador.png){ width=300pt height=200pt}
 *Panel donde el cliente puede buscar y seleccionar restaurantes.*
-
-
 
 ### Confirmación de pedido (cliente)
 
-![Confirmación de pedido](./docs/imagen_confirmacion.png)
+![Confirmación de pedido](./docs/imagen_confirmacion.png){ width=300pt height=200pt }
 *Estado del pedido tras ser realizado, con actualización automática.*
 
 
@@ -739,5 +796,5 @@ El desarrollo de este proyecto permitió aplicar de manera práctica los conocim
 ## Anexos
 
 - [Repositorio Backend y Frontend (Django y Angular)](https://github.com/UNSA3/py-final-2025-pf25_a5)
-- [Demo en la nube](URL_DEMO)
+- [Demo en la nube](https://resto-h5lu.onrender.com/#/login)
 - [Videos de funcionamiento](https://drive.google.com/drive/folders/1UTxUJW-cJ_SZnRGOgV1po5QrPJQkl98K?usp=sharing)
