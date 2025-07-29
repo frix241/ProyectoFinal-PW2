@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
   providedIn: "root",
 })
 export class ClienteService {
-  private apiUrl = "https://report-api-7eey.onrender.com/api/restaurants/";
+  private apiUrl = "https://report-api-7eey.onrender.com/api/restaurantes/";
 
   constructor(private http: HttpClient) {}
 
